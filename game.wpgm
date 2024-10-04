@@ -12,7 +12,7 @@ program pepesgame {
 	//  VISUALES
 
  	game.addVisual(pepe)
-	game.addVisual(new Palanca(position = game.at(150, 300)))
+	game.addVisual(new Palanca(position = game.at(6, 7)))
  	
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})
