@@ -1,0 +1,23 @@
+import wollok.game.*
+import personajes.*
+import posiciones.*
+
+program pepesgame {
+	//  CONFIG	
+	game.title("Juego sin nombre")
+	game.height(10)
+	game.width(10)
+
+	//  VISUALES
+
+ 	game.addVisual(pepe)
+ 	
+	keyboard.up().onPressDo({pepe.mover(arriba)})
+	keyboard.left().onPressDo({pepe.mover(izquierda)})
+	keyboard.down().onPressDo({pepe.mover(abajo)})
+	keyboard.right().onPressDo({pepe.mover(derecha)})
+	
+
+ 	//  COMIENZA
+	game.start()
+}
