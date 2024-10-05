@@ -5,7 +5,7 @@ import territorio.*
 
 object pepe {
     var property position = game.center()
-    var property image = "Pepe/Pepe_de_frente.png"
+    var property image = "Personajes/Pepe/Pepe_de_frente.png"
 
     method mover(direccion) {
 		position = direccion.siguiente(self.position())
