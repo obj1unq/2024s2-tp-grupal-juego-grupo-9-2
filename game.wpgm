@@ -13,12 +13,16 @@ program pepesgame {
 
  	game.addVisual(pepe)
 	game.addVisual(new Palanca(position = game.at(6, 7)))
+	game.addVisual(new Moneda(position = game.at (1,1)))
+
  	
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})
 	keyboard.down().onPressDo({pepe.mover(abajo)})
 	keyboard.right().onPressDo({pepe.mover(derecha)})
-	keyboard.p().onPressDo({pepe.moverPalanca()})
+	keyboard.r().onPressDo({pepe.recogerObjeto()})
+	keyboard.h().onPressDo({pepe.decirMonedas()})
+	//keyboard.p().onPressDo({pepe.moverPalanca()})
 
  	//  COMIENZA
 	game.start()
