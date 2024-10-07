@@ -3,19 +3,27 @@ import posiciones.*
 
 class Palanca {
     var property position = game.center()
-    var property image = "Objetos/Palanca_prendida.png"
-    var property prendida  = false
+    var property image = palancaPrendida.image()
+    var property estado  = palancaPrendida
+  
+
+
+}
+object palancaPrendida{
+   var property image = "Objetos/Palanca_prendida.png"
     
-    method cambiarEstado() {
-         if (prendida) {
-            image = "Objetos/Palanca_apagada.png"  // Si está encendida, la apagamos
-            prendida = false
-        } else {
-            image = "Objetos/Palanca_prendida.png"  // Si está apagada, la encendemos
-            prendida = true
-        }
+    method palancaCambiada(){
+        return "Objetos/Palanca_apagada.png"
     }
 }
+object palancaApagada{
+   var property image = "Objetos/Palanca_apagada.png"
+    
+    method palancaCambiada(){
+        return "Objetos/Palanca_prendida.png"
+    }
+}
+
 
 class Moneda {
     var property position = game.center()

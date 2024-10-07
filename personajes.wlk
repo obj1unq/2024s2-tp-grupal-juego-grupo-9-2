@@ -17,14 +17,12 @@ object pepe {
       const siguiente = direccion.siguiente(self.position())
       territorio.validarDentro(siguiente)
 	  }
-  // method moverPalanca(){
-  //   territorio.validarSiHayPalanca()
-  //   Palanca.cambiarEstado()
-  // }
+  method activarPalanca(){
+        const palanca = new Palanca(position = position) 
+        territorio.validarSiHayPalanca()
+        palanca.cambiarEstado()
 
-    method validarSiHayPalanca(){
-      
-    }
+}
 
     method objetoDebajoDePepe() = game.colliders(self)
 
@@ -50,6 +48,10 @@ object pepe {
     }
     method decirMonedas(){
       game.say(self, "Tengo "+monedas+" monedas")
+    }
+
+    method colisionasteConPalanca(objecto){
+      if (objecto.className() == "objetos.Palanca")
     }
 }
 

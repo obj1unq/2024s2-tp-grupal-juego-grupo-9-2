@@ -22,7 +22,7 @@ program pepesgame {
 	keyboard.right().onPressDo({pepe.mover(derecha)})
 	keyboard.r().onPressDo({pepe.recogerObjeto()})
 	keyboard.h().onPressDo({pepe.decirMonedas()})
-	//keyboard.p().onPressDo({pepe.moverPalanca()})
+	keyboard.p().onPressDo({pepe.moverPalanca()})
 
  	//  COMIENZA
 	game.start()
