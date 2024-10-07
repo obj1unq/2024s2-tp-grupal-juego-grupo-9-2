@@ -9,8 +9,14 @@ object pepe {
     var monedas = 0
 
     method mover(direccion) {
+      self.validarMover(direccion)
 		  position = direccion.siguiente(self.position())
-	  } 
+	  }
+
+    method validarMover(direccion) {
+      const siguiente = direccion.siguiente(self.position())
+      territorio.validarDentro(siguiente)
+	  }
   // method moverPalanca(){
   //   territorio.validarSiHayPalanca()
   //   Palanca.cambiarEstado()
