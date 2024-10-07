@@ -17,9 +17,8 @@ class Palanca {
     }
 }
 
-class Roca {
+class Moneda {
     var property position = game.center()
-    var property image = "Objetos/Roca-chia.png"
-
+    var property image = "Objetos/Roca-chica.png"
     
 }
