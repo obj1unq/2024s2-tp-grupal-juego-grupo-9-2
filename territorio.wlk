@@ -8,10 +8,11 @@ object territorio{
 
     // }
 
+
     method validarDentro(position) {
-		if (not self.estaDentro(position)) {
-			pepe.error("No puedo moverme fuera del tablero")
-		}
+	    if (not self.estaDentro(position)) {
+		    pepe.error("No puedo moverme fuera del tablero")
+	    }
 	}
 
     method estaDentro(position) {
@@ -19,4 +20,3 @@ object territorio{
 	}
 
  }
-

@@ -5,17 +5,22 @@ import territorio.*
 
 object pepe {
     var property position = game.center()
-    var property image = "Personajes/Pepe/Pepe_de_frente.png"
+    var property image = "Personajes/Pepe/pepe-down.png"
     var monedas = 0
+
+
+    // method imagenDelJugador() {
+    //     imagen = 
+    // }
 
     method mover(direccion) {
       self.validarMover(direccion)
 		  position = direccion.siguiente(self.position())
+      image = direccion.imagenDelJugador()
 	  }
 
     method validarMover(direccion) {
       const siguiente = direccion.siguiente(self.position())
-      territorio.validarDentro(siguiente)
 	  }
   // method moverPalanca(){
   //   territorio.validarSiHayPalanca()
