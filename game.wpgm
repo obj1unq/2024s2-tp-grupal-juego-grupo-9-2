@@ -14,6 +14,8 @@ program pepesgame {
 	game.ground("fondo-uno.jpeg")
  	game.addVisual(pepe)
 	game.addVisual(new Palanca(position = game.at(6,7)))
+	game.addVisual(new Palanca(position = game.at(3,5)))
+	game.addVisual(new Palanca(position = game.at(7,2)))
 	game.addVisual(new Moneda(position = game.at(1,1)))
 
  	
@@ -23,7 +25,6 @@ program pepesgame {
 	keyboard.right().onPressDo({pepe.mover(derecha)})
 	keyboard.z().onPressDo({pepe.interactuarConObjeto()})
 	keyboard.h().onPressDo({pepe.decirMonedas()})
-	keyboard.p().onPressDo({pepe.activarPalanca()})
 
  	//  COMIENZA
 	game.start()
