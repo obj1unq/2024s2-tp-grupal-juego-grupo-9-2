@@ -1,5 +1,6 @@
 import wollok.game.*
 import posiciones.*
+import personajes.*
 
 class Palanca {
     var property position = game.center()
@@ -20,5 +21,10 @@ class Palanca {
 class Moneda {
     var property position = game.center()
     var property image = "roca-chica.png"
+
+    method interactuar(){
+        pepe.sumarMoneda()
+        game.removeVisual(self)
+    }
     
 }
