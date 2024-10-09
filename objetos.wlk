@@ -17,6 +17,10 @@ class Palanca {
 			self.error("no hay palanca en la posición actual")
 		}
     }
+
+    method interactuar(){
+        
+    }
 }
 
 object palancaPrendida{
