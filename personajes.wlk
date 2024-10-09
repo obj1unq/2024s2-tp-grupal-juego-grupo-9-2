@@ -34,26 +34,29 @@ object pepe {
 
     method objetoDebajoDePepe() = game.colliders(self)
 
-    method recogerObjeto() {
-        self.validarRecoger()
+    method interactuarConObjeto() {
+        self.validarInteraccion()
         const objeto = self.objetoDebajoDePepe().first()
-        //game.say(self, "El objeto recogido es de tipo: " + objeto.className())
-        self.guardarObjeto(objeto)
-        game.removeVisual(objeto)
+        objeto.interactuar()
     }
-    method validarRecoger() {
+
+    method validarInteraccion() {
         if (not self.hayObjetoAca()){
-            self.error("No hay objeto para recoger!")
+            self.error("No hay objeto para interactuar!")
         }
     }
     method hayObjetoAca() {
         return not self.objetoDebajoDePepe().isEmpty()
     }
-    method guardarObjeto(objeto) {
-        if (objeto.className() == "objetos.Moneda"){
-          monedas += 1
-        }
+    
+    method sumarMoneda() {
+        monedas += 1
     }
+    method monedasTotales() {
+        return monedas
+    }
+
+
     method decirMonedas(){
       game.say(self, "Tengo "+monedas+" monedas")
     }
