@@ -14,7 +14,8 @@ program pepesgame {
 	game.ground("fondo-uno.jpeg")
  	game.addVisual(pepe)
 	game.addVisual(new Palanca(position = game.at(6,7)))
-	game.addVisual(new Palanca(position = game.at(3,9)))
+	game.addVisual(new Palanca(position = game.at(3,5)))
+	game.addVisual(new Palanca(position = game.at(7,2)))
 	game.addVisual(new Moneda(position = game.at(1,1)))
 
  	
