@@ -23,13 +23,6 @@ object pepe {
       const siguiente = direccion.siguiente(self.position())
       territorio.validarDentro(siguiente)
 	  }
-  method activarPalanca(){
-        const palanca = new Palanca(position = position) 
-        territorio.validarSiHayPalanca()
-        palanca.cambiarEstado()
-
-}
-
     method objetoDebajoDePepe() = game.colliders(self)
 
     method interactuarConObjeto() {
