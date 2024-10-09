@@ -9,7 +9,7 @@ object territorio{
     }
   }
     method hayPalanca(){
-      return game.colliders(pepe).first().image() == "Objetos/Palanca_apagada.png" 
+      return //   
     }
 
     method validarDentro(position) {
