@@ -5,9 +5,6 @@ class Palanca {
     var property position = game.center()
     var property image = palancaPrendida.image()
     var property estado  = palancaPrendida
-  
-
-
 }
 object palancaPrendida{
    var property image = "Objetos/Palanca_prendida.png"

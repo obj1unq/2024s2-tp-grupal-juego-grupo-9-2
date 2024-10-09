@@ -49,9 +49,5 @@ object pepe {
     method decirMonedas(){
       game.say(self, "Tengo "+monedas+" monedas")
     }
-
-    method colisionasteConPalanca(objecto){
-      if (objecto.className() == "objetos.Palanca")
-    }
 }
 
