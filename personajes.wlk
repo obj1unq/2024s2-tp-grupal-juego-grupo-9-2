@@ -21,6 +21,7 @@ object pepe {
 
     method validarMover(direccion) {
       const siguiente = direccion.siguiente(self.position())
+      territorio.validarDentro(siguiente)
 	  }
   // method moverPalanca(){
   //   territorio.validarSiHayPalanca()
