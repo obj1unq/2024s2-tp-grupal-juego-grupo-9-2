@@ -5,7 +5,7 @@ import territorio.*
 
 object pepe {
     var property position = game.center()
-    var property image = "Personajes/Pepe/pepe-down.png"
+    var property image = "pepe-down.png"
     var monedas = 0
 
 
