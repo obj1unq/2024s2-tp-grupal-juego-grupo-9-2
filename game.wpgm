@@ -2,6 +2,7 @@ import wollok.game.*
 import personajes.*
 import posiciones.*
 import objetos.*
+import mapa.*
 
 program pepesgame {
 	//  CONFIG	
@@ -11,11 +12,11 @@ program pepesgame {
 
 	//  VISUALES
 
-	game.ground("fondo-uno.jpeg")
- 	game.addVisual(pepe)
-	game.addVisual(new Palanca(position = game.at(6,7)))
-	game.addVisual(new Moneda(position = game.at(1,1)))
-
+	//game.ground("fondo-uno.jpeg")
+ 	//game.addVisual(pepe)
+	//game.addVisual(new Palanca(position = game.at(6,7)))
+	//game.addVisual(new Moneda(position = game.at(1,1)))
+	mapa.dibujar()
  	
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})
@@ -24,6 +25,8 @@ program pepesgame {
 	keyboard.z().onPressDo({pepe.interactuarConObjeto()})
 	keyboard.h().onPressDo({pepe.decirMonedas()})
 	keyboard.p().onPressDo({pepe.activarPalanca()})
+	keyboard.e().onPressDo({pepe.entrarPorPuerta()})
+	
 
  	//  COMIENZA
 	game.start()

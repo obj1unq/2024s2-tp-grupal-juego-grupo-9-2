@@ -2,6 +2,7 @@ import wollok.game.*
 import posiciones.*
 import objetos.*
 import territorio.*
+import mapa.*
 
 object pepe {
     var property position = game.center()
@@ -54,9 +55,15 @@ object pepe {
         return monedas
     }
 
-
     method decirMonedas(){
       game.say(self, "Tengo "+monedas+" monedas")
+    }
+
+    method entrarPorPuerta () {
+        self.validarInteraccion()
+        //m.objetosEnTablero.forEach {elemento => m.objetosEnTablero.removeVisual(elemento)}       
+        //m.objetosEnTablero.clear()   
+        mapa2.dibujar()
     }
 }
 

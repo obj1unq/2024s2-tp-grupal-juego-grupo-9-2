@@ -2,6 +2,7 @@ import territorio.*
 import wollok.game.*
 import posiciones.*
 import personajes.*
+import mapa.*
 
 class Palanca {
     var property position = game.center()
@@ -20,23 +21,23 @@ class Palanca {
 }
 
 object palancaPrendida{
-   var property image = "Objetos/Palanca_prendida.png"
+   var property image = "palanca_prendida.png"
     
     method palancaCambiada(){
-        return "Objetos/Palanca_apagada.png"
+        return "palanca_apagada.png"
     }
 }
 object palancaApagada{
-   var property image = "Objetos/Palanca_apagada.png"
+   var property image = "palanca_apagada.png"
     
     method palancaCambiada(){
-        return "Objetos/Palanca_prendida.png"
+        return "palanca_prendida.png"
     }
 }
 
 
 class Moneda {
-    var property position = game.center()
+    var property position 
     var property image = "roca-chica.png"
 
     method interactuar(){
@@ -44,4 +45,16 @@ class Moneda {
         game.removeVisual(self)
     }
     
+}
+
+class Puerta {
+    var property position
+    var property image = "roca-chica.png"
+
+
+    method interactuar() {
+    //image = "roca-grande.png"
+    
+    
+    }
 }
