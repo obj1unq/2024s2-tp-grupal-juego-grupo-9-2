@@ -24,6 +24,11 @@ object p {  // representa a Pepe en el mapa.
     }
 }
 
+object r { // representa una roca.
+    method dibujarEn(position) {
+     game.addVisual(new Roca(position = position))
+    }
+}
 
 object m { // REVISAR 
     const property objetosEnTablero = #{}
@@ -45,19 +50,40 @@ object m { // REVISAR
 
 }
 
-object k {  // representa a Pepe con una roca en el mapa. (en la misma celda).
+object k {  // representa a Pepe con una puerta en el mapa. (en la misma celda).
     //Precondicion: no puede haber "p" y "k" en el mismo mapa.
 
     method dibujarEn(position) {
         pepe.position(position)
-        game.addVisual(new Moneda(position = position)) //primero poner la moneda luego a Pepe, porque sino no funciona.
+        game.addVisual(new Puerta(position = position)) //primero poner la puerta luego a Pepe, porque sino no funciona.
         game.addVisual(pepe)
-        
     }
 }
 
+object e { // representa la Entrada (puerta, etc)
 
+    method dibujarEn(position) {
+     game.addVisual(new Puerta(position = position))
+    }
+}
 
+object l { // Representa una llave.
+    method dibujarEn(position) {
+     game.addVisual(new Llave(position = position))
+    }
+}
+
+object pa { // Representa una Palanca.
+    method dibujarEn(position) {
+     game.addVisual(new Palanca(position = position))
+    }
+}
+
+object o { // Representa el oceano.
+    method dibujarEn(position) {
+     game.addVisual(new Oceano(position = position))
+    }
+}
 
 object mapa {
    
@@ -66,13 +92,13 @@ object mapa {
 
     const tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,m,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,p,_,_,_,_,_,_,_,_,_,m],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,m,_,pa,_,l,_,_,_],    
+     [_,r,r,_,_,_,_,_,_,_,_,_,_],    
+     [_,r,p,_,_,_,_,_,_,r,_,e,_],    
+     [_,r,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,m,_,m,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse()
 
 
@@ -102,11 +128,11 @@ object mapa2 {
 
     const tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,m,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,k,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,m,_,m,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,r,r,r,_,_,_],    
+     [_,k,_,_,r,r,r,r,_,m,r,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,r,_,_],    
+     [_,_,_,_,_,_,_,_,r,r,r,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()

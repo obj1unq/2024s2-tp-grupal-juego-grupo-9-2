@@ -5,7 +5,7 @@ import personajes.*
 import mapa.*
 
 class Palanca {
-    var property position = game.center()
+    var property position 
     var property image = palancaPrendida.image()
     var property estado  = palancaPrendida
 
@@ -18,6 +18,10 @@ class Palanca {
 			self.error("no hay palanca en la posición actual")
 		}
     }
+
+    method solida() {
+		return false
+	}
 }
 
 object palancaPrendida{
@@ -26,35 +30,86 @@ object palancaPrendida{
     method palancaCambiada(){
         return "palanca_apagada.png"
     }
+
+    method solida() {
+		return false
+	}
 }
+
+
+
 object palancaApagada{
    var property image = "palanca_apagada.png"
     
     method palancaCambiada(){
         return "palanca_prendida.png"
     }
+
+    method solida() {
+		return false
+	}
+
 }
 
 
 class Moneda {
     var property position 
-    var property image = "roca-chica.png"
+    var property image = "moneda.png"
 
     method interactuar(){
         pepe.sumarMoneda()
         game.removeVisual(self)
     }
     
+    method solida() {
+		return false
+	}
+}
+
+class Roca {
+    var property position 
+    var property image = "roca-chica.png"
+
+    method solida() {
+		return true
+	}
+
+    
+}
+
+class Oceano {
+    var property position 
+    var property image = "oceano.png"
+
+    method solida() {
+		return true
+	}
 }
 
 class Puerta {
     var property position
-    var property image = "roca-chica.png"
+    var property image = "puerta.png"
 
 
     method interactuar() {
-    //image = "roca-grande.png"
-    
     
     }
+
+    method solida() {
+		return false
+	}
+}
+
+class Llave {
+    var property position
+    var property image = "llave.png"
+
+
+    method interactuar() {
+    
+    }
+
+    method solida() {
+		return false
+	}
 }

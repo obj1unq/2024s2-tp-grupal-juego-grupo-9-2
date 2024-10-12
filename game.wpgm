@@ -7,8 +7,9 @@ import mapa.*
 program pepesgame {
 	//  CONFIG	
 	game.title("Juego sin nombre")
-	game.height(10)
-	game.width(10)
+	//game.height(10)
+	//game.width(10)
+	game.cellSize(50) 	
 
 	//  VISUALES
 

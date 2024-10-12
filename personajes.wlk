@@ -23,8 +23,11 @@ object pepe {
     method validarMover(direccion) {
       const siguiente = direccion.siguiente(self.position())
       territorio.validarDentro(siguiente)
+      self.validarAtravesables(siguiente)
 	  }
-  method activarPalanca(){
+
+
+    method activarPalanca(){
         const palanca = new Palanca(position = position) 
         territorio.validarSiHayPalanca()
         palanca.cambiarEstado()
@@ -62,8 +65,22 @@ object pepe {
     method entrarPorPuerta () {
         self.validarInteraccion()
         //m.objetosEnTablero.forEach {elemento => m.objetosEnTablero.removeVisual(elemento)}       
-        //m.objetosEnTablero.clear()   
+         
         mapa2.dibujar()
     }
+
+    	method haySolido(_position) {
+		return game.getObjectsIn(_position).any({cosa => cosa.solida()})
+	}
+
+	method validarAtravesables(_position) {
+		if (self.haySolido(_position)) {
+			self.error("No puedo ir ahí")
+		}
+	}
+
+    method solida() {
+		return false
+	}
 }
 
