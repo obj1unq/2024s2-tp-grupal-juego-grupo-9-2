@@ -5,30 +5,20 @@ import personajes.*
 import mapa.*
 
 class Palanca {
-    var property position 
-    var property image = palancaPrendida.image()
+    var property position = game.center()
+    var property image = estado.image()
     var property estado  = palancaPrendida
 
-    method cambiarEstado(){
-        self.validar()
-        estado = estado.palancaCambiada()
-    }
-    method validar(){
-        if (not territorio.hayPalanca()){
-			self.error("no hay palanca en la posición actual")
-		}
-    }
-
-    method solida() {
-		return false
-	}
+    method interactuar(){
+       estado = estado.palancaCambiada()
+       image = estado.image() 
+    }    
 }
-
 object palancaPrendida{
    var property image = "palanca_prendida.png"
     
     method palancaCambiada(){
-        return "palanca_apagada.png"
+        return palancaApagada
     }
 
     method solida() {
@@ -42,7 +32,7 @@ object palancaApagada{
    var property image = "palanca_apagada.png"
     
     method palancaCambiada(){
-        return "palanca_prendida.png"
+        return palancaPrendida
     }
 
     method solida() {

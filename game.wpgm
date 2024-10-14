@@ -27,7 +27,7 @@ program pepesgame {
 	keyboard.h().onPressDo({pepe.decirMonedas()})
 	keyboard.p().onPressDo({pepe.activarPalanca()})
 	keyboard.e().onPressDo({pepe.entrarPorPuerta()})
-	
+
 
  	//  COMIENZA
 	game.start()

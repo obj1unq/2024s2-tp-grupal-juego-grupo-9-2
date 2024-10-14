@@ -25,15 +25,7 @@ object pepe {
       territorio.validarDentro(siguiente)
       self.validarAtravesables(siguiente)
 	  }
-
-
-    method activarPalanca(){
-        const palanca = new Palanca(position = position) 
-        territorio.validarSiHayPalanca()
-        palanca.cambiarEstado()
-
-}
-
+    
     method objetoDebajoDePepe() = game.colliders(self)
 
     method interactuarConObjeto() {
