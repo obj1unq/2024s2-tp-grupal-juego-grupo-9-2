@@ -54,8 +54,9 @@ object k {  // representa a Pepe con una puerta en el mapa. (en la misma celda).
     //Precondicion: no puede haber "p" y "k" en el mismo mapa.
 
     method dibujarEn(position) {
-        pepe.position(position)
+
         game.addVisual(new Puerta(position = position)) //primero poner la puerta luego a Pepe, porque sino no funciona.
+        pepe.position(position)
         game.addVisual(pepe)
     }
 }

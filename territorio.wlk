@@ -12,6 +12,9 @@ object territorio{
       return //   
     }
 
+   method hayPuertaAca(){
+      return //   
+    }
 
     method validarDentro(position) {
 	    if (not self.estaDentro(position)) {

@@ -60,6 +60,10 @@ class Moneda {
         pepe.sumarMoneda()
         game.removeVisual(self)
     }
+
+  //  method colision(personaje) {
+	//	personaje.removeVisual(self)
+	//}
     
     method solida() {
 		return false
@@ -89,7 +93,17 @@ class Oceano {
 class Puerta {
     var property position
     var property image = "puerta.png"
+    var property estado = tableroActual
 
+    method cambiarEstado(){
+        self.validarPuerta()
+        estado = estado.tableroActual()
+    }
+    method validarPuerta(){
+        if (not territorio.hayPuertaAca()){
+			self.error("No hay puerta en la posición actual")
+		}
+    }
 
     method interactuar() {
     
@@ -98,6 +112,12 @@ class Puerta {
     method solida() {
 		return false
 	}
+
+
+}
+
+object tableroActual {
+    
 }
 
 class Llave {

@@ -64,12 +64,11 @@ object pepe {
 
     method entrarPorPuerta () {
         self.validarInteraccion()
-        //m.objetosEnTablero.forEach {elemento => m.objetosEnTablero.removeVisual(elemento)}       
-         
+        //m.objetosEnTablero.forEach {elemento => m.objetosEnTablero.removeVisual(elemento)}        
         mapa2.dibujar()
     }
 
-    	method haySolido(_position) {
+    method haySolido(_position) {
 		return game.getObjectsIn(_position).any({cosa => cosa.solida()})
 	}
 
@@ -78,6 +77,15 @@ object pepe {
 			self.error("No puedo ir ahí")
 		}
 	}
+
+    //method agarrarVisual(objeto) {
+	//	self.agarrar(objeto)
+	//	objeto.colision()
+	//}
+
+    //method agarrar(objeto) {
+	//	monedas += monedas +1
+	//}
 
     method solida() {
 		return false
