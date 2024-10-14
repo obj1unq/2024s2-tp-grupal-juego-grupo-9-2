@@ -2,6 +2,7 @@ import wollok.game.*
 import posiciones.*
 import objetos.*
 import territorio.*
+import mapa.*
 
 object pepe {
     var property position = game.center()
@@ -22,14 +23,9 @@ object pepe {
     method validarMover(direccion) {
       const siguiente = direccion.siguiente(self.position())
       territorio.validarDentro(siguiente)
+      self.validarAtravesables(siguiente)
 	  }
-  method activarPalanca(){
-        const palanca = new Palanca(position = position) 
-        territorio.validarSiHayPalanca()
-        palanca.cambiarEstado()
-
-}
-
+    
     method objetoDebajoDePepe() = game.colliders(self)
 
     method interactuarConObjeto() {
@@ -54,9 +50,37 @@ object pepe {
         return monedas
     }
 
-
     method decirMonedas(){
       game.say(self, "Tengo "+monedas+" monedas")
     }
+
+    method entrarPorPuerta () {
+        self.validarInteraccion()
+        //m.objetosEnTablero.forEach {elemento => m.objetosEnTablero.removeVisual(elemento)}        
+        mapa2.dibujar()
+    }
+
+    method haySolido(_position) {
+		return game.getObjectsIn(_position).any({cosa => cosa.solida()})
+	}
+
+	method validarAtravesables(_position) {
+		if (self.haySolido(_position)) {
+			self.error("No puedo ir ahí")
+		}
+	}
+
+    //method agarrarVisual(objeto) {
+	//	self.agarrar(objeto)
+	//	objeto.colision()
+	//}
+
+    //method agarrar(objeto) {
+	//	monedas += monedas +1
+	//}
+
+    method solida() {
+		return false
+	}
 }
 
