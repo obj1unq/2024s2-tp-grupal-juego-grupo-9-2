@@ -26,11 +26,11 @@ object pepe {
       self.validarAtravesables(siguiente)
 	  }
     
-    method objetoDebajoDePepe() = game.colliders(self)
+    method objetoDebajoDePepe() = game.uniqueCollider(self)
 
     method interactuarConObjeto() {
         self.validarInteraccion()
-        const objeto = self.objetoDebajoDePepe().first()
+        const objeto = self.objetoDebajoDePepe()
         objeto.interactuar()
     }
 
@@ -40,7 +40,7 @@ object pepe {
         }
     }
     method hayObjetoAca() {
-        return not self.objetoDebajoDePepe().isEmpty()
+        return not game.colliders(self).isEmpty()
     }
     
     method sumarMoneda() {
@@ -56,7 +56,7 @@ object pepe {
 
     method entrarPorPuerta () {
         self.validarInteraccion()
-        //m.objetosEnTablero.forEach {elemento => m.objetosEnTablero.removeVisual(elemento)}        
+        game.allVisuals().forEach({e => game.removeVisual(e)}) 
         mapa2.dibujar()
     }
 

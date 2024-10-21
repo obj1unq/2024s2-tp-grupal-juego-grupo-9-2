@@ -34,13 +34,13 @@ object m { // REVISAR
     const property objetosEnTablero = #{}
     method dibujarEn(position) {
 
-        game.addVisual(new Moneda(position = position))
-        self.guardarObjeto(position)
+        //game.addVisual(new Moneda(position = position))
+        //self.guardarObjeto(position)
+        //objetosEnTablero.add(position)
    
-   
-        //const moneda = new Moneda (position = position)
-		//game.addVisual (Moneda)
-        //objetosEnTablero.add(Moneda)
+        const moneda = new Moneda (position = position)
+		game.addVisual (moneda)
+        objetosEnTablero.add(moneda)
     
     }
 
@@ -93,11 +93,11 @@ object mapa {
 
     const tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,m,_,pa,_,l,_,_,_],    
+     [_,_,_,_,_,m,_,_,_,l,_,_,_],    
      [_,r,r,_,_,_,_,_,_,_,_,_,_],    
      [_,r,p,_,_,_,_,_,_,r,_,e,_],    
      [_,r,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,m,_,m,_,_,_,_,_,_],    
+     [_,_,_,_,m,_,m,_,_,_,_,pa,_],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse()
@@ -140,6 +140,7 @@ object mapa2 {
 
 
     method dibujar() {
+         
         game.height(tablero.size())
         game.width(tablero.get(0).size())
 

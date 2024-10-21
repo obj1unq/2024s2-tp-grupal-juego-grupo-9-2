@@ -6,13 +6,18 @@ import mapa.*
 
 class Palanca {
     var property position = game.center()
-    var property image = estado.image()
     var property estado  = palancaPrendida
 
     method interactuar(){
        estado = estado.palancaCambiada()
-       image = estado.image() 
     }    
+    method image(){
+        return estado.image()
+    }
+
+    method solida() {
+		return false
+	}
 }
 object palancaPrendida{
    var property image = "palanca_prendida.png"
@@ -20,10 +25,6 @@ object palancaPrendida{
     method palancaCambiada(){
         return palancaApagada
     }
-
-    method solida() {
-		return false
-	}
 }
 
 
@@ -35,9 +36,7 @@ object palancaApagada{
         return palancaPrendida
     }
 
-    method solida() {
-		return false
-	}
+
 
 }
 
@@ -116,7 +115,7 @@ class Llave {
 
 
     method interactuar() {
-    
+        
     }
 
     method solida() {
