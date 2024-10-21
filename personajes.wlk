@@ -2,11 +2,13 @@ import wollok.game.*
 import posiciones.*
 import objetos.*
 import territorio.*
+import mapa.*
 
 object pepe {
     var property position = game.center()
     var property image = "pepe-down.png"
     var monedas = 0
+    var property nivelActual = mapa2
 
 
     // method imagenDelJugador() {
@@ -22,19 +24,14 @@ object pepe {
     method validarMover(direccion) {
       const siguiente = direccion.siguiente(self.position())
       territorio.validarDentro(siguiente)
+      self.validarAtravesables(siguiente)
 	  }
-  method activarPalanca(){
-        const palanca = new Palanca(position = position) 
-        territorio.validarSiHayPalanca()
-        palanca.cambiarEstado()
-
-}
-
-    method objetoDebajoDePepe() = game.colliders(self)
+    
+    method objetoDebajoDePepe() = game.uniqueCollider(self)
 
     method interactuarConObjeto() {
         self.validarInteraccion()
-        const objeto = self.objetoDebajoDePepe().first()
+        const objeto = self.objetoDebajoDePepe()
         objeto.interactuar()
     }
 
@@ -44,7 +41,7 @@ object pepe {
         }
     }
     method hayObjetoAca() {
-        return not self.objetoDebajoDePepe().isEmpty()
+        return not game.colliders(self).isEmpty()
     }
     
     method sumarMoneda() {
@@ -54,9 +51,44 @@ object pepe {
         return monedas
     }
 
-
     method decirMonedas(){
       game.say(self, "Tengo "+monedas+" monedas")
     }
+
+    method entrarPorPuerta () {
+        self.validarInteraccion()
+        //Puerta.validarPuerta()
+        game.allVisuals().forEach({elementos => game.removeVisual(elementos)}) 
+        self.dibujarSiguienteMapa()
+    }
+
+    method dibujarSiguienteMapa() {
+      nivelActual.dibujar()
+      nivelActual += "mapa"+1
+    }
+    
+
+    method haySolido(_position) {
+		return game.getObjectsIn(_position).any({cosa => cosa.solida()})
+	}
+
+	method validarAtravesables(_position) {
+		if (self.haySolido(_position)) {
+			self.error("No puedo ir ahí")
+		}
+	}
+
+    //method agarrarVisual(objeto) {
+	//	self.agarrar(objeto)
+	//	objeto.colision()
+	//}
+
+    //method agarrar(objeto) {
+	//	monedas += monedas +1
+	//}
+
+    method solida() {
+		return false
+	}
 }
 

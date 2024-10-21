@@ -2,46 +2,145 @@ import territorio.*
 import wollok.game.*
 import posiciones.*
 import personajes.*
+import mapa.*
 
 class Palanca {
     var property position = game.center()
-    var property image = palancaPrendida.image()
     var property estado  = palancaPrendida
 
-    method cambiarEstado(){
-        self.validar()
-        estado = estado.palancaCambiada()
+    method interactuar(){
+       estado = estado.palancaCambiada()
+    }    
+    method image(){
+        return estado.image()
     }
-    method validar(){
-        if (not territorio.hayPalanca()){
-			self.error("no hay palanca en la posición actual")
-		}
+
+    method solida() {
+		return false
+	}
+}
+object palancaPrendida{
+   var property image = "palanca_prendida.png"
+    
+    method palancaCambiada(){
+        return palancaApagada
     }
 }
 
-object palancaPrendida{
-   var property image = "Objetos/Palanca_prendida.png"
-    
-    method palancaCambiada(){
-        return "Objetos/Palanca_apagada.png"
-    }
-}
+
+
 object palancaApagada{
-   var property image = "Objetos/Palanca_apagada.png"
+   var property image = "palanca_apagada.png"
     
     method palancaCambiada(){
-        return "Objetos/Palanca_prendida.png"
+        return palancaPrendida
     }
+
+
+
 }
 
 
 class Moneda {
-    var property position = game.center()
-    var property image = "roca-chica.png"
+    var property position 
+    var property image = "moneda.png"
 
     method interactuar(){
         pepe.sumarMoneda()
         game.removeVisual(self)
     }
+
+  //  method colision(personaje) {
+	//	personaje.removeVisual(self)
+	//}
     
+    method solida() {
+		return false
+	}
+}
+
+class MonedaDePlata inherits Moneda(image = "moneda-plata.png") {
+ 
+}
+
+
+class MonedaVioleta inherits Moneda(image = "moneda-violeta.png") {
+  override method solida() {
+		return true
+	}
+}
+
+
+class MonedaDeBronce inherits Moneda(image = "moneda-bronce.png") {
+ 
+}
+
+class Roca {
+    var property position 
+    var property image = "roca-chica.png"
+
+    method solida() {
+		return true
+	}
+
+    
+}
+
+class Oceano {
+    var property position 
+    var property image = "oceano.png"
+
+    method solida() {
+		return true
+	}
+}
+
+class Puerta {
+    var property position
+    var property image = "puerta.png"
+    var property estado = tableroActual
+
+    method cambiarEstado(){
+        self.validarPuerta()
+        estado = estado.tableroActual()
+    }
+    method validarPuerta(){
+        if (not territorio.hayPuertaAca()){
+			self.error("No hay puerta en la posición actual")
+		}
+    }
+
+    method interactuar() {
+    
+    }
+
+    method solida() {
+		return false
+	}
+
+
+}
+
+object tableroActual {
+    
+}
+
+class Llave {
+    var property position
+    var property image = "llave.png"
+
+
+    method interactuar() {
+        
+    }
+
+    method solida() {
+		return false
+	}
+}
+
+class Llave2 inherits Llave(image = "llave2.png") {
+  override method solida() {
+    return true
+  }
 }
