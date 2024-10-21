@@ -17,7 +17,7 @@ program pepesgame {
  	//game.addVisual(pepe)
 	//game.addVisual(new Palanca(position = game.at(6,7)))
 	//game.addVisual(new Moneda(position = game.at(1,1)))
-	mapa.dibujar()
+	mapa1.dibujar()
  	
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})

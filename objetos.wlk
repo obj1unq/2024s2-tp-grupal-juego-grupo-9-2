@@ -59,6 +59,22 @@ class Moneda {
 	}
 }
 
+class MonedaDePlata inherits Moneda(image = "moneda-plata.png") {
+ 
+}
+
+
+class MonedaVioleta inherits Moneda(image = "moneda-violeta.png") {
+  override method solida() {
+		return true
+	}
+}
+
+
+class MonedaDeBronce inherits Moneda(image = "moneda-bronce.png") {
+ 
+}
+
 class Roca {
     var property position 
     var property image = "roca-chica.png"
@@ -121,4 +137,10 @@ class Llave {
     method solida() {
 		return false
 	}
+}
+
+class Llave2 inherits Llave(image = "llave2.png") {
+  override method solida() {
+    return true
+  }
 }

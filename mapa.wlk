@@ -30,8 +30,7 @@ object r { // representa una roca.
     }
 }
 
-object m { // REVISAR 
-    const property objetosEnTablero = #{}
+object m { // representauna moneda - REVISAR 
     method dibujarEn(position) {
 
         //game.addVisual(new Moneda(position = position))
@@ -40,14 +39,25 @@ object m { // REVISAR
    
         const moneda = new Moneda (position = position)
 		game.addVisual (moneda)
-        objetosEnTablero.add(moneda)
-    
     }
+}
 
-    method guardarObjeto(objeto) {
-        objetosEnTablero.add(objeto)
+object m2 { // representa una moneda de plata.
+    method dibujarEn(position) {
+     game.addVisual(new MonedaDePlata(position = position))
     }
+}
 
+object m3 { // representa una moneda de bronce.
+    method dibujarEn(position) {
+     game.addVisual(new MonedaDeBronce(position = position))
+    }
+}
+
+object m4 { // representa una moneda violeta .
+    method dibujarEn(position) {
+     game.addVisual(new MonedaVioleta(position = position))
+    }
 }
 
 object k {  // representa a Pepe con una puerta en el mapa. (en la misma celda).
@@ -74,6 +84,12 @@ object l { // Representa una llave.
     }
 }
 
+object l2 { // Representa una llave.
+    method dibujarEn(position) {
+     game.addVisual(new Llave2(position = position))
+    }
+}
+
 object pa { // Representa una Palanca.
     method dibujarEn(position) {
      game.addVisual(new Palanca(position = position))
@@ -86,18 +102,18 @@ object o { // Representa el oceano.
     }
 }
 
-object mapa {
+object mapa1 {
    
     const property objetosEnTablero = #{}
 
 
     const tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,m,_,_,_,l,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,l,l2,_,_],    
      [_,r,r,_,_,_,_,_,_,_,_,_,_],    
      [_,r,p,_,_,_,_,_,_,r,_,e,_],    
      [_,r,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,m,_,m,_,_,_,_,pa,_],    
+     [_,_,_,_,m,m2,m3,m4,_,_,_,pa,_],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse()
@@ -130,11 +146,47 @@ object mapa2 {
     const tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,r,r,r,_,_,_],    
+     [_,_,_,_,_,_,_,r,r,r,r,_,_],    
      [_,k,_,_,r,r,r,r,_,m,r,_,_],    
      [_,_,_,_,_,_,_,_,_,_,r,_,_],    
      [_,_,_,_,_,_,_,_,r,r,r,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,e,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    ].reverse()
+
+
+    method dibujar() {
+         
+        game.ground("fondo-uno.jpeg")   // Creo que no puedo cambiar el fondo porque no tiene las mismas dimensiones. 
+
+        game.height(tablero.size())
+        game.width(tablero.get(0).size())
+
+       
+
+        (0..game.width() - 1).forEach({ x =>
+            (0..game.height() -1).forEach({y =>
+                tablero.get(y).get(x).dibujarEn(game.at(x,y))
+            })
+        })
+        // game.addVisual(pepe) //Lo pongo aca por el eje z
+       
+    }
+}
+
+
+
+object mapa3 {
+
+
+    const tablero =
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,o,o,o,o,o,o,o,o,_,_],    
+     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
+     [_,k,_,o,m,_,_,_,_,_,_,_,_],    
+     [_,_,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,e,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()
 
@@ -144,14 +196,11 @@ object mapa2 {
         game.height(tablero.size())
         game.width(tablero.get(0).size())
 
-        game.ground("fondo-uno.jpeg")   // Creo que no puedo cambiar el fondo porque no tiene las mismas dimensiones. 
-
         (0..game.width() - 1).forEach({ x =>
             (0..game.height() -1).forEach({y =>
                 tablero.get(y).get(x).dibujarEn(game.at(x,y))
             })
         })
-        // game.addVisual(pepe) //Lo pongo aca por el eje z
        
     }
 }
