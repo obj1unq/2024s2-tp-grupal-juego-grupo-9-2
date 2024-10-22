@@ -66,7 +66,7 @@ class MonedaDePlata inherits Moneda(image = "moneda-plata.png") {
 
 class MonedaVioleta inherits Moneda(image = "moneda-violeta.png") {
   override method solida() {
-		return true
+		return false
 	}
 }
 
@@ -95,7 +95,7 @@ class Oceano {
 	}
 }
 
-class Puerta {
+class Puerta1 {
     var property position
     var property image = "puerta.png"
     var property estado = tableroActual
@@ -118,8 +118,42 @@ class Puerta {
 		return false
 	}
 
-
+    method dibujarSiguienteMapa() {
+      mapa2.dibujar()
+    }
 }
+
+class Puerta0 inherits Puerta1 {
+  override method dibujarSiguienteMapa() {
+    mapa1.dibujar()
+  }
+}
+
+
+class Puerta2 inherits Puerta1 {
+  override method dibujarSiguienteMapa() {
+    mapa3.dibujar()
+  }
+}
+
+
+class Puerta3 inherits Puerta1 {
+ override method dibujarSiguienteMapa() {
+    mapa4.dibujar()
+  }
+}
+
+class PuertaDeAdorno  {
+  var property position
+  var property image = "puerta.png"
+  
+  
+  method solida() {
+		return true
+	}
+}
+
+
 
 object tableroActual {
     

@@ -8,8 +8,6 @@ object pepe {
     var property position = game.center()
     var property image = "pepe-down.png"
     var monedas = 0
-    var property nivelActual = mapa2
-
 
     // method imagenDelJugador() {
     //     imagen = 
@@ -56,16 +54,13 @@ object pepe {
     }
 
     method entrarPorPuerta () {
+        
+        const puerta = game.colliders(self).first()
         self.validarInteraccion()
-        //Puerta.validarPuerta()
         game.allVisuals().forEach({elementos => game.removeVisual(elementos)}) 
-        self.dibujarSiguienteMapa()
-    }
+        puerta.dibujarSiguienteMapa()
+    }                    
 
-    method dibujarSiguienteMapa() {
-      nivelActual.dibujar()
-      nivelActual += "mapa"+1
-    }
     
 
     method haySolido(_position) {
