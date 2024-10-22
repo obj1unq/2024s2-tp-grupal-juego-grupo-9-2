@@ -7,7 +7,7 @@ import mapa.*
 object pepe {
     var property position = game.center()
     var property image = "pepe-down.png"
-    var monedas = 0
+    var dolares = 0
 
     // method imagenDelJugador() { 
     //     imagen = 
@@ -42,15 +42,15 @@ object pepe {
         return not game.colliders(self).isEmpty()
     }
     
-    method sumarMoneda() {
-        monedas += 1
+    method sumarDolar(moneda) {
+        dolares += moneda.valor()
     }
-    method monedasTotales() {
-        return monedas
+    method dolaresTotales() {
+        return dolares
     }
 
-    method decirMonedas(){
-      game.say(self, "Tengo "+monedas+" monedas")
+    method decirDolares(){
+      game.say(self, "Tengo "+dolares+" dolares")
     }
 
     method entrarPorPuerta () {
@@ -87,10 +87,8 @@ object pepe {
 	}
 
     method agarrarVisual(moneda) {
-        self.sumarMoneda()
+        self.sumarDolar(moneda)
 		game.removeVisual(moneda)
-	}
-
-    
+	}    
 }
 

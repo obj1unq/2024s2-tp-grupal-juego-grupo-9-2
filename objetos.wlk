@@ -20,7 +20,7 @@ class Palanca {
     }
 
     method colision(personaje) {
-		  
+		  // no queremos que al colisionar haga nada, pero por polimorfismo lo mantenemos
 	}
 }
 
@@ -50,10 +50,11 @@ object palancaApagada{
 class Moneda {
     var property position 
     var property image = "moneda.png"
+    var property valor = 10
 
     method interactuar(){ // Teniendo el metodo "Colision" ya no es importante.
         //pepe.sumarMoneda()
-        //game.removeVisual(self)
+        //game.removeVisual(self)      // no queremos el efecto de colisionar sea a a través de una tecla, pero por polimorfismo lo dejamos.
     }
 
   //  method colision(personaje) {
@@ -69,19 +70,19 @@ class Moneda {
     }
 }
 
-class MonedaDePlata inherits Moneda(image = "moneda-plata.png") {
+class MonedaDePlata inherits Moneda(image = "moneda-plata.png",valor = 50) {
  
 }
 
 
-class MonedaVioleta inherits Moneda(image = "moneda-violeta.png") {
+class MonedaVioleta inherits Moneda(image = "moneda-violeta.png", valor = 100) {
   override method solida() {
 		return true
 	}
 }
 
 
-class MonedaDeBronce inherits Moneda(image = "moneda-bronce.png") {
+class MonedaDeBronce inherits Moneda(image = "moneda-bronce.png",valor = 25) {
  
 }
 
@@ -188,7 +189,7 @@ class Llave {
 	}
 
   method colision(personaje) {
-		  
+		  // no queremos que al colisionar haga nada, pero por polimorfismo lo mantenemos
 	}
 }
 
