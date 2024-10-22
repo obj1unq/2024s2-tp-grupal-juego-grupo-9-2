@@ -9,14 +9,9 @@ program pepesgame {
 	game.title("Juego sin nombre")
 	//game.height(10)
 	//game.width(10)
-	game.cellSize(50) 	
+	game.cellSize(50) //valor por defecto 50	
 
 	//  VISUALES
-
-	//game.ground("fondo-uno.jpeg")
- 	//game.addVisual(pepe)
-	//game.addVisual(new Palanca(position = game.at(6,7)))
-	//game.addVisual(new Moneda(position = game.at(1,1)))
 	mapa1.dibujar()
  	
 	keyboard.up().onPressDo({pepe.mover(arriba)})
@@ -27,6 +22,7 @@ program pepesgame {
 	keyboard.h().onPressDo({pepe.decirMonedas()})
 	keyboard.e().onPressDo({pepe.entrarPorPuerta()})
 
+	game.onCollideDo(pepe, {algo => algo.colision(pepe)}) // Pepe colision con monedas.
 
  	//  COMIENZA
 	game.start()

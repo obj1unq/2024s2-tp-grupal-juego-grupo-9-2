@@ -9,7 +9,7 @@ object pepe {
     var property image = "pepe-down.png"
     var monedas = 0
 
-    // method imagenDelJugador() {
+    // method imagenDelJugador() { 
     //     imagen = 
     // }
 
@@ -25,7 +25,7 @@ object pepe {
       self.validarAtravesables(siguiente)
 	  }
     
-    method objetoDebajoDePepe() = game.uniqueCollider(self)
+    method objetoDebajoDePepe() = game.uniqueCollider(self) // Lo que hay abajo de Pepe.
 
     method interactuarConObjeto() {
         self.validarInteraccion()
@@ -85,5 +85,12 @@ object pepe {
     method solida() {
 		return false
 	}
+
+    method agarrarVisual(moneda) {
+        self.sumarMoneda()
+		game.removeVisual(moneda)
+	}
+
+    
 }
 

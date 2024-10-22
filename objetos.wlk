@@ -16,9 +16,15 @@ class Palanca {
     }
 
     method solida() {
-		return false
+		  return false
+    }
+
+    method colision(personaje) {
+		  
 	}
 }
+
+
 object palancaPrendida{
    var property image = "palanca_prendida.png"
     
@@ -45,9 +51,9 @@ class Moneda {
     var property position 
     var property image = "moneda.png"
 
-    method interactuar(){
-        pepe.sumarMoneda()
-        game.removeVisual(self)
+    method interactuar(){ // Teniendo el metodo "Colision" ya no es importante.
+        //pepe.sumarMoneda()
+        //game.removeVisual(self)
     }
 
   //  method colision(personaje) {
@@ -57,6 +63,10 @@ class Moneda {
     method solida() {
 		return false
 	}
+
+    method colision(personaje) {
+		  personaje.agarrarVisual(self)
+    }
 }
 
 class MonedaDePlata inherits Moneda(image = "moneda-plata.png") {
@@ -66,7 +76,7 @@ class MonedaDePlata inherits Moneda(image = "moneda-plata.png") {
 
 class MonedaVioleta inherits Moneda(image = "moneda-violeta.png") {
   override method solida() {
-		return false
+		return true
 	}
 }
 
@@ -100,7 +110,7 @@ class Puerta1 {
     var property image = "puerta.png"
     var property estado = tableroActual
 
-    method cambiarEstado(){
+    method cambiarEstado(){ // ESTE METODO NO HACE NADA. REVISAR!
         self.validarPuerta()
         estado = estado.tableroActual()
     }
@@ -121,7 +131,12 @@ class Puerta1 {
     method dibujarSiguienteMapa() {
       mapa2.dibujar()
     }
+
+    method colision(personaje) {
+		  
+	}
 }
+
 
 class Puerta0 inherits Puerta1 {
   override method dibujarSiguienteMapa() {
@@ -155,7 +170,7 @@ class PuertaDeAdorno  {
 
 
 
-object tableroActual {
+object tableroActual { // POSIBLEMENTE NO HACE NADA.
     
 }
 
@@ -165,11 +180,15 @@ class Llave {
 
 
     method interactuar() {
-        
+        game.removeVisual(self)
     }
 
     method solida() {
 		return false
+	}
+
+  method colision(personaje) {
+		  
 	}
 }
 
