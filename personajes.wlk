@@ -7,11 +7,9 @@ import mapa.*
 object pepe {
     var property position = game.center()
     var property image = "pepe-down.png"
-    var monedas = 0
-    var property nivelActual = mapa2
+    var dolares = 0
 
-
-    // method imagenDelJugador() {
+    // method imagenDelJugador() { 
     //     imagen = 
     // }
 
@@ -27,7 +25,7 @@ object pepe {
       self.validarAtravesables(siguiente)
 	  }
     
-    method objetoDebajoDePepe() = game.uniqueCollider(self)
+    method objetoDebajoDePepe() = game.uniqueCollider(self) // Lo que hay abajo de Pepe.
 
     method interactuarConObjeto() {
         self.validarInteraccion()
@@ -44,28 +42,25 @@ object pepe {
         return not game.colliders(self).isEmpty()
     }
     
-    method sumarMoneda() {
-        monedas += 1
+    method sumarDolar(moneda) {
+        dolares += moneda.valor()
     }
-    method monedasTotales() {
-        return monedas
+    method dolaresTotales() {
+        return dolares
     }
 
-    method decirMonedas(){
-      game.say(self, "Tengo "+monedas+" monedas")
+    method decirDolares(){
+      game.say(self, "Tengo "+dolares+" dolares")
     }
 
     method entrarPorPuerta () {
+        
+        const puerta = game.colliders(self).first()
         self.validarInteraccion()
-        //Puerta.validarPuerta()
         game.allVisuals().forEach({elementos => game.removeVisual(elementos)}) 
-        self.dibujarSiguienteMapa()
-    }
+        puerta.dibujarSiguienteMapa()
+    }                    
 
-    method dibujarSiguienteMapa() {
-      nivelActual.dibujar()
-      nivelActual += "mapa"+1
-    }
     
 
     method haySolido(_position) {
@@ -90,5 +85,10 @@ object pepe {
     method solida() {
 		return false
 	}
+
+    method agarrarVisual(moneda) {
+        self.sumarDolar(moneda)
+		game.removeVisual(moneda)
+	}    
 }
 

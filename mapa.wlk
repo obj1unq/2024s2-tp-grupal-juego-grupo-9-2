@@ -16,7 +16,6 @@ object _ {
 
 
 object p {  // representa a Pepe en el mapa.
-    //Precondicion: no puede haber "p" y "k" en el mismo mapa.
 
     method dibujarEn(position) {
         pepe.position(position)
@@ -60,21 +59,38 @@ object m4 { // representa una moneda violeta .
     }
 }
 
-object k {  // representa a Pepe con una puerta en el mapa. (en la misma celda).
-    //Precondicion: no puede haber "p" y "k" en el mismo mapa.
+object ea {  // representa la entrada de adorno en el mapa.
 
     method dibujarEn(position) {
-
-        game.addVisual(new Puerta(position = position)) //primero poner la puerta luego a Pepe, porque sino no funciona.
-        pepe.position(position)
-        game.addVisual(pepe)
+        game.addVisual(new PuertaDeAdorno(position = position)) //primero poner la puerta luego a Pepe, porque sino no funciona.
     }
 }
 
-object e { // representa la Entrada (puerta, etc)
+object e0 { // representa la Entrada (puerta, etc)
 
     method dibujarEn(position) {
-     game.addVisual(new Puerta(position = position))
+     game.addVisual(new Puerta0(position = position))
+    }
+}
+
+object e1 { // representa la Entrada (puerta, etc)
+
+    method dibujarEn(position) {
+     game.addVisual(new Puerta1(position = position))
+    }
+}
+
+object e2 { // representa la Entrada (puerta, etc)
+
+    method dibujarEn(position) {
+     game.addVisual(new Puerta2(position = position))
+    }
+}
+
+object e3 { // representa la Entrada (puerta, etc)
+
+    method dibujarEn(position) {
+     game.addVisual(new Puerta3(position = position))
     }
 }
 
@@ -111,7 +127,7 @@ object mapa1 {
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,l,l2,_,_],    
      [_,r,r,_,_,_,_,_,_,_,_,_,_],    
-     [_,r,p,_,_,_,_,_,_,r,_,e,_],    
+     [_,r,p,_,_,_,_,_,_,r,_,e1,_],    
      [_,r,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,m,m2,m3,m4,_,_,_,pa,_],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
@@ -147,10 +163,10 @@ object mapa2 {
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,r,r,r,r,_,_],    
-     [_,k,_,_,r,r,r,r,_,m,r,_,_],    
+     [ea,p,_,_,r,r,r,r,_,m,r,_,_],    
      [_,_,_,_,_,_,_,_,_,_,r,_,_],    
      [_,_,_,_,_,_,_,_,r,r,r,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,e,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,e2,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()
 
@@ -183,10 +199,40 @@ object mapa3 {
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,o,_,_,_,_,_,_,_,_,_],    
-     [_,k,_,o,m,_,_,_,_,_,_,_,_],    
+     [ea,p,_,o,m,_,_,_,_,_,_,_,_],    
      [_,_,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,e,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,e3,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    ].reverse()
+
+
+    method dibujar() {
+         
+        game.height(tablero.size())
+        game.width(tablero.get(0).size())
+
+        (0..game.width() - 1).forEach({ x =>
+            (0..game.height() -1).forEach({y =>
+                tablero.get(y).get(x).dibujarEn(game.at(x,y))
+            })
+        })
+       
+    }
+}
+
+
+object mapa4 {
+
+
+    const tablero =
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
+     [ea,p,_,o,m,_,_,_,_,_,_,_,_],    
+     [_,_,_,o,m2,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,m4,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,e0,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()
 
