@@ -48,20 +48,9 @@ object pepe {
     method dolaresTotales() {
         return dolares
     }
-
     method decirDolares(){
       game.say(self, "Tengo "+dolares+" dolares")
     }
-
-    method entrarPorPuerta () {
-        
-        const puerta = game.colliders(self).first()
-        self.validarInteraccion()
-        game.allVisuals().forEach({elementos => game.removeVisual(elementos)}) 
-        puerta.dibujarSiguienteMapa()
-    }                    
-
-    
 
     method haySolido(_position) {
 		return game.getObjectsIn(_position).any({cosa => cosa.solida()})

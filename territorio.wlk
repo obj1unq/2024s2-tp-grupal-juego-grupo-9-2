@@ -14,6 +14,6 @@ object territorio{
 	  }
 
 	method hayPuertaAca() {
-		return 
+		return pepe.objetoDebajoDePepe().typeName() == "Puerta"
 	}
  }

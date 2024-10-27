@@ -112,17 +112,18 @@ class Puerta1 {
     var property estado = tableroActual
 
     method cambiarEstado(){ // ESTE METODO NO HACE NADA. REVISAR!
-        self.validarPuerta()
+        pepe.validarInteraccion()
         estado = estado.tableroActual()
     }
     method validarPuerta(){
         if (not territorio.hayPuertaAca()){
-			self.error("No hay puerta en la posición actual")
-		}
+			    self.error("No hay puerta en la posición actual")
+		  }
     }
 
     method interactuar() {
-    
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)}) 
+      self.dibujarSiguienteMapa()
     }
 
     method solida() {
