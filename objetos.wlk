@@ -106,7 +106,7 @@ class Oceano {
 	}
 }
 
-class Puerta1 {
+class PuertaANivel1 {
     var property position
     var property image = "puerta.png"
     var property estado = tableroActual
@@ -130,7 +130,7 @@ class Puerta1 {
 	}
 
     method dibujarSiguienteMapa() {
-      mapa2.dibujar()
+      nivel1.dibujar()
     }
 
     method colision(personaje) {
@@ -139,23 +139,35 @@ class Puerta1 {
 }
 
 
-class Puerta0 inherits Puerta1 {
+class Lobby inherits PuertaANivel1 {
   override method dibujarSiguienteMapa() {
-    mapa1.dibujar()
+    lobby.dibujar()
   }
 }
 
 
-class Puerta2 inherits Puerta1 {
+class PuertaANivel2 inherits PuertaANivel1 {
   override method dibujarSiguienteMapa() {
-    mapa3.dibujar()
+    nivel2.dibujar()
   }
 }
 
 
-class Puerta3 inherits Puerta1 {
+class PuertaANivel3 inherits PuertaANivel1 {
  override method dibujarSiguienteMapa() {
-    mapa4.dibujar()
+    nivel3.dibujar()
+  }
+}
+
+class PuertaANivel4 inherits PuertaANivel1 {
+ override method dibujarSiguienteMapa() {
+    nivel4.dibujar()
+  }
+}
+
+class PuertaANivel5 inherits PuertaANivel1 {
+ override method dibujarSiguienteMapa() {
+    nivel5.dibujar()
   }
 }
 
@@ -197,4 +209,32 @@ class Llave2 inherits Llave(image = "llave2.png") {
   override method solida() {
     return true
   }
+}
+
+class NPC {
+  var property position
+  var property image = "hector.png"
+
+
+  method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
+		return false
+	}
+
+  method interactuar() {
+        game.say(self, "¡HOLA VIAJERO!")
+    }
+}
+
+class Tienda {
+  var property position
+  var property image = "tienda.png"
+
+
+  method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
+		return false
+	}
+
+  method interactuar() {
+        game.say(self, "No hay objetos para vender")
+    }
 }
