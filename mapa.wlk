@@ -69,7 +69,7 @@ object ea {  // representa la entrada de adorno en el mapa.
 object lo { // representa el lobby 
 
     method dibujarEn(position) {
-     game.addVisual(new Lobby(position = position))
+     game.addVisual(new PuertaALobby(position = position))
     }
 }
 
@@ -132,25 +132,36 @@ object o { // Representa el oceano.
     }
 }
 
-object h { // Representa el oceano.
+object h { // Representa a Hector.
     method dibujarEn(position) {
      game.addVisual(new NPC(position = position))
     }
 }
 
-object t {
+object t { // Representa una Tienda.
     method dibujarEn(position) {
      game.addVisual(new Tienda(position = position))
     }
 }
 
+class Mapa {
+    const tablero 
 
-object lobby {
-   
-    const property objetosEnTablero = #{}
+    method dibujar() {
+        game.height(tablero.size())
+        game.width(tablero.get(0).size())
 
 
-    const tablero =
+        (0..game.width() - 1).forEach({ x =>
+            (0..game.height() -1).forEach({y =>
+                tablero.get(y).get(x).dibujarEn(game.at(x,y))
+            })
+        })
+    }
+
+}
+
+object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,n1,_,n2,_,n3,_,n4,_,n5,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
@@ -159,180 +170,71 @@ object lobby {
      [_,_,_,_,_,_,p,_,_,_,_,_,_],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
-    ].reverse()
-
-
-    method dibujar() {
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-       //game.addVisual(pepe) //Lo pongo aca por el eje z
-
-
-
-
-    }
+    ].reverse())  {
 
 }
 
-object nivel1 {
-   
-    const property objetosEnTablero = #{}
-
-
-    const tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [lo,p,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,r,r,r,r,_,_],    
-     [_,_,_,_,r,r,r,r,_,lo,r,_,_],    
-     [_,_,_,_,_,_,m,m2,_,_,r,_,_],    
-     [_,_,_,_,_,r,r,r,r,r,r,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()
-
-
-    method dibujar() {
-         
-        game.ground("fondo-uno.jpeg")   // Creo que no puedo cambiar el fondo porque no tiene las mismas dimensiones. 
-
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-       
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-        // game.addVisual(pepe) //Lo pongo aca por el eje z
-       
-    }
-}
-
-
-
-object nivel2 {
-
-
-    const tablero =
+object nivel1 inherits Mapa (tablero =  
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [lo,p,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,o,_,_,_,_,_,_,_,_,_],    
      [_,_,_,o,m,_,_,_,_,_,_,_,_],    
      [_,_,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,lo,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,n2,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()
+    ].reverse()) { 
 
+}
 
-    method dibujar() {
-         
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
+object nivel2 inherits Mapa ( tablero =     
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [lo,p,_,o,o,o,o,o,o,o,o,_,_],    
+     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,o,m,_,_,_,_,_,_,_,_],    
+     [_,_,_,o,o,o,o,o,o,o,o,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,n3,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    ].reverse()) {
 
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-       
-    }
 }
 
 
-object nivel3 {
-
-
-    const tablero =
+object nivel3 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [lo,p,_,o,_,_,_,_,_,_,_,_,_],    
      [_,_,_,o,_,_,_,_,_,_,_,_,_],    
      [_,_,_,o,m,_,_,_,_,_,_,_,_],    
      [_,_,_,o,m2,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,m4,_,_,_,_,_,lo,_,_],    
+     [_,_,_,_,m4,_,_,_,_,_,n4,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()
-
-
-    method dibujar() {
-         
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-       
-    }
+    ].reverse() ) {
 }
 
-object nivel4 {
-
-
-    const tablero =
+object nivel4 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [lo,p,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,l,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,lo,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,n5,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()
+    ].reverse() ) {
 
-
-    method dibujar() {
-         
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-       
-    }
 }
 
 
-object nivel5 {
-
-
-    const tablero =
+object nivel5 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [lo,p,_,_,_,_,_,_,_,_,_,lo,_],    
+     [lo,p,_,_,_,_,_,_,_,_,_,n1,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,l2,_,_,_,_],    
      [_,_,_,_,_,_,_,_,m3,_,_,_,_],    
      [_,_,_,_,_,_,_,_,m4,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()
-
-
-    method dibujar() {
-         
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-       
-    }
+    ].reverse() ) {
 }

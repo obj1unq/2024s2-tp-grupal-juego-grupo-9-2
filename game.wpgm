@@ -13,7 +13,7 @@ program pepesgame {
 
 	//  VISUALES
 	lobby.dibujar()
- 	
+
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})
 	keyboard.down().onPressDo({pepe.mover(abajo)})

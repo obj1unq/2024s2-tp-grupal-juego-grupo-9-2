@@ -56,10 +56,6 @@ class Moneda {
         //pepe.sumarMoneda()
         //game.removeVisual(self)      // no queremos el efecto de colisionar sea a a través de una tecla, pero por polimorfismo lo dejamos.
     }
-
-  //  method colision(personaje) {
-	//	personaje.removeVisual(self)
-	//}
     
     method solida() {
 		return false
@@ -139,7 +135,7 @@ class PuertaANivel1 {
 }
 
 
-class Lobby inherits PuertaANivel1 {
+class PuertaALobby inherits PuertaANivel1 {
   override method dibujarSiguienteMapa() {
     lobby.dibujar()
   }
