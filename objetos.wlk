@@ -139,7 +139,6 @@ class Puerta1 {
 	}
 }
 
-
 class Puerta0 inherits Puerta1 {
   override method dibujarSiguienteMapa() {
     mapa1.dibujar()
@@ -169,8 +168,6 @@ class PuertaDeAdorno  {
 		return true
 	}
 }
-
-
 
 object tableroActual { // POSIBLEMENTE NO HACE NADA.
     

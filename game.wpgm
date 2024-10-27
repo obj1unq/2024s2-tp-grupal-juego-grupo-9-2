@@ -20,7 +20,6 @@ program pepesgame {
 	keyboard.right().onPressDo({pepe.mover(derecha)})
 	keyboard.z().onPressDo({pepe.interactuarConObjeto()})
 	keyboard.h().onPressDo({pepe.decirDolares()})
-	//keyboard.e().onPressDo({pepe.entrarPorPuerta()})
 
 	game.onCollideDo(pepe, {algo => algo.colision(pepe)}) // Pepe colision con monedas.
 

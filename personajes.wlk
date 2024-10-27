@@ -51,7 +51,7 @@ object pepe {
     method decirDolares(){
       game.say(self, "Tengo "+dolares+" dolares")
     }
-
+    
     method haySolido(_position) {
 		return game.getObjectsIn(_position).any({cosa => cosa.solida()})
 	}
