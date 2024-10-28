@@ -108,12 +108,13 @@ class PuertaANivel1 {
 
     method validarPuerta(){
         if (not territorio.hayPuertaAca()){
-			self.error("No hay puerta en la posición actual")
-		}
+			    self.error("No hay puerta en la posición actual")
+		  }
     }
 
     method interactuar() {
-    
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)}) 
+      self.dibujarSiguienteMapa()
     }
 
     method solida() {
@@ -131,6 +132,7 @@ class PuertaANivel1 {
 
 
 class PuertaALobby inherits PuertaANivel1 {
+
   override method dibujarSiguienteMapa() {
     lobby.dibujar()
   }
@@ -171,8 +173,6 @@ class PuertaDeAdorno  { // No la estamos usando pero anda.
 		return false
 	}
 }
-
-
 
 class Llave {
     var property position
