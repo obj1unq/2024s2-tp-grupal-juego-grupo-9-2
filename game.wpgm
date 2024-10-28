@@ -12,8 +12,8 @@ program pepesgame {
 	game.cellSize(50) //valor por defecto 50	
 
 	//  VISUALES
-	mapa1.dibujar()
- 	
+	lobby.dibujar()
+
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})
 	keyboard.down().onPressDo({pepe.mover(abajo)})

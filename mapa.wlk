@@ -9,8 +9,6 @@ import personajes.*
 
 object _ {
     method dibujarEn(position) {
-
-
     }
 }
 
@@ -29,15 +27,9 @@ object r { // representa una roca.
     }
 }
 
-object m { // representauna moneda - REVISAR 
+object m { // representauna moneda.
     method dibujarEn(position) {
-
-        //game.addVisual(new Moneda(position = position))
-        //self.guardarObjeto(position)
-        //objetosEnTablero.add(position)
-   
-        const moneda = new Moneda (position = position)
-		game.addVisual (moneda)
+     game.addVisual(new Moneda(position = position))
     }
 }
 
@@ -66,31 +58,45 @@ object ea {  // representa la entrada de adorno en el mapa.
     }
 }
 
-object e0 { // representa la Entrada (puerta, etc)
+object lo { // representa el lobby 
 
     method dibujarEn(position) {
-     game.addVisual(new Puerta0(position = position))
+     game.addVisual(new PuertaALobby(position = position))
     }
 }
 
-object e1 { // representa la Entrada (puerta, etc)
+object n1 { // representa la entrada al Nivel 1 
 
     method dibujarEn(position) {
-     game.addVisual(new Puerta1(position = position))
+     game.addVisual(new PuertaANivel1(position = position))
     }
 }
 
-object e2 { // representa la Entrada (puerta, etc)
+object n2 { // representa la entrada al Nivel 2 
 
     method dibujarEn(position) {
-     game.addVisual(new Puerta2(position = position))
+     game.addVisual(new PuertaANivel2(position = position))
     }
 }
 
-object e3 { // representa la Entrada (puerta, etc)
+object n3 { // representa la entrada al Nivel 3 
 
     method dibujarEn(position) {
-     game.addVisual(new Puerta3(position = position))
+     game.addVisual(new PuertaANivel3(position = position))
+    }
+}
+
+object n4 { // representa la entrada al Nivel 4
+
+    method dibujarEn(position) {
+     game.addVisual(new PuertaANivel4(position = position))
+    }
+}
+
+object n5 { // representa la entrada al Nivel 5
+
+    method dibujarEn(position) {
+     game.addVisual(new PuertaANivel5(position = position))
     }
 }
 
@@ -118,135 +124,104 @@ object o { // Representa el oceano.
     }
 }
 
-object mapa1 {
-   
-    const property objetosEnTablero = #{}
+object h { // Representa a Hector.
+    method dibujarEn(position) {
+     game.addVisual(new NPC(position = position))
+    }
+}
+
+object t { // Representa una Tienda.
+    method dibujarEn(position) {
+     game.addVisual(new Tienda(position = position))
+    }
+}
+
+class Mapa {
+    const tablero 
+
+    method dibujar() {
+        game.height(tablero.size())
+        game.width(tablero.get(0).size())
 
 
-    const tablero =
+        (0..game.width() - 1).forEach({ x =>
+            (0..game.height() -1).forEach({y =>
+                tablero.get(y).get(x).dibujarEn(game.at(x,y))
+            })
+        })
+    }
+}
+
+object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,l,l2,_,_],    
-     [_,r,r,_,_,_,_,_,_,_,_,_,_],    
-     [_,r,p,_,_,_,_,_,_,r,_,e1,_],    
-     [_,r,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,m,m2,m3,m4,_,_,_,pa,_],    
+     [_,_,n1,_,n2,_,n3,_,n4,_,n5,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,h,_,_,_,_,_,_,_,_,_,t,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,p,_,_,_,_,_,_],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
-    ].reverse()
-
-
-    method dibujar() {
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-       //game.addVisual(pepe) //Lo pongo aca por el eje z
-
-
-
-
-    }
-
+    ].reverse())  {
 }
 
-object mapa2 {
-   
-    const property objetosEnTablero = #{}
-
-
-    const tablero =
+object nivel1 inherits Mapa (tablero =  
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [lo,p,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,r,r,r,r,_,_],    
-     [ea,p,_,_,r,r,r,r,_,m,r,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,r,_,_],    
-     [_,_,_,_,_,_,_,_,r,r,r,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,e2,_],    
+     [_,_,_,_,m,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,o,_,_,o,_,o,o,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,m2,m3,_,_,n2,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()
-
-
-    method dibujar() {
-         
-        game.ground("fondo-uno.jpeg")   // Creo que no puedo cambiar el fondo porque no tiene las mismas dimensiones. 
-
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-       
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-        // game.addVisual(pepe) //Lo pongo aca por el eje z
-       
-    }
+    ].reverse()) { 
 }
 
-
-
-object mapa3 {
-
-
-    const tablero =
+object nivel2 inherits Mapa ( tablero =     
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,o,o,o,o,o,o,o,o,_,_],    
+     [lo,p,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,o,_,_,_,_,_,_,_,_,_],    
-     [ea,p,_,o,m,_,_,_,_,_,_,_,_],    
+     [_,_,_,o,m,_,_,_,_,_,_,_,_],    
      [_,_,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,e3,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,n3,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()
-
-
-    method dibujar() {
-         
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-       
-    }
+    ].reverse()) {
 }
 
 
-object mapa4 {
-
-
-    const tablero =
+object nivel3 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [lo,p,_,o,_,_,_,_,_,_,_,_,_],    
      [_,_,_,o,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
-     [ea,p,_,o,m,_,_,_,_,_,_,_,_],    
+     [_,_,_,o,m,_,_,_,_,_,_,_,_],    
      [_,_,_,o,m2,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,m4,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,e0,_,_,_,_],    
+     [_,_,_,_,m4,_,_,_,_,_,n4,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()
+    ].reverse() ) {
+}
+
+object nivel4 inherits Mapa (tablero =
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [lo,p,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,l,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,n5,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    ].reverse() ) {
+}
 
 
-    method dibujar() {
-         
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-       
-    }
+object nivel5 inherits Mapa (tablero =
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [lo,p,_,_,_,_,_,_,_,_,_,n1,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,l2,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,m3,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,m4,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    ].reverse() ) {
 }

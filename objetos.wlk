@@ -56,10 +56,6 @@ class Moneda {
         //pepe.sumarMoneda()
         //game.removeVisual(self)      // no queremos el efecto de colisionar sea a a través de una tecla, pero por polimorfismo lo dejamos.
     }
-
-  //  method colision(personaje) {
-	//	personaje.removeVisual(self)
-	//}
     
     method solida() {
 		return false
@@ -106,15 +102,10 @@ class Oceano {
 	}
 }
 
-class Puerta1 {
+class PuertaANivel1 {
     var property position
     var property image = "puerta.png"
-    var property estado = tableroActual
 
-    method cambiarEstado(){ // ESTE METODO NO HACE NADA. REVISAR!
-        pepe.validarInteraccion()
-        estado = estado.tableroActual()
-    }
     method validarPuerta(){
         if (not territorio.hayPuertaAca()){
 			    self.error("No hay puerta en la posición actual")
@@ -131,7 +122,7 @@ class Puerta1 {
 	}
 
     method dibujarSiguienteMapa() {
-      mapa2.dibujar()
+      nivel1.dibujar()
     }
 
     method colision(personaje) {
@@ -139,38 +130,48 @@ class Puerta1 {
 	}
 }
 
-class Puerta0 inherits Puerta1 {
+
+class PuertaALobby inherits PuertaANivel1 {
+
   override method dibujarSiguienteMapa() {
-    mapa1.dibujar()
+    lobby.dibujar()
   }
 }
 
 
-class Puerta2 inherits Puerta1 {
+class PuertaANivel2 inherits PuertaANivel1 {
   override method dibujarSiguienteMapa() {
-    mapa3.dibujar()
+    nivel2.dibujar()
   }
 }
 
 
-class Puerta3 inherits Puerta1 {
+class PuertaANivel3 inherits PuertaANivel1 {
  override method dibujarSiguienteMapa() {
-    mapa4.dibujar()
+    nivel3.dibujar()
   }
 }
 
-class PuertaDeAdorno  {
+class PuertaANivel4 inherits PuertaANivel1 {
+ override method dibujarSiguienteMapa() {
+    nivel4.dibujar()
+  }
+}
+
+class PuertaANivel5 inherits PuertaANivel1 {
+ override method dibujarSiguienteMapa() {
+    nivel5.dibujar()
+  }
+}
+
+class PuertaDeAdorno  { // No la estamos usando pero anda.
   var property position
   var property image = "puerta.png"
   
   
   method solida() {
-		return true
+		return false
 	}
-}
-
-object tableroActual { // POSIBLEMENTE NO HACE NADA.
-    
 }
 
 class Llave {
@@ -195,4 +196,32 @@ class Llave2 inherits Llave(image = "llave2.png") {
   override method solida() {
     return true
   }
+}
+
+class NPC {
+  var property position
+  var property image = "hector.png"
+
+
+  method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
+		return false
+	}
+
+  method interactuar() {
+        game.say(self, "¡HOLA VIAJERO!")
+    }
+}
+
+class Tienda {
+  var property position
+  var property image = "tienda.png"
+
+
+  method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
+		return false
+	}
+
+  method interactuar() {
+        game.say(self, "No hay objetos para vender")
+    }
 }

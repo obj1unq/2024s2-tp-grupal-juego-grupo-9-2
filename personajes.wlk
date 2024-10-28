@@ -62,15 +62,6 @@ object pepe {
 		}
 	}
 
-    //method agarrarVisual(objeto) {
-	//	self.agarrar(objeto)
-	//	objeto.colision()
-	//}
-
-    //method agarrar(objeto) {
-	//	monedas += monedas +1
-	//}
-
     method solida() {
 		return false
 	}
