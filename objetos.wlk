@@ -105,12 +105,7 @@ class Oceano {
 class PuertaANivel1 {
     var property position
     var property image = "puerta.png"
-    var property estado = tableroActual
 
-    method cambiarEstado(){ // ESTE METODO NO HACE NADA. REVISAR!
-        self.validarPuerta()
-        estado = estado.tableroActual()
-    }
     method validarPuerta(){
         if (not territorio.hayPuertaAca()){
 			self.error("No hay puerta en la posición actual")
@@ -167,21 +162,17 @@ class PuertaANivel5 inherits PuertaANivel1 {
   }
 }
 
-class PuertaDeAdorno  {
+class PuertaDeAdorno  { // No la estamos usando pero anda.
   var property position
   var property image = "puerta.png"
   
   
   method solida() {
-		return true
+		return false
 	}
 }
 
 
-
-object tableroActual { // POSIBLEMENTE NO HACE NADA.
-    
-}
 
 class Llave {
     var property position

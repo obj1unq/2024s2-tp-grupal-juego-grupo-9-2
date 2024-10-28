@@ -9,8 +9,6 @@ import personajes.*
 
 object _ {
     method dibujarEn(position) {
-
-
     }
 }
 
@@ -29,15 +27,9 @@ object r { // representa una roca.
     }
 }
 
-object m { // representauna moneda - REVISAR 
+object m { // representauna moneda.
     method dibujarEn(position) {
-
-        //game.addVisual(new Moneda(position = position))
-        //self.guardarObjeto(position)
-        //objetosEnTablero.add(position)
-   
-        const moneda = new Moneda (position = position)
-		game.addVisual (moneda)
+     game.addVisual(new Moneda(position = position))
     }
 }
 
@@ -158,7 +150,6 @@ class Mapa {
             })
         })
     }
-
 }
 
 object lobby inherits Mapa ( tablero =
@@ -171,20 +162,18 @@ object lobby inherits Mapa ( tablero =
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse())  {
-
 }
 
 object nivel1 inherits Mapa (tablero =  
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [lo,p,_,o,o,o,o,o,o,o,o,_,_],    
-     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,m,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,o,o,o,o,o,o,o,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,n2,_],    
+     [_,_,_,_,m,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,o,_,_,o,_,o,o,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,m2,m3,_,_,n2,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()) { 
-
 }
 
 object nivel2 inherits Mapa ( tablero =     
@@ -197,7 +186,6 @@ object nivel2 inherits Mapa ( tablero =
      [_,_,_,_,_,_,_,_,_,_,_,n3,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()) {
-
 }
 
 
@@ -223,7 +211,6 @@ object nivel4 inherits Mapa (tablero =
      [_,_,_,_,_,_,_,_,_,_,n5,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
-
 }
 
 
