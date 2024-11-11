@@ -49,7 +49,7 @@ object palancaApagada{
 
 class Moneda {
     var property position 
-    var property image = "moneda.png"
+    var property image = "monedaDeOro.png"
     var property valor = 10
 
     method interactuar(){ // Teniendo el metodo "Colision" ya no es importante.
@@ -66,19 +66,19 @@ class Moneda {
     }
 }
 
-class MonedaDePlata inherits Moneda(image = "moneda-plata.png",valor = 50) {
+class MonedaDePlata inherits Moneda(image = "monedaDePlata.png",valor = 50) {
  
 }
 
 
-class MonedaVioleta inherits Moneda(image = "moneda-violeta.png", valor = 100) {
+class MonedaVioleta inherits Moneda(image = "monedaVioleta.png", valor = 100) {
   override method solida() {
 		return true
 	}
 }
 
 
-class MonedaDeBronce inherits Moneda(image = "moneda-bronce.png",valor = 25) {
+class MonedaDeBronce inherits Moneda(image = "monedaDeBronce.png",valor = 25) {
  
 }
 
@@ -109,7 +109,7 @@ class Oceano {
 
 class PuertaANivel1 {
     var property position
-    var property image = "puerta2.png"
+    var property image = "puertaNueva.png"
 
     method validarPuerta(){
         if (not territorio.hayPuertaAca()){
@@ -171,7 +171,7 @@ class PuertaANivel5 inherits PuertaANivel1 {
 
 class PuertaDeAdorno  { // No la estamos usando pero anda.
   var property position
-  var property image = "puerta2.png"
+  var property image = "puertaNueva.png"
   
   
   method solida() {

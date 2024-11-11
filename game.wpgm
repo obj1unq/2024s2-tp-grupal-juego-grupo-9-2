@@ -21,7 +21,7 @@ program pepesgame {
 	keyboard.z().onPressDo({pepe.interactuarConObjeto()})
 	keyboard.h().onPressDo({pepe.decirDolares()})
 
-	game.onCollideDo(pepe, {algo => algo.colision(pepe)}) // Pepe colision con monedas.
+	game.onCollideDo(pepe, {algo => algo.colision(pepe)}) // Pepe puede colisionar 
 
  	//  COMIENZA
 	game.start()
