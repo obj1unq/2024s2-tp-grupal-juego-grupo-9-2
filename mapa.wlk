@@ -136,6 +136,12 @@ object t { // Representa una Tienda.
     }
 }
 
+object pu {
+    method dibujarEn(position){
+        game.addVisual(new Puente(position = position))
+    }
+}
+
 class Mapa {
     const tablero 
 
@@ -177,14 +183,14 @@ object nivel1 inherits Mapa (tablero =
 }
 
 object nivel2 inherits Mapa ( tablero =     
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [lo,p,_,o,o,o,o,o,o,o,o,_,_],    
-     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,m,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,o,o,o,o,o,o,o,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,n3,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    [[o,o,o,o,o,o,o,o,o,o,o,o,o],
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [pu,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [p,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [lo,o,o,o,o,o,o,o,o,o,o,o,o]       
     ].reverse()) {
 }
 
