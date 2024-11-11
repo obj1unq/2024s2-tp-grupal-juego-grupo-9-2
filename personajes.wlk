@@ -7,7 +7,8 @@ import mapa.*
 object pepe {
     var property position = game.center()
     var property image = "pepe2.png"
-    var dolares = 0
+    var dolaresTotales = 0
+    var dolaresNivel = 0
 
     // method imagenDelJugador() { 
     //     imagen = 
@@ -41,15 +42,22 @@ object pepe {
     method hayObjetoAca() {
         return not game.colliders(self).isEmpty()
     }
-    
+
+    method resetarDolares(){
+        dolaresNivel = 0
+    }
+
     method sumarDolar(moneda) {
-        dolares += moneda.valor()
+        dolaresNivel += moneda.valor()
     }
     method dolaresTotales() {
-        return dolares
+        return dolaresTotales
+    }
+    method actualizarDolares(){
+        dolaresTotales += dolaresNivel
     }
     method decirDolares(){
-      game.say(self, "Tengo "+dolares+" dolares")
+      game.say(self, "Tengo "+dolaresTotales+" dolares")
     }
     
     method haySolido(_position) {
