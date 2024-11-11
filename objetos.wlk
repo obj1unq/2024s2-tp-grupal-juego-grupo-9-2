@@ -46,7 +46,6 @@ object palancaApagada{
 
 }
 
-
 class Moneda {
     var property position 
     var property image = "moneda.png"
@@ -91,6 +90,19 @@ class Roca {
 	}
 
     
+}
+
+class Puente {
+    var property position
+    var property image = "puenteD.png"
+
+    method solida(){
+      return false
+    }
+
+    method colision(personaje){
+
+    }
 }
 
 class Oceano {
