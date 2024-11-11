@@ -177,8 +177,8 @@ object nivel1 inherits Mapa (tablero =
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,_,_,_,_,m2,m3,_,_,n2,_],    
-     [o,o,o,o,o,o,o,o,o,o,o,o]        
+     [o,o,m,_,m2,_,_,lo,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse()) { 
 }
 
