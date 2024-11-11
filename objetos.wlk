@@ -125,7 +125,7 @@ class PuertaANivel1 {
     }
 
     method interactuar() {
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)}) 
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
       self.dibujarSiguienteMapa()
     }
 
@@ -146,6 +146,7 @@ class PuertaANivel1 {
 class PuertaALobby inherits PuertaANivel1 {
 
   override method dibujarSiguienteMapa() {
+    pepe.resetarDolares()
     lobby.dibujar()
   }
 }
@@ -153,24 +154,25 @@ class PuertaALobby inherits PuertaANivel1 {
 
 class PuertaANivel2 inherits PuertaANivel1 {
   override method dibujarSiguienteMapa() {
+    pepe.actualizarDolares()
     nivel2.dibujar()
   }
 }
 
 
-class PuertaANivel3 inherits PuertaANivel1 {
+class PuertaANivel3 inherits PuertaANivel2 {
  override method dibujarSiguienteMapa() {
     nivel3.dibujar()
   }
 }
 
-class PuertaANivel4 inherits PuertaANivel1 {
+class PuertaANivel4 inherits PuertaANivel2 {
  override method dibujarSiguienteMapa() {
     nivel4.dibujar()
   }
 }
 
-class PuertaANivel5 inherits PuertaANivel1 {
+class PuertaANivel5 inherits PuertaANivel2 {
  override method dibujarSiguienteMapa() {
     nivel5.dibujar()
   }
