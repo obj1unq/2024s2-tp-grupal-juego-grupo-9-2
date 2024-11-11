@@ -109,7 +109,7 @@ class Oceano {
 
 class PuertaANivel1 {
     var property position
-    var property image = "puerta.png"
+    var property image = "puerta2.png"
 
     method validarPuerta(){
         if (not territorio.hayPuertaAca()){
@@ -171,7 +171,7 @@ class PuertaANivel5 inherits PuertaANivel1 {
 
 class PuertaDeAdorno  { // No la estamos usando pero anda.
   var property position
-  var property image = "puerta.png"
+  var property image = "puerta2.png"
   
   
   method solida() {

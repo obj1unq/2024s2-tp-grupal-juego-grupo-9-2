@@ -6,7 +6,7 @@ import mapa.*
 
 object pepe {
     var property position = game.center()
-    var property image = "pepe-down.png"
+    var property image = "pepe2.png"
     var dolares = 0
 
     // method imagenDelJugador() { 

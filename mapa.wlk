@@ -165,12 +165,12 @@ object lobby inherits Mapa ( tablero =
 }
 
 object nivel1 inherits Mapa (tablero =  
-    [[o,o,o,o,o,o,o,o,o,o,o,o,o],
-     [lo,p,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,o,o,o,o,o,o,o,o,o,o],    
+    [[o,o,o,o,o,o,o,o,o,o,o,o],
+     [lo,p,_,o,o,o,o,o,o,o,o,o],    
+     [o,o,_,o,o,o,o,o,o,o,o,o],    
+     [o,o,_,o,o,o,o,o,o,o,o,o],    
+     [o,o,_,o,o,o,o,o,o,o,o,o],    
+     [o,o,_,o,o,o,o,o,o,o,o,o],    
      [o,o,_,_,_,_,_,m2,m3,_,_,n2,_],    
      [o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse()) { 
