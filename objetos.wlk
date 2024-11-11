@@ -98,8 +98,13 @@ class Oceano {
     var property image = "oceano.png"
 
     method solida() {
-		return true
+		  return false
 	}
+
+  method colision(personaje) {
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
+		  lobby.dibujar()
+    }
 }
 
 class PuertaANivel1 {
