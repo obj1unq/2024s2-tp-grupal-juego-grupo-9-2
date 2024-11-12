@@ -112,17 +112,25 @@ object l2 { // Representa una llave.
     }
 }
 
-object pa { // Representa una Palanca.
-    method dibujarEn(position) {
-     game.addVisual(new Palanca(position = position))
-    }
-}
-
 object o { // Representa el oceano.
     method dibujarEn(position) {
      game.addVisual(new Oceano(position = position))
     }
 }
+
+object o1 { // Representa el oceano.
+    method dibujarEn(position) {
+     game.addVisual(new OceanoP1(position = position))
+    }
+}
+
+object pa { // Representa una Palanca.
+    method dibujarEn(position) {
+     game.addVisual(new Palanca(position = position, oceano = o1))
+    }
+}
+
+
 
 object h { // Representa a Hector.
     method dibujarEn(position) {
@@ -172,10 +180,10 @@ object lobby inherits Mapa ( tablero =
 
 object nivel1 inherits Mapa (tablero =  
     [[o,o,o,o,o,o,o,o,o,o,o,o,o],
-     [lo,p,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,o,o,o,o,o,o,o,o,o,o],    
+     [lo,p,_,pa,o,o,o,o,o,o,o,o,o],    
+     [o,o,o1,o,o,o,o,o,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
      [o,o,m,_,m2,_,_,lo,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        

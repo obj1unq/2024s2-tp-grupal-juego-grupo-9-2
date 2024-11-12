@@ -6,10 +6,12 @@ import mapa.*
 
 class Palanca {
     var property position = game.center()
-    var property estado  = palancaPrendida
+    var property estado  = palancaApagada
+    const oceano
 
     method interactuar(){
        estado = estado.palancaCambiada()
+       oceano.cambiar()
     }    
     method image(){
         return estado.image()
@@ -41,9 +43,6 @@ object palancaApagada{
     method palancaCambiada(){
         return palancaPrendida
     }
-
-
-
 }
 
 class Moneda {
@@ -64,21 +63,14 @@ class Moneda {
 		  personaje.agarrarVisual(self)
     }
 }
-
 class MonedaDePlata inherits Moneda(image = "monedaDePlata.png",valor = 50) {
- 
 }
-
-
 class MonedaVioleta inherits Moneda(image = "monedaVioleta.png", valor = 100) {
   override method solida() {
 		return true
 	}
 }
-
-
 class MonedaDeBronce inherits Moneda(image = "monedaDeBronce.png",valor = 25) {
- 
 }
 
 class Roca {
@@ -111,13 +103,22 @@ class Oceano {
 
     method solida() {
 		  return false
-	}
+	  }
 
-  method colision(personaje) {
+    method colision(personaje) {
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
 		  lobby.dibujar()
     }
 }
+
+class OceanoP1 inherits Oceano{
+  method cambiar(){
+    game.removeVisual(self)
+  }
+}
+
+
+
 
 class PuertaANivel1 {
     var property position
