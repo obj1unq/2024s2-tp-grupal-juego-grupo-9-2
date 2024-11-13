@@ -165,8 +165,7 @@ class Mapa {
         })
     }
 }
-
-object inicio inherits Mapa(tablero =
+class Background inherits Mapa(tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
@@ -176,19 +175,28 @@ object inicio inherits Mapa(tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()){
-    method image() = "fondo.png"
+   var property nuevoMapa 
+    method image() 
 
     override method dibujar(){
         super()
         game.boardGround(self.image())
-        
-        keyboard.enter().onPressDo({self.cambiar()})
-    }
-    method cambiar(){
-        lobby.dibujar()
     }
 
+    method cambiar(){
+        nuevoMapa.dibujar()
+    }        
+    
 }
+object start inherits Background(nuevoMapa = inst){
+    override method image() = "inicio.png"
+
+}
+object inst inherits Background(nuevoMapa = lobby){
+    override method image() = "instrucciones.png"
+
+}
+
 
 
 object lobby inherits Mapa ( tablero =
@@ -201,6 +209,12 @@ object lobby inherits Mapa ( tablero =
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse())  {
+        method image() = "puenteD.png"
+
+        override method dibujar(){
+        super()
+        game.boardGround(self.image())
+    }
 }
 
 object nivel1 inherits Mapa (tablero =  
