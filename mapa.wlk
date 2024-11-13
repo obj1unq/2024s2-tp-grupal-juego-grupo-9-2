@@ -176,6 +176,7 @@ class Background inherits Mapa(tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()){
    var property nuevoMapa 
+    
     method image() 
 
     override method dibujar(){
