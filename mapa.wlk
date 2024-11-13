@@ -166,6 +166,31 @@ class Mapa {
     }
 }
 
+object inicio inherits Mapa(tablero =
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    ].reverse()){
+    method image() = "fondo.png"
+
+    override method dibujar(){
+        super()
+        game.boardGround(self.image())
+        
+        keyboard.enter().onPressDo({self.cambiar()})
+    }
+    method cambiar(){
+        lobby.dibujar()
+    }
+
+}
+
+
 object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,n1,_,n2,_,n3,_,n4,_,n5,_,_],    
