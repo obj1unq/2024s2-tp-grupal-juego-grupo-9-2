@@ -230,6 +230,9 @@ class NPC {
   method interactuar() {
         game.say(self, "¡HOLA VIAJERO!")
     }
+  method colision(){
+    // evita errores
+  } 
 }
 
 class Tienda {

@@ -165,36 +165,39 @@ class Mapa {
         })
     }
 }
-class Background inherits Mapa(tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()){
-   var property nuevoMapa 
-    
-    method image() 
+object background {
+   var property bgActual = start     // inst o lobby
+    const property position = game.at(0,0)
+    method image() = bgActual.image()
 
-    override method dibujar(){
-        super()
-        game.boardGround(self.image())
+    method iniciar(){
+        game.addVisual(self)
     }
 
     method cambiar(){
-        nuevoMapa.dibujar()
+        if(bgActual.siguiente() != null){
+            
+            bgActual = bgActual.siguiente()    
+        }else{
+            game.allVisuals().forEach({bg=>game.removeVisual(bg)})
+            lobby.dibujar()
+        }
     }        
-    
 }
-object start inherits Background(nuevoMapa = inst){
-    override method image() = "inicio.png"
+object start {
+     method image() = "inicio.png"
 
+    method siguiente(){
+        return inst
+    }
 }
-object inst inherits Background(nuevoMapa = lobby){
-    override method image() = "instrucciones.png"
+object inst {
+     method image() = "instrucciones.png"
+
+     method siguiente(){
+        return null
+    }
+   
 
 }
 
@@ -210,12 +213,6 @@ object lobby inherits Mapa ( tablero =
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse())  {
-        method image() = "puenteD.png"
-
-        override method dibujar(){
-        super()
-        game.boardGround(self.image())
-    }
 }
 
 object nivel1 inherits Mapa (tablero =  

@@ -5,21 +5,23 @@ import objetos.*
 import mapa.*
 
 program pepesgame {
+
+	//  COMIENZA
+	game.start()
 	//  CONFIG	
 	game.title("Juego sin nombre")
-	//game.height(10)
-	//game.width(10)
+	game.height(10)
+	game.width(10)
 	game.cellSize(50) //valor por defecto 50	
-
+	game.boardGround("puenteD.png")
 	//  VISUALES
-	start.dibujar()
-	
-	var mapaActual = start
-	
+	background.iniciar()
+
 	keyboard.enter().onPressDo({
-									mapaActual.cambiar()
-									mapaActual = mapaActual.nuevoMapa()
+									background.cambiar()	
+                                    
 								})
+
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})
 	keyboard.down().onPressDo({pepe.mover(abajo)})
@@ -29,6 +31,5 @@ program pepesgame {
 
 	game.onCollideDo(pepe, {algo => algo.colision(pepe)}) // Pepe puede colisionar 
 
- 	//  COMIENZA
-	game.start()
+ 	
 }
