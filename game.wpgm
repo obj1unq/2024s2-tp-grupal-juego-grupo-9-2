@@ -11,17 +11,15 @@ program pepesgame {
 	//  CONFIG	
 	game.title("Juego sin nombre")
 	game.height(10)
-	game.width(10)
+	game.width(13)
 	game.cellSize(50) //valor por defecto 50	
-	game.boardGround("puenteD.png")
+	game.boardGround("lobby.png")
 	//  VISUALES
 	background.iniciar()
 
-	keyboard.enter().onPressDo({
-									background.cambiar()	
-                                    
-								})
 
+	//CONTROL
+	keyboard.enter().onPressDo({background.cambiar()})
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})
 	keyboard.down().onPressDo({pepe.mover(abajo)})
