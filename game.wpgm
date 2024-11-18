@@ -13,7 +13,7 @@ program pepesgame {
 	game.height(10)
 	game.width(13)
 	game.cellSize(50) //valor por defecto 50	
-	game.boardGround("lobby.png")
+	
 	//  VISUALES
 	background.iniciar()
 
