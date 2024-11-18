@@ -25,8 +25,6 @@ class Palanca {
 		  // no queremos que al colisionar haga nada, pero por polimorfismo lo mantenemos
 	}
 }
-
-
 object palancaPrendida{
    var property image = "palanca_prendida.png"
     
@@ -34,9 +32,6 @@ object palancaPrendida{
         return palancaApagada
     }
 }
-
-
-
 object palancaApagada{
    var property image = "palanca_apagada.png"
     
@@ -44,7 +39,6 @@ object palancaApagada{
         return palancaPrendida
     }
 }
-
 class Moneda {
     var property position 
     var property image = "monedaDeOro.png"
@@ -72,7 +66,6 @@ class MonedaVioleta inherits Moneda(image = "monedaVioleta.png", valor = 100) {
 }
 class MonedaDeBronce inherits Moneda(image = "monedaDeBronce.png",valor = 25) {
 }
-
 class Roca {
     var property position 
     var property image = "roca-chica.png"
@@ -86,16 +79,63 @@ class Roca {
 
 class Puente {
     var property position
-    var property image = "puenteD.png"
+    var property estado = puenteHabilitado
+    method image(){
+      return estado.image()
+    }
 
     method solida(){
-      return false
+      return estado.solida()
     }
 
     method colision(personaje){
-
+      estado.colision()
     }
 }
+
+class PuenteFragil inherits Puente{
+
+    method cambiarEstado(){
+       if(estado.derrumbado()){
+        estado = puenteHabilitado
+       }
+       else {
+        estado = puenteNoHabilitado
+       }
+    }
+}
+
+object puenteHabilitado {
+    var property image = "puente.png"
+    var property solida = false
+    method derrumbado(){
+      return false
+    }
+    method colision(){
+      // por polimorfismo
+    }
+    
+}
+object puenteNoHabilitado {
+    var property image = "puenteRoto.png"
+    var property solida = false
+    method derrumbado(){
+      return true
+    }
+    method colision(){
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
+		  lobby.dibujar()
+    }
+}
+
+// class PuenteBolatil inherits Puente {
+//     method cambiarEstado(){
+//         if(self.solida()){
+//           self.cambiarSolidez()
+//         }
+//     }
+// }
+
 
 class Oceano {
     var property position 
