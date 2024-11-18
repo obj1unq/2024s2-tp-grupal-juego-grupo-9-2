@@ -118,6 +118,7 @@ object o { // Representa el oceano.
     }
 }
 
+
 object s { // Representa el oceano que cambia con palanca1. s
     method dibujarEn(position) {
      game.addVisual(new OceanoP1(position = position))
@@ -129,7 +130,6 @@ object u { // Representa una Palanca. pa
      game.addVisual(new Palanca(position = position, oceano = s))
     }
 }
-
 
 
 object h { // Representa a Hector.
