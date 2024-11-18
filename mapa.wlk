@@ -8,7 +8,7 @@ import personajes.*
 
 
 object _ {
-    method dibujarEn(position) {
+    method dibujarEn(position) { //vacío
     }
 }
 
@@ -33,80 +33,80 @@ object m { // representauna moneda.
     }
 }
 
-object m2 { // representa una moneda de plata.
+object a { // representa una moneda de plata. m2
     method dibujarEn(position) {
      game.addVisual(new MonedaDePlata(position = position))
     }
 }
 
-object m3 { // representa una moneda de bronce.
+object b { // representa una moneda de bronce. m3
     method dibujarEn(position) {
      game.addVisual(new MonedaDeBronce(position = position))
     }
 }
 
-object m4 { // representa una moneda violeta .
+object c { // representa una moneda violeta . m4
     method dibujarEn(position) {
      game.addVisual(new MonedaVioleta(position = position))
     }
 }
 
-object ea {  // representa la entrada de adorno en el mapa.
+object d {  // representa la entrada de adorno en el mapa. ea
 
     method dibujarEn(position) {
         game.addVisual(new PuertaDeAdorno(position = position)) //primero poner la puerta luego a Pepe, porque sino no funciona.
     }
 }
 
-object lo { // representa el lobby 
+object e { // representa el lobby lo
 
     method dibujarEn(position) {
      game.addVisual(new PuertaALobby(position = position))
     }
 }
 
-object n1 { // representa la entrada al Nivel 1 
+object f { // representa la entrada al Nivel 1 f 
 
     method dibujarEn(position) {
      game.addVisual(new PuertaANivel1(position = position))
     }
 }
 
-object n2 { // representa la entrada al Nivel 2 
+object g { // representa la entrada al Nivel 2  g
 
     method dibujarEn(position) {
      game.addVisual(new PuertaANivel2(position = position))
     }
 }
 
-object n3 { // representa la entrada al Nivel 3 
+object i { // representa la entrada al Nivel 3 i 
 
     method dibujarEn(position) {
      game.addVisual(new PuertaANivel3(position = position))
     }
 }
 
-object n4 { // representa la entrada al Nivel 4
+object j { // representa la entrada al Nivel 4 j
 
     method dibujarEn(position) {
      game.addVisual(new PuertaANivel4(position = position))
     }
 }
 
-object n5 { // representa la entrada al Nivel 5
+object k { // representa la entrada al Nivel 5
 
     method dibujarEn(position) {
      game.addVisual(new PuertaANivel5(position = position))
     }
 }
 
-object l { // Representa una llave.
+object l { // Representa una llave. 
     method dibujarEn(position) {
      game.addVisual(new Llave(position = position))
     }
 }
 
-object l2 { // Representa una llave.
+object q { // Representa una llave. q
     method dibujarEn(position) {
      game.addVisual(new Llave2(position = position))
     }
@@ -118,18 +118,18 @@ object o { // Representa el oceano.
     }
 }
 
-object o1 { // Representa el oceano.
+
+object s { // Representa el oceano que cambia con palanca1. s
     method dibujarEn(position) {
      game.addVisual(new OceanoP1(position = position))
     }
 }
 
-object pa { // Representa una Palanca.
+object u { // Representa una Palanca. pa
     method dibujarEn(position) {
-     game.addVisual(new Palanca(position = position, oceano = o1))
+     game.addVisual(new Palanca(position = position, oceano = s))
     }
 }
-
 
 
 object h { // Representa a Hector.
@@ -144,7 +144,7 @@ object t { // Representa una Tienda.
     }
 }
 
-object pu {
+object v {  // Representa un Puente pu
     method dibujarEn(position){
         game.addVisual(new Puente(position = position))
     }
@@ -165,27 +165,64 @@ class Mapa {
         })
     }
 }
+object background {
+   var property bgActual = start     // inst o lobby
+    const property position = game.at(0,0)
+    method image() = bgActual.image()
+
+    method iniciar(){
+        game.addVisual(self)
+    }
+
+    method cambiar(){
+        if(bgActual.siguiente() != null){
+            
+            bgActual = bgActual.siguiente()    
+        }else{
+            game.allVisuals().forEach({bg=>game.removeVisual(bg)})
+            lobby.dibujar()
+        }
+    }        
+}
+object start {
+     method image() = "inicio.png"
+
+    method siguiente(){
+        return inst
+    }
+}
+object inst {
+     method image() = "instrucciones.png"
+
+     method siguiente(){
+        return null
+    }
+   
+
+}
+
+
 
 object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,n1,_,n2,_,n3,_,n4,_,n5,_,_],    
+     [_,_,f,_,g,_,i,_,j,_,k,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,h,_,_,_,_,_,_,_,_,_,t,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,p,_,_,_,_,_,_],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o]        
+     [v,v,v,v,v,v,v,v,v,v,v,v,v],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse())  {
 }
 
 object nivel1 inherits Mapa (tablero =  
     [[o,o,o,o,o,o,o,o,o,o,o,o,o],
-     [lo,p,_,pa,o,o,o,o,o,o,o,o,o],    
-     [o,o,o1,o,o,o,o,o,o,o,o,o,o],    
+     [e,p,_,u,o,o,o,o,o,o,o,o,o],    
+     [o,o,s,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,m,_,m2,_,_,lo,o,o,o,o,o],    
+     [o,o,m,_,a,_,_,a,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse()) { 
 }
@@ -196,20 +233,20 @@ object nivel2 inherits Mapa ( tablero =
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [pu,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [v,o,o,o,o,o,o,o,o,o,o,o,o],    
      [p,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [lo,o,o,o,o,o,o,o,o,o,o,o,o]       
+     [e,o,o,o,o,o,o,o,o,o,o,o,o]       
     ].reverse()) {
 }
 
 
 object nivel3 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [lo,p,_,o,_,_,_,_,_,_,_,_,_],    
+     [e,p,_,o,_,_,_,_,_,_,_,_,_],    
      [_,_,_,o,_,_,_,_,_,_,_,_,_],    
      [_,_,_,o,m,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,m2,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,m4,_,_,_,_,_,n4,_,_],    
+     [_,_,_,o,a,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,c,_,_,_,_,_,j,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
@@ -217,12 +254,12 @@ object nivel3 inherits Mapa (tablero =
 
 object nivel4 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [lo,p,_,_,_,_,_,_,_,_,_,_,_],    
+     [e,p,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,l,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,n5,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,k,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }
@@ -230,12 +267,12 @@ object nivel4 inherits Mapa (tablero =
 
 object nivel5 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [lo,p,_,_,_,_,_,_,_,_,_,n1,_],    
+     [e,p,_,_,_,_,_,_,_,_,_,f,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,l2,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,m3,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,m4,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,q,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,b,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,c,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }

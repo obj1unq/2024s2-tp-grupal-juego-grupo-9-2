@@ -108,6 +108,7 @@ class Oceano {
     method colision(personaje) {
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
 		  lobby.dibujar()
+      game.say(pepe,"me caí al oceano. se reinicia el juego")
     }
 }
 
@@ -230,6 +231,9 @@ class NPC {
   method interactuar() {
         game.say(self, "¡HOLA VIAJERO!")
     }
+  method colision(){
+    // evita errores
+  } 
 }
 
 class Tienda {
