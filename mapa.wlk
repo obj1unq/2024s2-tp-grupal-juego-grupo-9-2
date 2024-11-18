@@ -144,7 +144,9 @@ object t { // Representa una Tienda.
     }
 }
 
+
 object v {  // Representa un Puente pu
+
     method dibujarEn(position){
         game.addVisual(new Puente(position = position))
     }
