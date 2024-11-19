@@ -1,10 +1,10 @@
-# Nombre del juego (<- borrar y completar)
+# Pepite's game (<- borrar y completar)
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Lasota, Pablo
+- Gómez, Leandro
+- Ferreyra, Amanda
 
 ## Capturas
 
@@ -17,6 +17,6 @@
 
 ## Otros
 
-- Curso/Facultad
-- Versión de wollok
+- Programación con objetos I
+- Versión de wollok 0.2.7
 - Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
