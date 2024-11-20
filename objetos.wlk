@@ -3,6 +3,7 @@ import wollok.game.*
 import posiciones.*
 import personajes.*
 import mapa.*
+import randomizer.*
 
 class Palanca {
     var property position = game.center()
@@ -288,4 +289,65 @@ class Tienda {
   method interactuar() {
         game.say(self, "No hay objetos para vender")
     }
+}
+
+object lamparitaFactory {
+
+  method construir(position) {
+    return new Lamparita(position=position)
+  }
+}
+
+
+object administradorLamparas {
+ 
+  const creados = #{}
+  const factories = [lamparitaFactory]
+
+
+  method nuevaLamparita() {
+    if (self.hayEspacio()) {
+      const comida = self.construirLampara()
+      game.addVisual(comida)
+      creados.add(comida)
+    }
+  }
+
+  method construirLampara() {
+    return factories.anyOne().construir(randomizer.emptyPosition())
+  }
+
+
+  method hayEspacio() {
+    return creados.size() < 3
+  }
+
+
+  method remover(comida) {
+    game.removeVisual(comida)
+    creados.remove(comida)
+  }
+}
+class Lamparita {
+  const position
+  
+  method position() {
+    return position
+  }
+
+  method image() {
+    return "monedaDeOro.png"
+  }
+
+  method solida() {
+    return false
+  }
+
+  method colision(personaje) {
+    personaje.agarrarObjeto(self)
+  }
+
+
+
+
 }
