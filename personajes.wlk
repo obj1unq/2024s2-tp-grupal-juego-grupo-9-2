@@ -7,6 +7,7 @@ import mapa.*
 object pepe {
     var property position = game.center()
     var property image = "pepite-back.png"
+    var property nivelActual = lobby
 
     var dolaresTotales = 0
     var dolaresNivel = 0
@@ -79,5 +80,10 @@ object pepe {
         self.sumarDolar(moneda)
 		game.removeVisual(moneda)
 	}    
+    method reinicio(){
+        game.removeVisual(self)
+        self.position(9.9)
+        game.addVisual(self)
+    }
 }
 

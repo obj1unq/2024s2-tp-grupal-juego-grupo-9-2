@@ -240,7 +240,35 @@ object instN22{
         return null
     }
 }
+object instN3{
+    method image() = "nivel_3_instrucciones.png"
 
+    method siguiente(){
+        return instn32
+    }
+}
+object instn32{
+     method image() = "nivel_3_instrucciones2.png"
+
+    method siguiente(){
+        return null
+    }
+}
+object instN4{
+    method image() = "nivel_4_instrucciones.png"
+
+    method siguiente(){
+        return null
+    }
+}
+
+object instN5{
+    method image() = "nivel_5_instrucciones.png"
+
+    method siguiente(){
+        return null
+    }
+}
 
 
 
@@ -252,6 +280,8 @@ object lobby inherits Mapa ( tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [v,v,v,v,v,v,v,v,v,v,v,v,v],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse())  {
 }
@@ -264,6 +294,8 @@ object nivel1 inherits Mapa (tablero =
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
      [o,o,m,_,a,_,_,a,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse()) { 
 }
@@ -276,7 +308,9 @@ object nivel2 inherits Mapa ( tablero =
      [o,o,o,o,v,o,v,o,o,v,o,o,o],    
      [n,n,n,v,v,o,v,o,o,n,o,o,o],    
      [v,o,o,o,o,o,v,o,o,v,o,o,o],    
-     [v,v,v,v,v,n,v,o,o,v,n,v,e]       
+     [v,v,v,v,v,n,v,o,o,v,n,v,e],
+     [v,o,o,o,o,o,v,o,o,v,o,o,v],
+     [v,v,v,n,v,v,n,v,v,v,n,v,v]       
     ].reverse()) {
     
 }
@@ -290,6 +324,8 @@ object nivel3 inherits Mapa (tablero =
      [_,_,_,o,a,_,_,_,_,_,_,_,_],    
      [_,_,_,_,c,_,_,_,_,_,j,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }
@@ -302,6 +338,8 @@ object nivel4 inherits Mapa (tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,k,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }
@@ -315,6 +353,8 @@ object nivel5 inherits Mapa (tablero =
      [_,_,_,_,_,_,_,_,q,_,_,_,_],    
      [_,_,_,_,_,_,_,_,b,_,_,_,_],    
      [_,_,_,_,_,_,_,_,c,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }
