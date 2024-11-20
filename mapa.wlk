@@ -162,14 +162,9 @@ object n {// Representa un Puente que se desarma cada x tiempo
 class Mapa {
     const tablero 
 
-    method fondo() {
-        game.boardGround("lobby.png")
-    }
-
     method dibujar() {
         game.height(tablero.size())
         game.width(tablero.get(0).size())
-        self.fondo()
 
         (0..game.width() - 1).forEach({ x =>
             (0..game.height() -1).forEach({y =>
@@ -198,14 +193,14 @@ object background {
     }        
 }
 object start {
-     method image() = "inicio.png"
+     method image() = "instrucciones.png"
 
     method siguiente(){
         return inst
     }
 }
 object inst {
-     method image() = "instrucciones.png"
+     method image() = "inicio.png"
 
      method siguiente(){
         return null
@@ -251,9 +246,6 @@ object nivel2 inherits Mapa ( tablero =
      [v,v,v,v,v,n,v,o,o,v,n,v,e]       
     ].reverse()) {
     
-    override method fondo() {
-        game.boardGround("fondo-oceano.jpg")
-    }
 }
 
 
