@@ -91,6 +91,9 @@ class Puente {
     method colision(personaje){
       estado.colision()
     }
+    method interactuar(){
+
+    }
 }
 
 class PuenteFragil inherits Puente{
@@ -111,8 +114,11 @@ object puenteHabilitado {
     method derrumbado(){
       return false
     }
-    method colision(){
+    method colision(pepe){
       // por polimorfismo
+    }
+    method colision(){
+
     }
     
 }
@@ -122,9 +128,10 @@ object puenteNoHabilitado {
     method derrumbado(){
       return true
     }
-    method colision(){
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
+    method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
 		  lobby.dibujar()
+      game.say(pepe,"me caí al oceano. Perdí una vida")
     }
 }
 
@@ -139,7 +146,7 @@ object puenteNoHabilitado {
 
 class Oceano {
     var property position 
-    var property image = "oceano.png"
+    var property image = "fondo-oceano.png"
 
     method solida() {
 		  return false
@@ -271,8 +278,8 @@ class NPC {
   method interactuar() {
         game.say(self, "¡HOLA VIAJERO!")
     }
-  method colision(){
-    // evita errores
+  method colision(pepe){
+    game.say(self, "¡AUCH!")
   } 
 }
 
@@ -288,4 +295,7 @@ class Tienda {
   method interactuar() {
         game.say(self, "No hay objetos para vender")
     }
+  method colision(pepe){
+    game.say(self, "Presiona ''z'' para ver tus trofeos")
+  } 
 }
