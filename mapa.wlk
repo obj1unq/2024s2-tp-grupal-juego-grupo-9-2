@@ -146,19 +146,30 @@ object t { // Representa una Tienda.
 
 
 object v {  // Representa un Puente pu
-
     method dibujarEn(position){
         game.addVisual(new Puente(position = position))
+    }
+}
+
+object n {// Representa un Puente que se desarma cada x tiempo
+    method dibujarEn(position){
+        const puente = new PuenteFragil(position = position)
+        game.addVisual(puente)
+	    game.onTick(5000, "estado", {puente.cambiarEstado()})
     }
 }
 
 class Mapa {
     const tablero 
 
+    method fondo() {
+        game.boardGround("lobby.png")
+    }
+
     method dibujar() {
         game.height(tablero.size())
         game.width(tablero.get(0).size())
-
+        self.fondo()
 
         (0..game.width() - 1).forEach({ x =>
             (0..game.height() -1).forEach({y =>
@@ -206,12 +217,12 @@ object inst {
 
 
 object lobby inherits Mapa ( tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+    [[_,_,_,_,_,_,_,_,_,_,_,_,p],
      [_,_,f,_,g,_,i,_,j,_,k,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,h,_,_,_,_,_,_,_,_,_,t,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,p,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [v,v,v,v,v,v,v,v,v,v,v,v,v],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse())  {
@@ -230,15 +241,19 @@ object nivel1 inherits Mapa (tablero =
 }
 
 object nivel2 inherits Mapa ( tablero =     
-    [[o,o,o,o,o,o,o,o,o,o,o,o,o],
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [v,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [p,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [e,o,o,o,o,o,o,o,o,o,o,o,o]       
+    [[o,v,n,n,v,v,v,n,v,v,v,p,e],
+     [o,v,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,v,o,o,o,o,n,v,v,n,o,o,o],    
+     [o,v,v,n,v,o,n,o,o,v,o,o,o],    
+     [o,o,o,o,v,o,v,o,o,v,o,o,o],    
+     [n,n,n,v,v,o,v,o,o,n,o,o,o],    
+     [v,o,o,o,o,o,v,o,o,v,o,o,o],    
+     [v,v,v,v,v,n,v,o,o,v,n,v,e]       
     ].reverse()) {
+    
+    override method fondo() {
+        game.boardGround("fondo-oceano.jpg")
+    }
 }
 
 
