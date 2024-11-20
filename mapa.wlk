@@ -259,6 +259,11 @@ object nivel3 inherits Mapa (tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
+
+    override method dibujar() {
+        super()
+        game.onTick(3000, "lamparitas", {administradorLamparas.nuevaLamparita()})
+    }
 }
 
 object nivel4 inherits Mapa (tablero =
