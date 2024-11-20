@@ -3,6 +3,7 @@ import wollok.game.*
 import posiciones.*
 import personajes.*
 import mapa.*
+import randomizer.*
 
 class Palanca {
     var property position = game.center()
@@ -60,7 +61,7 @@ class Moneda {
 	}
 
     method colision(personaje) {
-		  personaje.agarrarVisual(self)
+		  personaje.agarrarMoneda(self)
     }
 }
 class MonedaDePlata inherits Moneda(image = "monedaDePlata.png",valor = 50) {
@@ -81,7 +82,7 @@ class Roca {
 		return true
 	}
 
-    
+
 }
 
 class Puente {
@@ -112,12 +113,57 @@ class Oceano {
     }
 }
 
-class OceanoP1 inherits Oceano{
+class OceanoFalso inherits Oceano{
+    const palanca
+    var property estado = oceanoPrendido
+
   method cambiar(){
-    game.removeVisual(self)
+       estado = estado.oceanoCambiado()
+    }
+
+  override method image(){
+        return estado.image()
+    } 
+
+/*
+  method cambiar(){
+    if(self.estaPalancaPrendida()) {
+      image = ""
+//      self.noColision(pepe)
+    } else {
+      image = "oceano.png"
+//      self.colision(pepe)
+    }
   }
+*/
+
+  method estaPalancaPrendida() {
+    return palanca.estado() == palanca.palancaPrendida()
+  }
+
+//  method noColision(personaje) {
+  
+//  }
+  
 }
 
+object oceanoPrendido{
+   var property image = "oceano.png"
+    
+    method oceanoCambiado(){
+        return oceanoApagado
+    }
+}
+
+
+
+object oceanoApagado{
+   var property image = ""
+    
+    method oceanoCambiado(){
+        return oceanoPrendido
+    }
+}
 
 
 
@@ -248,4 +294,75 @@ class Tienda {
   method interactuar() {
         game.say(self, "No hay objetos para vender")
     }
+  
+  method colision(){
+    // evita errores
+  } 
 }
+
+object lamparitaFactory {
+
+	method construir(position) {
+		return new Lamparita(position=position)
+	}
+}
+
+object administradorLamparas {
+	
+	const creados = #{} 
+	const factories = [ lamparitaFactory]
+
+	method nuevaLamparita() {
+		if (self.hayEspacio()) {
+			const comida = self.construirLampara()
+			game.addVisual(comida)
+			creados.add(comida)
+		}
+	}
+
+	method construirLampara() {
+		return factories.anyOne().construir(randomizer.emptyPosition()) 
+	}
+
+	method hayEspacio() {
+		return creados.size() < 3
+	}
+
+	method remover(comida) {
+		game.removeVisual(comida)
+		creados.remove(comida)
+	}
+}
+class Lamparita {
+	const position
+
+	method position() {
+		return position
+	}
+
+	method image() {
+		return "monedaDeOro.png"
+	}
+	method solida() {
+		return false
+	}
+
+	method colision(personaje) {
+		personaje.agarrarObjeto(self)
+	}
+
+
+}
+
+
+/*
+class Caja {
+  var property position
+  var property image = "caja.png"
+
+  method colision(){
+    personaje.empujar(direccion)
+  }
+  
+}
+*/

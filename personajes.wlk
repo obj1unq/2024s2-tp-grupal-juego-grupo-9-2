@@ -9,6 +9,7 @@ object pepe {
     var property image = "pepite-back.png"
     var dolaresTotales = 0
     var dolaresNivel = 0
+    var cantObjetos = 0
 
     // method imagenDelJugador() { 
     //     imagen = 
@@ -74,9 +75,32 @@ object pepe {
 		return false
 	}
 
-    method agarrarVisual(moneda) {
+    method agarrarMoneda(moneda) {
         self.sumarDolar(moneda)
 		game.removeVisual(moneda)
-	}    
+	}
+
+    method agarrarObjeto(objeto) {  
+        self.sumarObjeto()
+        administradorLamparas.remover(objeto)
+    } 
+
+    method sumarObjeto() {
+        cantObjetos += 1
+    }
+
+    /*
+    method empujar(direccion) {
+    var posicionCaja = self.posicion.frente(direccion)
+    var posicionDestinoCaja = posicionCaja.frente(direccion)
+
+        if (tablero.hayCajaEn(posicionCaja) && tablero.esPosicionValida(posicionDestinoCaja)) {
+            tablero.moverCaja(posicionCaja, posicionDestinoCaja)
+            self.mover(direccion) // El personaje también se mueve
+        }
+    } 
+    */
+
+
 }
 
