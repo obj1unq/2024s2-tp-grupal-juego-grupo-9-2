@@ -176,7 +176,17 @@ class Mapa {
 object background {
    var property bgActual = start     // inst o lobby
     const property position = game.at(0,0)
+    var dibujo = lobby
+    
     method image() = bgActual.image()
+
+    method bgActual(_bgActual){
+        bgActual = _bgActual
+    }
+
+    method dibujo(_dibujo){
+        dibujo = _dibujo
+    }
 
     method iniciar(){
         game.addVisual(self)
@@ -188,10 +198,11 @@ object background {
             bgActual = bgActual.siguiente()    
         }else{
             game.allVisuals().forEach({bg=>game.removeVisual(bg)})
-            lobby.dibujar()
+            dibujo.dibujar()
         }
     }        
 }
+
 object start {
      method image() = "instrucciones.png"
 
@@ -205,9 +216,31 @@ object inst {
      method siguiente(){
         return null
     }
-   
-
 }
+object instN1{
+    method image() = "nivel_1_instrucciones.png"
+
+    method siguiente(){
+        return null
+    }
+}
+
+object instN2{
+    method image() = "nivel_2_instrucciones.png"
+
+     method siguiente(){
+        return instN22
+    }
+}
+
+object instN22{
+    method image() = "nivel_2_instrucciones2.png"
+
+    method siguiente(){
+        return null
+    }
+}
+
 
 
 

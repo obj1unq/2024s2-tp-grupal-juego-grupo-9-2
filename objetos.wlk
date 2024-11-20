@@ -171,6 +171,8 @@ class OceanoP1 inherits Oceano{
 class PuertaANivel1 {
     var property position
     var property image = "puertaNueva.png"
+    var property nivelADibujar = nivel1 
+    var property bgAAgregar   = instN1 
 
     method validarPuerta(){
         if (not territorio.hayPuertaAca()){
@@ -179,17 +181,20 @@ class PuertaANivel1 {
     }
 
     method interactuar() {
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
-      self.dibujarSiguienteMapa()
+      background.dibujo(nivelADibujar)
+      background.bgActual(bgAAgregar)   
+      background.iniciar() 
+      //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
+      //self.dibujarSiguienteMapa()
     }
 
     method solida() {
 		return false
 	}
 
-    method dibujarSiguienteMapa() {
-      nivel1.dibujar()
-    }
+    //method dibujarSiguienteMapa() {
+    //  nivel1.dibujar()
+    //}
 
     method colision(personaje) {
 		  
@@ -197,39 +202,47 @@ class PuertaANivel1 {
 }
 
 
-class PuertaALobby inherits PuertaANivel1 {
+class PuertaALobby inherits PuertaANivel1(bgAAgregar = instN1.siguiente() ) {
 
-  override method dibujarSiguienteMapa() {
+  /*override*/ method dibujarSiguienteMapa() {
     pepe.resetarDolares()
+    game.allVisuals().forEach({bg=>game.removeVisual(bg)})
     lobby.dibujar()
+  
   }
 }
 
 
-class PuertaANivel2 inherits PuertaANivel1 {
-  override method dibujarSiguienteMapa() {
+class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2) {
+  /*override*/ 
+  //method dibujarSiguienteMapa() {
+    //pepe.actualizarDolares()
+    //nivel2.dibujar()
+  //}
+  override method interactuar(){
+    super()
     pepe.actualizarDolares()
-    nivel2.dibujar()
-  }
+
+  } 
 }
 
 
 class PuertaANivel3 inherits PuertaANivel2 {
- override method dibujarSiguienteMapa() {
-    nivel3.dibujar()
-  }
+ //override method dibujarSiguienteMapa() {
+ //   nivel3.dibujar()
+ // }
 }
 
 class PuertaANivel4 inherits PuertaANivel2 {
- override method dibujarSiguienteMapa() {
-    nivel4.dibujar()
-  }
+ //override method dibujarSiguienteMapa() {
+ //   nivel4.dibujar()
+ // }
 }
 
 class PuertaANivel5 inherits PuertaANivel2 {
- override method dibujarSiguienteMapa() {
-    nivel5.dibujar()
-  }
+ //override method dibujarSiguienteMapa() {
+ //   nivel5.dibujar()
+ // }
 }
 
 class PuertaDeAdorno  { // No la estamos usando pero anda.
