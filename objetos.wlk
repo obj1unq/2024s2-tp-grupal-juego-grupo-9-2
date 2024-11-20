@@ -291,41 +291,55 @@ class Tienda {
     }
 }
 
-object lamparitaFactory {
+object accesoriosFactory {
 
   method construir(position) {
     return new Lamparita(position=position)
   }
 }
 
+object trofeosFactory {
+  
+  method construir(position) {
+    return new Trofeo(position=position)
+  }
+}
 
-object administradorLamparas {
+
+object administradorAccesorios {
  
   const creados = #{}
-  const factories = [lamparitaFactory]
+  const property factories = [accesoriosFactory, trofeosFactory]
 
 
-  method nuevaLamparita() {
+  method nuevosAccesorios() {
     if (self.hayEspacio()) {
-      const comida = self.construirLampara()
-      game.addVisual(comida)
-      creados.add(comida)
+      const lamparita = self.construirAccesorios()
+      game.addVisual(lamparita)
+      creados.add(lamparita)
+    }else {
+      const trofeo = self.construirTrofeos()
+      game.addVisual(trofeo)
     }
   }
 
-  method construirLampara() {
-    return factories.anyOne().construir(randomizer.emptyPosition())
+  method construirAccesorios() {
+    return accesoriosFactory.construir(randomizer.emptyPosition())
+  }
+
+  method construirTrofeos() {
+    return trofeosFactory.construir(randomizer.emptyPosition())
   }
 
 
   method hayEspacio() {
-    return creados.size() < 3
+    return creados.size() < 2 and pepe.tieneAccesoriosInsuficientes() //and  not pepe.tieneTercerTrofeo() // revisar segunda condicion
   }
 
 
-  method remover(comida) {
-    game.removeVisual(comida)
-    creados.remove(comida)
+  method remover(lamparita) {
+    game.removeVisual(lamparita)
+    creados.remove(lamparita)
   }
 }
 class Lamparita {
@@ -346,8 +360,24 @@ class Lamparita {
   method colision(personaje) {
     personaje.agarrarObjeto(self)
   }
+}
 
+class Trofeo {
+  const position
+  
+  method position() {
+    return position
+  }
 
+  method image() {
+    return "monedaVioleta.png"
+  }
 
+  method solida() {
+    return false
+  }
 
+  method colision(personaje) {
+    personaje.agarrarTrofeo(self)
+  }
 }

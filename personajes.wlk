@@ -10,7 +10,7 @@ object pepe {
 
     var dolaresTotales = 0
     var dolaresNivel = 0
-    var cantObjetos = 0
+    var property cantObjetos = 0
 
 
     // method imagenDelJugador() { 
@@ -84,11 +84,20 @@ object pepe {
 
     method agarrarObjeto(objeto) {  
         self.sumarObjeto()
-        administradorLamparas.remover(objeto)
+        administradorAccesorios.remover(objeto)
     }
 
     method sumarObjeto() {
         cantObjetos += 1
-    }    
+    }
+
+    method tieneAccesoriosInsuficientes() {
+        return cantObjetos < 15
+    }
+
+    method agarrarTrofeo(trofeo) {  
+        //self.sumarObjeto() 
+        administradorAccesorios.remover(trofeo)
+    }   
 }
 

@@ -250,19 +250,19 @@ object nivel2 inherits Mapa ( tablero =
 
 
 object nivel3 inherits Mapa (tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [e,p,_,o,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,m,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,a,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,c,_,_,_,_,_,j,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    [[n,n,n,n,n,n,n,n,n,n,_,_,_],
+     [n,n,n,n,n,n,n,n,n,n,_,p,e],    
+     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
+     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
+     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
+     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
+     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
+     [n,n,n,n,n,n,n,n,n,n,_,_,_]        
     ].reverse() ) {
 
     override method dibujar() {
         super()
-        game.onTick(3000, "lamparitas", {administradorLamparas.nuevaLamparita()})
+        game.onTick(3000, "lamparitas", {administradorAccesorios.nuevosAccesorios()})
     }
 }
 
