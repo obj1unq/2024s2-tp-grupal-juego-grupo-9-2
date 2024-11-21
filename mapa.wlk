@@ -155,7 +155,26 @@ object n {// Representa un Puente que se desarma cada x tiempo
     method dibujarEn(position){
         const puente = new PuenteFragil(position = position)
         game.addVisual(puente)
-	    game.onTick(5000, "estado", {puente.cambiarEstado()})
+	    game.onTick(6500, "estado", {puente.cambiarEstado()})
+        game.onTick(8500, "estado", {puente.cambiarEstado()})
+    }
+}
+
+object nn {// Representa un Puente que se desarma cada x tiempo
+    method dibujarEn(position){
+        const puente = new PuenteFragil(position = position)
+        game.addVisual(puente)
+	    game.onTick(10000, "estado", {puente.cambiarEstado()})
+        game.onTick(12000, "estado", {puente.cambiarEstado()})
+    }
+}
+
+object nnn {// Representa un Puente que se desarma cada x tiempo
+    method dibujarEn(position){
+        const puente = new PuenteFragil(position = position)
+        game.addVisual(puente)
+	    game.onTick(13000, "estado", {puente.cambiarEstado()})
+        game.onTick(15000, "estado", {puente.cambiarEstado()})
     }
 }
 
@@ -219,6 +238,8 @@ object lobby inherits Mapa ( tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [v,v,v,v,v,v,v,v,v,v,v,v,v],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse())  {
 }
@@ -231,7 +252,9 @@ object nivel1 inherits Mapa (tablero =
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
      [o,o,m,_,a,_,_,a,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o]        
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse()) { 
 }
 
@@ -243,26 +266,30 @@ object nivel2 inherits Mapa ( tablero =
      [o,o,o,o,v,o,v,o,o,v,o,o,o],    
      [n,n,n,v,v,o,v,o,o,n,o,o,o],    
      [v,o,o,o,o,o,v,o,o,v,o,o,o],    
-     [v,v,v,v,v,n,v,o,o,v,n,v,e]       
+     [v,v,v,v,v,n,v,o,o,v,n,v,e],
+     [o,v,o,o,o,o,o,o,o,o,o,o,o],
+     [o,o,o,o,o,o,o,o,o,o,o,o,o]       
     ].reverse()) {
     
 }
 
 
 object nivel3 inherits Mapa (tablero =
-    [[n,n,n,n,n,n,n,n,n,n,_,_,_],
-     [n,n,n,n,n,n,n,n,n,n,_,p,e],    
-     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
-     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
-     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
-     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
-     [n,n,n,n,n,n,n,n,n,n,_,_,_],    
-     [n,n,n,n,n,n,n,n,n,n,_,_,_]        
+    [[nnn,n  ,n  ,nn ,n  ,n  ,n  ,n  ,n  ,nnn,_  ,_  ,_  ],
+     [n  ,nnn,n  ,nnn,nnn,n  ,n  ,n  ,nnn,n  ,_  ,p  ,e  ],    
+     [nnn,n  ,nn ,n  ,n  ,nnn,n  ,nnn,n  ,n  ,_  ,_  ,_  ],    
+     [nn ,n  ,n  ,nn ,nn ,n  ,nnn,nn ,n  ,nn ,_  ,_  ,_  ],    
+     [nn ,nnn,n  ,nn ,nnn,n  ,nn ,nn ,n  ,nn ,_  ,_  ,_  ],    
+     [n  ,nn ,nnn,n  ,n  ,n  ,nnn,n  ,n  ,n  ,_  ,_  ,_  ],    
+     [n  ,nn ,n  ,nnn,n  ,nnn,n  ,n  ,n  ,nnn,_  ,_  ,_  ],    
+     [n  ,n  ,n  ,nn ,nnn,n  ,nn ,nn ,nnn,n  ,_  ,_  ,_  ],
+     [nnn,n  ,nn ,nn ,n  ,nnn,n  ,nnn,n  ,nnn,_  ,_  ,_  ],
+     [n  ,n  ,nnn,n  ,n  ,n  ,nnn,n  ,n  ,n  ,_  ,_  ,_  ]        
     ].reverse() ) {
 
     override method dibujar() {
         super()
-        game.onTick(3000, "lamparitas", {administradorAccesorios.nuevosAccesorios()})
+        game.onTick(5000, "lamparitas", {administradorAccesorios.nuevosAccesorios()})
     }
 }
 
@@ -274,6 +301,8 @@ object nivel4 inherits Mapa (tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,k,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }
@@ -287,6 +316,8 @@ object nivel5 inherits Mapa (tablero =
      [_,_,_,_,_,_,_,_,q,_,_,_,_],    
      [_,_,_,_,_,_,_,_,b,_,_,_,_],    
      [_,_,_,_,_,_,_,_,c,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }

@@ -294,7 +294,7 @@ class Tienda {
 object accesoriosFactory {
 
   method construir(position) {
-    return new Lamparita(position=position)
+    return new Accesorio(position=position)
   }
 }
 
@@ -313,13 +313,14 @@ object administradorAccesorios {
 
 
   method nuevosAccesorios() {
-    if (self.hayEspacio()) {
-      const lamparita = self.construirAccesorios()
-      game.addVisual(lamparita)
-      creados.add(lamparita)
-    }else {
+    if (self.hayEspacioParaAccesorio()) {
+      const accesorio = self.construirAccesorios()
+      game.addVisual(accesorio)
+      creados.add(accesorio)
+    }else if(self.hayEspacioParaTrofeo()){
       const trofeo = self.construirTrofeos()
       game.addVisual(trofeo)
+      creados.add(trofeo)
     }
   }
 
@@ -332,17 +333,21 @@ object administradorAccesorios {
   }
 
 
-  method hayEspacio() {
-    return creados.size() < 2 and pepe.tieneAccesoriosInsuficientes() //and  not pepe.tieneTercerTrofeo() // revisar segunda condicion
+  method hayEspacioParaAccesorio() {
+    return creados.size() < 3  and pepe.tieneAccesoriosInsuficientes()
+  }
+
+  method hayEspacioParaTrofeo() {
+    return creados.size() < 1 //and not pepe.tieneTercerTrofeo() 
   }
 
 
-  method remover(lamparita) {
-    game.removeVisual(lamparita)
-    creados.remove(lamparita)
+  method remover(accesorio) {
+    game.removeVisual(accesorio)
+    creados.remove(accesorio)
   }
 }
-class Lamparita {
+class Accesorio {
   const position
   
   method position() {

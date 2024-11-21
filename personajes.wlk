@@ -92,7 +92,7 @@ object pepe {
     }
 
     method tieneAccesoriosInsuficientes() {
-        return cantObjetos < 15
+        return cantObjetos < 5
     }
 
     method agarrarTrofeo(trofeo) {  
