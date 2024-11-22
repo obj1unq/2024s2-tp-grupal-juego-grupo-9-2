@@ -155,28 +155,12 @@ object n {// Representa un Puente que se desarma cada x tiempo
     method dibujarEn(position){
         const puente = new PuenteFragil(position = position)
         game.addVisual(puente)
-	    game.onTick(6500, "estado", {puente.cambiarEstado()})
-        game.onTick(8500, "estado", {puente.cambiarEstado()})
+	    game.onTick(5000, "estado", {puente.cambiarEstado()})
+        //game.onTick(8500, "estado", {puente.cambiarEstado()})
     }
 }
 
-object nn {// Representa un Puente que se desarma cada x tiempo
-    method dibujarEn(position){
-        const puente = new PuenteFragil(position = position)
-        game.addVisual(puente)
-	    game.onTick(10000, "estado", {puente.cambiarEstado()})
-        game.onTick(12000, "estado", {puente.cambiarEstado()})
-    }
-}
 
-object nnn {// Representa un Puente que se desarma cada x tiempo
-    method dibujarEn(position){
-        const puente = new PuenteFragil(position = position)
-        game.addVisual(puente)
-	    game.onTick(13000, "estado", {puente.cambiarEstado()})
-        game.onTick(15000, "estado", {puente.cambiarEstado()})
-    }
-}
 
 class Mapa {
     const tablero 
@@ -275,16 +259,16 @@ object nivel2 inherits Mapa ( tablero =
 
 
 object nivel3 inherits Mapa (tablero =
-    [[nnn,n  ,n  ,nn ,n  ,n  ,n  ,n  ,n  ,nnn,_  ,_  ,_  ],
-     [n  ,nnn,n  ,nnn,nnn,n  ,n  ,n  ,nnn,n  ,_  ,p  ,e  ],    
-     [nnn,n  ,nn ,n  ,n  ,nnn,n  ,nnn,n  ,n  ,_  ,_  ,_  ],    
-     [nn ,n  ,n  ,nn ,nn ,n  ,nnn,nn ,n  ,nn ,_  ,_  ,_  ],    
-     [nn ,nnn,n  ,nn ,nnn,n  ,nn ,nn ,n  ,nn ,_  ,_  ,_  ],    
-     [n  ,nn ,nnn,n  ,n  ,n  ,nnn,n  ,n  ,n  ,_  ,_  ,_  ],    
-     [n  ,nn ,n  ,nnn,n  ,nnn,n  ,n  ,n  ,nnn,_  ,_  ,_  ],    
-     [n  ,n  ,n  ,nn ,nnn,n  ,nn ,nn ,nnn,n  ,_  ,_  ,_  ],
-     [nnn,n  ,nn ,nn ,n  ,nnn,n  ,nnn,n  ,nnn,_  ,_  ,_  ],
-     [n  ,n  ,nnn,n  ,n  ,n  ,nnn,n  ,n  ,n  ,_  ,_  ,_  ]        
+    [[v,n,n,n,v,n,n,n,v,v,n,_,_],
+     [n,v,v,n,n,v,n,v,v,n,n,p,e],    
+     [n,v,n,n,v,v,n,n,v,n,v,_,_],    
+     [v,n,v,v,n,n,v,n,n,v,n,_,_],    
+     [v,n,n,n,v,n,v,v,n,n,v,_,_],    
+     [n,v,v,v,n,n,n,n,v,v,n,_,_],    
+     [v,n,n,n,v,n,v,v,n,v,n,_,_],    
+     [n,v,v,n,n,v,n,n,n,n,v,_,_],
+     [v,n,n,v,v,n,n,n,v,v,n,_,_],
+     [v,n,v,v,n,v,n,v,n,v,n,_,_]      
     ].reverse() ) {
 
     override method dibujar() {
@@ -294,17 +278,22 @@ object nivel3 inherits Mapa (tablero =
 }
 
 object nivel4 inherits Mapa (tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [e,p,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,l,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,k,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    [[_,n,n,n,n,n,n,n,n,n,n,_,_],
+     [_,n,n,n,n,n,n,n,n,n,n,p,e],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],
+     [_,n,n,n,n,n,n,n,n,n,n,_,_]      
     ].reverse() ) {
+
+    override method dibujar() {
+        super()
+        game.onTick(5000, "lamparitas", {administradorAccesorios.nuevosAccesorios()})
+    }
 }
 
 

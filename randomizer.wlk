@@ -4,7 +4,7 @@ object randomizer {
 		
 	method position() {
 		return 	game.at( 
-					(0 .. game.width() - 4 ).anyOne(),
+					(1 .. game.width() - 6 ).anyOne(),
 					(0..  game.height() - 1).anyOne()
 		) 
 	}

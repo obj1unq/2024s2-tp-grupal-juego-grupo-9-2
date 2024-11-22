@@ -140,7 +140,7 @@ object puenteNoHabilitado {
 
 class Oceano {
     var property position 
-    var property image = "oceano.png"
+    var property image = "fondo-oceano.png"
 
     method solida() {
 		  return false
@@ -342,7 +342,7 @@ object administradorAccesorios {
   }
 
 
-  method remover(accesorio) {
+  method remover(accesorio) { 
     game.removeVisual(accesorio)
     creados.remove(accesorio)
   }
