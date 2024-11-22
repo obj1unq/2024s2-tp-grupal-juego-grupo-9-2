@@ -81,9 +81,11 @@ class Roca {
 class Puente {
     var property position
     var property estado = puenteHabilitado
-    method image(){
-      return estado.image()
-    }
+    var property image = estado.image()
+    
+//    method image(){
+//      return estado.image()
+//    }
 
     method solida(){
       return estado.solida()
@@ -91,6 +93,10 @@ class Puente {
 
     method colision(personaje){
       estado.colision()
+    }
+
+    method desaparecerPuente() {
+      image = "fondo-oceano.png"
     }
 }
 

@@ -160,7 +160,13 @@ object n {// Representa un Puente que se desarma cada x tiempo
     }
 }
 
-
+object n2 {// Representa un Puente que se desarma cada x tiempo
+    method dibujarEn(position){
+        const puente = new PuenteFragil(position = position)
+        game.addVisual(puente)
+	    game.onTick(5000, "estado", {puente.desaparecerPuente()})
+    }
+}
 
 class Mapa {
     const tablero 
@@ -298,15 +304,15 @@ object nivel4 inherits Mapa (tablero =
 
 
 object nivel5 inherits Mapa (tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [e,p,_,_,_,_,_,_,_,_,_,f,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,q,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,b,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,c,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    [[_ ,o ,n2,n2,n2,o ,o ,o ,o ,o ,_ ,_ ,_ ],
+     [_ ,o ,n2,o ,n2,o ,n2,n2,n2,o ,_ ,p ,e ],    
+     [_ ,n2,n2,o ,n2,o ,n2,o ,n2,o ,_ ,_ ,_ ],    
+     [_ ,o ,o ,o ,n2,o ,n2,o ,n2,n2,_ ,_ ,_ ],    
+     [m ,o ,n2,n2,n2,o ,n2,o ,o ,o ,_ ,_ ,_ ],    
+     [_ ,o ,n2,o ,o ,o ,n2,o ,o ,o ,_ ,_ ,_ ],    
+     [_ ,o ,n2,o ,o ,o ,n2,o ,o ,o ,_ ,_ ,_ ],    
+     [_ ,o ,n2,n2,o ,o ,n2,n2,n2,o ,_ ,_ ,_ ],
+     [_ ,o ,o ,n2,n2,o ,o ,o ,n2,o ,_ ,_ ,_ ],
+     [_ ,o ,o ,o ,n2,n2,n2,n2,n2,o ,_ ,_ ,_ ]      
     ].reverse() ) {
 }
