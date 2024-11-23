@@ -118,16 +118,9 @@ object o { // Representa el oceano.
     }
 }
 
-
-object s { // Representa el oceano que cambia con palanca1. s
-    method dibujarEn(position) {
-     game.addVisual(new OceanoP1(position = position))
-    }
-}
-
 object u { // Representa una Palanca. pa
     method dibujarEn(position) {
-     game.addVisual(new Palanca(position = position, oceano = s))
+     game.addVisual(new Palanca(position = position, oceano = o))
     }
 }
 
@@ -161,6 +154,24 @@ object n {// Representa un Puente que se desarma cada x tiempo
 object rr {// Representa a ringo
     method dibujarEn(position){
         game.addVisual(ringo)
+    }
+}
+
+object s{
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+    }
+}
+
+object cs{
+    method dibujarEn(position){
+        game.addVisual(new SueloVidrio(position = position))
+    }
+}
+
+object cf{
+    method dibujarEn(position){
+        game.addVisual(new SueloVidrioFalso(position = position))
     }
 }
 
@@ -348,16 +359,16 @@ object lobby inherits Mapa ( tablero =
 }
 
 object nivel1 inherits Mapa (tablero =  
-    [[o,o,o,o,o,o,o,o,o,o,o,o,o],
-     [e,p,_,u,o,o,o,o,o,o,o,o,o],    
-     [o,o,s,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,_,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,m,_,a,_,_,a,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],
-     [o,o,o,o,o,o,o,o,o,o,o,o,o]        
+    [[_,_,_,_,_,_,s,s,_,_,_,p,e],
+     [_,_,_,_,_,_,cs,cf,_,_,_,_,_],    
+     [_,_,_,_,_,_,s,s,_,_,_,_,_],    
+     [_,_,_,_,_,_,cs,cf,_,_,_,_,_],    
+     [s,cf,s,cf,s,cs,s,s,_,_,_,_,_],    
+     [s,cs,s,cs,s,cf,s,_,_,_,_,_,_],    
+     [s,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [s,_,_,_,_,_,_,_,_,_,_,_,_],
+     [s,cs,s,cf,s,cf,s,cs,s,cs,s,s,s],
+     [s,cf,s,cs,s,cs,s,cf,s,cf,s,i,s]        
     ].reverse()) { 
 }
 

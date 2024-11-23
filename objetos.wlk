@@ -76,18 +76,13 @@ class Roca {
 
     
 }
-
 class Puente {
     var property position
     var property estado = puenteHabilitado
     method image(){
       return estado.image()
     }
-
-    method solida(){
-      return estado.solida()
-    }
-
+    method solida() = estado.solida()
     method colision(personaje){
       estado.colision()
     }
@@ -95,7 +90,6 @@ class Puente {
 
     }
 }
-
 class PuenteFragil inherits Puente{
 
     method cambiarEstado(){
@@ -107,15 +101,11 @@ class PuenteFragil inherits Puente{
        }
     }
 }
-
 object puenteHabilitado {
     var property image = "puente.png"
     var property solida = false
     method derrumbado(){
       return false
-    }
-    method colision(pepe){
-      // por polimorfismo
     }
     method colision(){
 
@@ -135,13 +125,31 @@ object puenteNoHabilitado {
     }
 }
 
-// class PuenteBolatil inherits Puente {
-//     method cambiarEstado(){
-//         if(self.solida()){
-//           self.cambiarSolidez()
-//         }
-//     }
-// }
+class ZonaSegura{
+  var property position
+  method image() = "zonaSegura.png"
+  method solida() = false
+  method colision(personaje) { // por polimorfismo
+     
+  }
+}
+
+class SueloVidrio{
+  var property position
+  method image() = "cristal.png"
+  method solida() = false
+  method colision(personaje){ // por polimorfismo
+    
+  }
+}
+
+class SueloVidrioFalso inherits SueloVidrio{
+  override method colision(personaje){  // revisar porque se repite código y hay dos metodos que se llaman igual.
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
+		  nivel1.dibujar()
+      game.say(pepe,"¡me ahogué!")
+    }
+}
 
 
 class Oceano {
@@ -159,16 +167,6 @@ class Oceano {
       game.say(pepe,"me caí al oceano")
     }
 }
-
-class OceanoP1 inherits Oceano{
-  method cambiar(){
-    game.removeVisual(self)
-  }
-}
-
-
-
-
 class PuertaANivel1 {
     var property position
     var property image = "puertaNueva.png"
@@ -281,7 +279,6 @@ class Llave {
 		  // no queremos que al colisionar haga nada, pero por polimorfismo lo mantenemos
 	}
 }
-
 class Llave2 inherits Llave(image = "llave2.png") {
   override method solida() {
     return true
