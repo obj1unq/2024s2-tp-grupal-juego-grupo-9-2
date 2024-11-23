@@ -199,11 +199,10 @@ class PuertaANivel1 {
     //  nivel1.dibujar()
     //}
 
-    method colision(personaje) {
-		  
-	}
+    method colision(personaje){
+  
+  }
 }
-
 
 class PuertaALobby inherits PuertaANivel1(nivelADibujar = lobby) {
 
@@ -301,19 +300,20 @@ class NPC {
   } 
 }
 
-class Tienda {
-  var property position
-  var property image = "tienda.png"
+class Tienda inherits PuertaANivel1(image = "tienda.png",nivelADibujar = mapaTienda,bgAAgregar = bgTienda ){
+  //var property position
+  //var property image = "tienda.png"
 
 
-  method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
-		return false
-	}
-
-  method interactuar() {
-        game.say(self, "No hay objetos para vender")
-    }
-  method colision(pepe){
+  /*method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
+		//return false
+	}*/
+  override method interactuar(){
+  super()
+  background.dibujo(lobby)
+  
+  }
+ override  method colision(pepe){
     game.say(self, "Presiona ''z'' para ver tus trofeos")
   } 
 }

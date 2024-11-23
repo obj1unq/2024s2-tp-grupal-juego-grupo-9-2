@@ -269,8 +269,53 @@ object instN5{
         return null
     }
 }
+object bgTienda{
+    method image() = "bgTrofeos.png"
 
+    method siguiente(){
+        return null
+    }
+}
+object z{  // representa el primero trofe
+   
+    
+    
+    //listaDeTrofeos.get(0) // suponiendo que done se guarden los trofes es una lista y no un set.
+    
+}
 
+object zz{  // representa el segundo trofe
+    
+    //listaDeTrofeos.get(1)
+}
+
+object aa{  // representa el tercer trofe
+  
+    //listaDeTrofeos.get(2)
+}
+object bb{  // representa el cuarto trofe
+    //listaDeTrofeos.get(3)
+}
+
+object cc{   // representa el quinto trofe
+    //listaDeTrofeos.get(4)
+}
+
+object mapaTienda inherits Mapa (tablero = 
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,z,_,zz,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,aa,_,bb,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,cc,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    ].reverse()) 
+{
+
+}
 
 object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,p],
@@ -279,7 +324,7 @@ object lobby inherits Mapa ( tablero =
      [_,h,_,_,_,_,_,_,_,_,_,t,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [v,v,v,v,v,v,v,v,v,v,v,v,v],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
