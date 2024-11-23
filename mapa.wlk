@@ -303,14 +303,14 @@ object nivel1 inherits Mapa (tablero =
 object nivel2 inherits Mapa ( tablero =     
     [[o,v,n,n,v,v,v,n,v,v,v,p,e],
      [o,v,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,v,o,o,o,o,n,v,v,n,o,o,o],    
-     [o,v,v,n,v,o,n,o,o,v,o,o,o],    
-     [o,o,o,o,v,o,v,o,o,v,o,o,o],    
-     [n,n,n,v,v,o,v,o,o,n,o,o,o],    
-     [v,o,o,o,o,o,v,o,o,v,o,o,o],    
-     [v,v,v,v,v,n,v,o,o,v,n,v,e],
-     [v,o,o,o,o,o,v,o,o,v,o,o,v],
-     [v,v,v,n,v,v,n,v,v,v,n,v,v]       
+     [o,v,o,o,o,o,n,v,v,n,v,o,o],    
+     [o,v,n,n,n,v,n,o,o,o,n,m,o],    
+     [o,v,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,n,n,v,v,v,n,n,v,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,n,o,o,o,o],    
+     [o,o,v,n,n,v,v,n,v,o,o,v,e],
+     [o,o,n,o,o,o,o,o,o,o,o,n,o],
+     [o,o,n,v,n,v,n,v,n,v,v,n,o]       
     ].reverse()) {
     
 }
