@@ -23,9 +23,12 @@ object p {  // representa a Pepe en el mapa.
 
 object r { // representa una roca.
     method dibujarEn(position) {
-     game.addVisual(new Roca(position = position))
+        const roca = new Roca(position = position)
+        game.addVisual(roca)
+        game.schedule(5000, {game.removeVisual(roca)})
     }
 }
+
 
 object m { // representauna moneda.
     method dibujarEn(position) {
@@ -151,6 +154,15 @@ object n {// Representa un Puente que se desarma cada x tiempo
 	    game.onTick(5000, "estado", {puente.cambiarEstado()})
     }
 }
+
+object n2 {// Representa un Puente que se desarma cada x tiempo
+    method dibujarEn(position){
+        const puente = new PuenteFantasma(position = position)
+        game.addVisual(puente)
+        game.schedule(5000, {puente.cambiarEstado()})
+    }
+}
+
 object rr {// Representa a ringo
     method dibujarEn(position){
         game.addVisual(ringo)
@@ -389,32 +401,40 @@ object nivel2 inherits Mapa ( tablero =
 
 
 object nivel3 inherits Mapa (tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [e,p,_,o,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,m,_,_,_,_,_,_,_,_],    
-     [_,_,_,o,a,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,c,_,_,_,_,_,j,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    [[_,n,n,n,n,n,n,n,n,n,n,_,_],
+     [_,n,n,n,n,n,n,n,n,n,n,p,e],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],
+     [_,n,n,n,n,n,n,n,n,n,n,_,_],
+     [_,n,n,n,n,n,n,n,n,n,n,_,_]      
+    ].reverse() ) {
+
+
+    override method dibujar() {
+        super()
+        game.onTick(5000, "sombreros", {administradorSombreros.nuevosSombreros()})
+    }
+}
+
+
+object nivel4 inherits Mapa (tablero =
+    [[_ ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,_ ,_ ],
+     [_ ,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,p ,e ],    
+     [_ ,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,_ ,_ ],    
+     [_ ,o ,o ,o ,n2,o ,n2,o ,n2,n2,r ,_ ,_ ],    
+     [m ,o ,n2,n2,n2,o ,n2,o ,o ,o ,r ,_ ,_ ],    
+     [_ ,o ,n2,o ,o ,o ,n2,o ,o ,o ,r ,_ ,_ ],    
+     [_ ,o ,n2,o ,o ,o ,n2,o ,o ,o ,r ,_ ,_ ],    
+     [_ ,o ,n2,n2,o ,o ,n2,n2,n2,o ,r ,_ ,_ ],
+     [_ ,o ,o ,n2,n2,o ,o ,o ,n2,o ,r ,_ ,_ ],
+     [_ ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,_ ,_ ]      
     ].reverse() ) {
 }
 
-object nivel4 inherits Mapa (tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [e,p,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,l,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,k,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse() ) {
-}
 
 
 object nivel5 inherits Mapa (tablero =
