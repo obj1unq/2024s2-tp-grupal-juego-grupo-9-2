@@ -246,6 +246,11 @@ class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = i
 class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5)  {
  //override method dibujarSiguienteMapa() {
  //   nivel5.dibujar()
+      override method interactuar(){
+        super()
+        game.say(ringo, "Pepite,acá estoy!")
+        
+      }
  // }
 }
 
@@ -288,7 +293,7 @@ class NPC {
   var property image = "hector.png"
 
 
-  method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
+  method solida() { 
 		return false
 	}
 
@@ -298,6 +303,18 @@ class NPC {
   method colision(pepe){
     game.say(self, "¡AUCH!")
   } 
+}
+object ringo inherits NPC(image = "ringo.png",position = game.center()){
+ 
+  
+  override method colision(pepe){
+    game.say(self,"Hola pepite te extrañé!")
+    game.schedule(3000, {game.allVisuals().forEach({bg=>game.removeVisual(bg)})
+                         background.bgActual(bgFinal)
+                         background.iniciar()
+                          })
+                          
+  }
 }
 
 class Tienda inherits PuertaANivel1(image = "tienda.png",nivelADibujar = mapaTienda,bgAAgregar = bgTienda ){
@@ -317,3 +334,4 @@ class Tienda inherits PuertaANivel1(image = "tienda.png",nivelADibujar = mapaTie
     game.say(self, "Presiona ''z'' para ver tus trofeos")
   } 
 }
+

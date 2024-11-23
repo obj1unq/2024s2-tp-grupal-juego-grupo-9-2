@@ -158,6 +158,11 @@ object n {// Representa un Puente que se desarma cada x tiempo
 	    game.onTick(5000, "estado", {puente.cambiarEstado()})
     }
 }
+object rr {// Representa a ringo
+    method dibujarEn(position){
+        game.addVisual(ringo)
+    }
+}
 
 class Mapa {
     const tablero 
@@ -276,11 +281,22 @@ object bgTienda{
         return null
     }
 }
-object z{  // representa el primero trofe
+object bgNivel5{
+    const property position = game.at(0,0)
+
+    method image() = "bgnivel5.png"
+    method siguiente() = null
+} 
+object bgFinal{
+    method image() = "bgFinal.png"
+
+    method siguiente() = null
+}
+object z{  // representa el primer trofe
    
     
     
-    //listaDeTrofeos.get(0) // suponiendo que done se guarden los trofes es una lista y no un set.
+    //listaDeTrofeos.get(0) // suponiendo que se guarden los trofes es una lista y no un set.
     
 }
 
@@ -394,7 +410,7 @@ object nivel5 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [e,p,_,_,_,_,_,_,_,_,_,f,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,rr],    
      [_,_,_,_,_,_,_,_,q,_,_,_,_],    
      [_,_,_,_,_,_,_,_,b,_,_,_,_],    
      [_,_,_,_,_,_,_,_,c,_,_,_,_],    
