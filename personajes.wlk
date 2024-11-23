@@ -11,8 +11,6 @@ object pepe {
     var dolaresTotales = 0
     var dolaresNivel = 0
     var property cantObjetos = 0
-
-
     // method imagenDelJugador() { 
     //     imagen = 
     // }
@@ -77,7 +75,7 @@ object pepe {
 		return false
 	}
 
-    method agarrarVisual(moneda) {
+    method agarrarMoneda(moneda) {
         self.sumarDolar(moneda)
 		game.removeVisual(moneda)
 	}
@@ -86,7 +84,6 @@ object pepe {
         self.sumarObjeto()
         administradorAccesorios.remover(objeto)
     }
-
     method sumarObjeto() {
         cantObjetos += 1
     }

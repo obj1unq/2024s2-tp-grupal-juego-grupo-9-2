@@ -11,6 +11,7 @@ object randomizer {
 	
 	method emptyPosition() {
 		const position = self.position()
+
 		
 		return position 
 

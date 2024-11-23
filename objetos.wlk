@@ -55,7 +55,7 @@ class Moneda {
 	}
 
     method colision(personaje) {
-		  personaje.agarrarVisual(self)
+		  personaje.agarrarMoneda(self)
     }
 }
 class MonedaDePlata inherits Moneda(image = "monedaDePlata.png",valor = 50) {
@@ -75,7 +75,7 @@ class Roca {
 		return true
 	}
 
-    
+
 }
 
 class Puente {
@@ -159,12 +159,57 @@ class Oceano {
     }
 }
 
-class OceanoP1 inherits Oceano{
+class OceanoFalso inherits Oceano{
+    const palanca
+    var property estado = oceanoPrendido
+
   method cambiar(){
-    game.removeVisual(self)
+       estado = estado.oceanoCambiado()
+    }
+
+  override method image(){
+        return estado.image()
+    } 
+
+/*
+  method cambiar(){
+    if(self.estaPalancaPrendida()) {
+      image = ""
+//      self.noColision(pepe)
+    } else {
+      image = "oceano.png"
+//      self.colision(pepe)
+    }
   }
+*/
+
+  method estaPalancaPrendida() {
+    return palanca.estado() == palanca.palancaPrendida()
+  }
+
+//  method noColision(personaje) {
+  
+//  }
+  
 }
 
+object oceanoPrendido{
+   var property image = "oceano.png"
+    
+    method oceanoCambiado(){
+        return oceanoApagado
+    }
+}
+
+
+
+object oceanoApagado{
+   var property image = ""
+    
+    method oceanoCambiado(){
+        return oceanoPrendido
+    }
+}
 
 
 
@@ -296,7 +341,6 @@ class Tienda {
         game.say(self, "No hay objetos para vender")
     }
 }
-
 object accesoriosFactory {
 
   method construir(position) {

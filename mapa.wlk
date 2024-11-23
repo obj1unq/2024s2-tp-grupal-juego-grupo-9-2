@@ -121,7 +121,7 @@ object o { // Representa el oceano.
 
 object s { // Representa el oceano que cambia con palanca1. s
     method dibujarEn(position) {
-     game.addVisual(new OceanoP1(position = position))
+     game.addVisual(new OceanoFalso(position = position, palanca = u))
     }
 }
 
@@ -198,6 +198,7 @@ object background {
         }else{
             game.allVisuals().forEach({bg=>game.removeVisual(bg)})
             lobby.dibujar()
+            game.onTick(3000, "lamparitas", {administradorLamparas.nuevaLamparita()})
         }
     }        
 }
@@ -238,8 +239,8 @@ object nivel1 inherits Mapa (tablero =
     [[o,o,o,o,o,o,o,o,o,o,o,o,o],
      [e,p,_,u,o,o,o,o,o,o,o,o,o],    
      [o,o,s,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,o,s,o,o,o,o,o,o,o,o,o,o],    
+     [o,o,s,o,o,o,o,o,o,o,o,o,o],    
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
      [o,o,m,_,a,_,_,a,o,o,o,o,o],    
      [o,o,o,o,o,o,o,o,o,o,o,o,o],
