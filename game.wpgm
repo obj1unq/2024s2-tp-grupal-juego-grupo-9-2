@@ -28,5 +28,5 @@ program pepesgame {
 	keyboard.h().onPressDo({pepe.decirDolares()})
 
 	game.onCollideDo(pepe, {algo => algo.colision(pepe)}) // Pepe puede colisionar 
- 	
+		
 }

@@ -3,6 +3,7 @@ import wollok.game.*
 import posiciones.*
 import personajes.*
 import mapa.*
+import randomizer.*
 
 class Palanca {
     var property position = game.center()
@@ -89,7 +90,21 @@ class Puente {
     method interactuar(){
 
     }
+
+    method desaparecerPuente() {
+    //  image = "fondo-oceano.png"
+    }
 }
+
+class PuenteFantasma inherits Puente {
+  method cambiarEstado() {
+    if(!estado.derrumbado()) {
+      estado = puenteFantasma
+    }
+  }
+
+}
+
 class PuenteFragil inherits Puente{
 
     method cambiarEstado(){
@@ -101,6 +116,23 @@ class PuenteFragil inherits Puente{
        }
     }
 }
+
+object puenteFantasma {
+  var property image = "fondo-oceano.png" 
+
+  method solida() {
+    return false
+  }
+
+  method derrumbado() {
+    return true
+  }
+
+  method colision() {
+    
+  }
+}
+
 object puenteHabilitado {
     var property image = "puente.png"
     var property solida = false
@@ -167,6 +199,23 @@ class Oceano {
       game.say(pepe,"me caí al oceano")
     }
 }
+
+object oceanoPrendido{ // REVISAR
+   var property image = "oceano.png"
+   
+    method oceanoCambiado(){
+        return oceanoApagado
+    }
+}
+
+object oceanoApagado{ // REVISAR
+   var property image = ""
+   
+    method oceanoCambiado(){
+        return oceanoPrendido
+    }
+}
+
 class PuertaANivel1 {
     var property position
     var property image = "puertaNueva.png"
@@ -331,4 +380,121 @@ class Tienda inherits PuertaANivel1(image = "tienda.png",nivelADibujar = mapaTie
     game.say(self, "Presiona ''z'' para ver tus trofeos")
   } 
 }
+
+object sombreroFactory {
+
+
+  method construir(position) {
+    return new Accesorio(position=position)
+  }
+}
+
+
+object trofeosFactory {
+ 
+  method construir(position) {
+    return new Trofeo(position=position)
+  }
+}
+
+
+
+
+object administradorSombreros {
+ 
+  const creados = #{}
+  const property factories = [sombreroFactory, trofeosFactory]
+
+
+
+
+  method nuevosSombreros() {
+    if (self.hayEspacioParaSombrero()) {
+      const sombrero = self.construirSombrero()
+      game.addVisual(sombrero)
+      creados.add(sombrero)
+    }else if(self.hayEspacioParaTrofeo()){
+      const trofeo = self.construirTrofeos()
+      game.addVisual(trofeo)
+      creados.add(trofeo)
+    }
+  }
+
+
+  method construirSombrero() {
+    return sombreroFactory.construir(randomizer.emptyPosition())
+  }
+
+
+  method construirTrofeos() {
+    return trofeosFactory.construir(randomizer.emptyPosition())
+  }
+
+
+
+
+  method hayEspacioParaSombrero() {
+    return creados.size() < 3  and pepe.tieneSombrerosInsuficientes()
+  }
+
+
+  method hayEspacioParaTrofeo() {
+    return creados.size() < 1 //and not pepe.tieneTercerTrofeo()
+  }
+
+
+
+
+  method remover(accesorio) {
+    game.removeVisual(accesorio)
+    creados.remove(accesorio)
+  }
+}
+class Accesorio {
+  const position
+ 
+  method position() {
+    return position
+  }
+
+
+  method image() {
+    return "monedaDeOro.png"
+  }
+
+
+  method solida() {
+    return false
+  }
+
+
+  method colision(personaje) {
+    personaje.agarrarObjeto(self)
+  }
+}
+
+
+class Trofeo {
+  const position
+ 
+  method position() {
+    return position
+  }
+
+
+  method image() {
+    return "monedaVioleta.png"
+  }
+
+
+  method solida() {
+    return false
+  }
+
+
+  method colision(personaje) {
+    personaje.agarrarTrofeo(self)
+  }
+}
+
 

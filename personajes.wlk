@@ -8,6 +8,7 @@ object pepe {
     var property position = game.center()
     var property image = "pepite-back.png"
     var property nivelActual = lobby
+    var property cantSombreros = 0
 
     var dolaresTotales = 0
     var dolaresNivel = 0
@@ -20,7 +21,7 @@ object pepe {
       self.validarMover(direccion)
 		  position = direccion.siguiente(self.position())
       image = direccion.imagenDelJugador()
-	  }
+      }
 
     method validarMover(direccion) {
       const siguiente = direccion.siguiente(self.position())
@@ -84,6 +85,31 @@ object pepe {
         game.removeVisual(self)
         self.position(9.9)
         game.addVisual(self)
+    }
+
+    method agarrarMoneda(moneda) {
+        self.sumarDolar(moneda)
+        game.removeVisual(moneda)
+    }
+
+
+    method agarrarObjeto(objeto) {  
+        self.sumarObjeto()
+        administradorSombreros.remover(objeto)
+    }
+    method sumarObjeto() {
+        cantSombreros += 1
+    }
+
+
+    method tieneSombrerosInsuficientes() {
+        return cantSombreros < 5
+    }
+
+
+    method agarrarTrofeo(trofeo) {  
+        //self.sumarObjeto()
+        administradorSombreros.remover(trofeo) //Revisar
     }
 }
 
