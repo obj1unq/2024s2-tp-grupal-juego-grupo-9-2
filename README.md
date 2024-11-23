@@ -1,4 +1,4 @@
-# Pepite's game (<- borrar y completar)
+# Pepite's game 
 
 ## Equipo de desarrollo
 

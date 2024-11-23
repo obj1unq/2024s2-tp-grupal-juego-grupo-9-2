@@ -158,6 +158,11 @@ object n {// Representa un Puente que se desarma cada x tiempo
 	    game.onTick(5000, "estado", {puente.cambiarEstado()})
     }
 }
+object rr {// Representa a ringo
+    method dibujarEn(position){
+        game.addVisual(ringo)
+    }
+}
 
 class Mapa {
     const tablero 
@@ -176,7 +181,17 @@ class Mapa {
 object background {
    var property bgActual = start     // inst o lobby
     const property position = game.at(0,0)
+    var dibujo = lobby
+    
     method image() = bgActual.image()
+
+    method bgActual(_bgActual){
+        bgActual = _bgActual
+    }
+
+    method dibujo(_dibujo){
+        dibujo = _dibujo
+    }
 
     method iniciar(){
         game.addVisual(self)
@@ -188,10 +203,11 @@ object background {
             bgActual = bgActual.siguiente()    
         }else{
             game.allVisuals().forEach({bg=>game.removeVisual(bg)})
-            lobby.dibujar()
+            dibujo.dibujar()
         }
     }        
 }
+
 object start {
      method image() = "instrucciones.png"
 
@@ -205,11 +221,117 @@ object inst {
      method siguiente(){
         return null
     }
-   
+}
+object instN1{
+    method image() = "nivel_1_instrucciones.png"
 
+    method siguiente(){
+        return null
+    }
 }
 
+object instN2{
+    method image() = "nivel_2_instrucciones.png"
 
+     method siguiente(){
+        return instN22
+    }
+}
+
+object instN22{
+    method image() = "nivel_2_instrucciones2.png"
+
+    method siguiente(){
+        return null
+    }
+}
+object instN3{
+    method image() = "nivel_3_instrucciones.png"
+
+    method siguiente(){
+        return instn32
+    }
+}
+object instn32{
+     method image() = "nivel_3_instrucciones2.png"
+
+    method siguiente(){
+        return null
+    }
+}
+object instN4{
+    method image() = "nivel_4_instrucciones.png"
+
+    method siguiente(){
+        return null
+    }
+}
+
+object instN5{
+    method image() = "nivel_5_instrucciones.png"
+
+    method siguiente(){
+        return null
+    }
+}
+object bgTienda{
+    method image() = "bgTrofeos.png"
+
+    method siguiente(){
+        return null
+    }
+}
+object bgNivel5{
+    const property position = game.at(0,0)
+
+    method image() = "bgnivel5.png"
+    method siguiente() = null
+} 
+object bgFinal{
+    method image() = "bgFinal.png"
+
+    method siguiente() = null
+}
+object z{  // representa el primer trofe
+   
+    
+    
+    //listaDeTrofeos.get(0) // suponiendo que se guarden los trofes es una lista y no un set.
+    
+}
+
+object zz{  // representa el segundo trofe
+    
+    //listaDeTrofeos.get(1)
+}
+
+object aa{  // representa el tercer trofe
+  
+    //listaDeTrofeos.get(2)
+}
+object bb{  // representa el cuarto trofe
+    //listaDeTrofeos.get(3)
+}
+
+object cc{   // representa el quinto trofe
+    //listaDeTrofeos.get(4)
+}
+
+object mapaTienda inherits Mapa (tablero = 
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,z,_,zz,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,aa,_,bb,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,cc,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+    ].reverse()) 
+{
+
+}
 
 object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,p],
@@ -218,7 +340,9 @@ object lobby inherits Mapa ( tablero =
      [_,h,_,_,_,_,_,_,_,_,_,t,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [v,v,v,v,v,v,v,v,v,v,v,v,v],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse())  {
 }
@@ -231,6 +355,8 @@ object nivel1 inherits Mapa (tablero =
      [o,o,o,o,o,o,o,o,o,o,o,o,o],    
      [o,o,_,o,o,o,o,o,o,o,o,o,o],    
      [o,o,m,_,a,_,_,a,o,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],
+     [o,o,o,o,o,o,o,o,o,o,o,o,o],
      [o,o,o,o,o,o,o,o,o,o,o,o,o]        
     ].reverse()) { 
 }
@@ -238,12 +364,14 @@ object nivel1 inherits Mapa (tablero =
 object nivel2 inherits Mapa ( tablero =     
     [[o,v,n,n,v,v,v,n,v,v,v,p,e],
      [o,v,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,v,o,o,o,o,n,v,v,n,o,o,o],    
-     [o,v,v,n,v,o,n,o,o,v,o,o,o],    
-     [o,o,o,o,v,o,v,o,o,v,o,o,o],    
-     [n,n,n,v,v,o,v,o,o,n,o,o,o],    
-     [v,o,o,o,o,o,v,o,o,v,o,o,o],    
-     [v,v,v,v,v,n,v,o,o,v,n,v,e]       
+     [o,v,o,o,o,o,n,v,v,n,v,o,o],    
+     [o,v,n,n,n,v,n,o,o,o,n,m,o],    
+     [o,v,o,o,o,o,o,o,o,o,o,o,o],    
+     [o,n,n,v,v,v,n,n,v,o,o,o,o],    
+     [o,o,o,o,o,o,o,o,n,o,o,o,o],    
+     [o,o,v,n,n,v,v,n,v,o,o,v,e],
+     [o,o,n,o,o,o,o,o,o,o,o,n,o],
+     [o,o,n,v,n,v,n,v,n,v,v,n,o]       
     ].reverse()) {
     
 }
@@ -257,6 +385,8 @@ object nivel3 inherits Mapa (tablero =
      [_,_,_,o,a,_,_,_,_,_,_,_,_],    
      [_,_,_,_,c,_,_,_,_,_,j,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }
@@ -269,6 +399,8 @@ object nivel4 inherits Mapa (tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,k,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }
@@ -278,10 +410,12 @@ object nivel5 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [e,p,_,_,_,_,_,_,_,_,_,f,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,rr],    
      [_,_,_,_,_,_,_,_,q,_,_,_,_],    
      [_,_,_,_,_,_,_,_,b,_,_,_,_],    
      [_,_,_,_,_,_,_,_,c,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse() ) {
 }

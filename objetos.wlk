@@ -91,6 +91,9 @@ class Puente {
     method colision(personaje){
       estado.colision()
     }
+    method interactuar(){
+
+    }
 }
 
 class PuenteFragil inherits Puente{
@@ -111,20 +114,24 @@ object puenteHabilitado {
     method derrumbado(){
       return false
     }
-    method colision(){
+    method colision(pepe){
       // por polimorfismo
+    }
+    method colision(){
+
     }
     
 }
 object puenteNoHabilitado {
     var property image = "puenteRoto.png"
-    var property solida = false
+    var property solida = false 
     method derrumbado(){
       return true
     }
-    method colision(){
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
-		  lobby.dibujar()
+    method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
+		  nivel2.dibujar()
+      game.say(pepe,"¡me ahogué!")
     }
 }
 
@@ -139,7 +146,7 @@ object puenteNoHabilitado {
 
 class Oceano {
     var property position 
-    var property image = "oceano.png"
+    var property image = "fondo-oceano.png"
 
     method solida() {
 		  return false
@@ -147,8 +154,9 @@ class Oceano {
 
     method colision(personaje) {
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
-		  lobby.dibujar()
-      game.say(pepe,"me caí al oceano. se reinicia el juego")
+		  pepe.nivelActual().dibujar()
+      //pepe.reinicio()
+      game.say(pepe,"me caí al oceano")
     }
 }
 
@@ -164,6 +172,8 @@ class OceanoP1 inherits Oceano{
 class PuertaANivel1 {
     var property position
     var property image = "puertaNueva.png"
+    var property nivelADibujar = nivel1 
+    var property bgAAgregar   = instN1 
 
     method validarPuerta(){
         if (not territorio.hayPuertaAca()){
@@ -172,57 +182,76 @@ class PuertaANivel1 {
     }
 
     method interactuar() {
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
-      self.dibujarSiguienteMapa()
+      background.dibujo(nivelADibujar)
+      background.bgActual(bgAAgregar)   
+      background.iniciar()
+      pepe.nivelActual(nivelADibujar)   
+      //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
+      //self.dibujarSiguienteMapa()
     }
+    
 
     method solida() {
 		return false
 	}
 
-    method dibujarSiguienteMapa() {
-      nivel1.dibujar()
-    }
+    //method dibujarSiguienteMapa() {
+    //  nivel1.dibujar()
+    //}
 
-    method colision(personaje) {
-		  
-	}
+    method colision(personaje){
+  
+  }
 }
 
+class PuertaALobby inherits PuertaANivel1(nivelADibujar = lobby) {
 
-class PuertaALobby inherits PuertaANivel1 {
-
-  override method dibujarSiguienteMapa() {
+  /*override dibujarSiguienteMapa()*/
+     override method interactuar() {
     pepe.resetarDolares()
+    game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
     lobby.dibujar()
+  
   }
 }
 
 
-class PuertaANivel2 inherits PuertaANivel1 {
-  override method dibujarSiguienteMapa() {
+class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2) {
+  /*override*/ 
+  //method dibujarSiguienteMapa() {
+    //pepe.actualizarDolares()
+    //nivel2.dibujar()
+  //}
+  override method interactuar(){
+    super()
     pepe.actualizarDolares()
-    nivel2.dibujar()
-  }
+
+  } 
 }
 
 
-class PuertaANivel3 inherits PuertaANivel2 {
- override method dibujarSiguienteMapa() {
-    nivel3.dibujar()
-  }
+class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3) {
+ //override method dibujarSiguienteMapa() {
+ //   nivel3.dibujar()
+ // }
+ 
 }
 
-class PuertaANivel4 inherits PuertaANivel2 {
- override method dibujarSiguienteMapa() {
-    nivel4.dibujar()
-  }
+class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4)  {
+ //override method dibujarSiguienteMapa() {
+ //   nivel4.dibujar()
+ // }
 }
 
-class PuertaANivel5 inherits PuertaANivel2 {
- override method dibujarSiguienteMapa() {
-    nivel5.dibujar()
-  }
+class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5)  {
+ //override method dibujarSiguienteMapa() {
+ //   nivel5.dibujar()
+      override method interactuar(){
+        super()
+        game.say(ringo, "Pepite,acá estoy!")
+        
+      }
+ // }
 }
 
 class PuertaDeAdorno  { // No la estamos usando pero anda.
@@ -264,28 +293,45 @@ class NPC {
   var property image = "hector.png"
 
 
-  method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
+  method solida() { 
 		return false
 	}
 
   method interactuar() {
         game.say(self, "¡HOLA VIAJERO!")
     }
-  method colision(){
-    // evita errores
+  method colision(pepe){
+    game.say(self, "¡AUCH!")
+  } 
+}
+object ringo inherits NPC(image = "ringo.png",position = game.center()){
+ 
+  
+  override method colision(pepe){
+    game.say(self,"Hola pepite te extrañé!")
+    game.schedule(3000, {game.allVisuals().forEach({bg=>game.removeVisual(bg)})
+                         background.bgActual(bgFinal)
+                         background.iniciar()
+                          })
+                          
+  }
+}
+
+class Tienda inherits PuertaANivel1(image = "tienda.png",nivelADibujar = mapaTienda,bgAAgregar = bgTienda ){
+  //var property position
+  //var property image = "tienda.png"
+
+
+  /*method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
+		//return false
+	}*/
+  override method interactuar(){
+  super()
+  background.dibujo(lobby)
+  
+  }
+ override  method colision(pepe){
+    game.say(self, "Presiona ''z'' para ver tus trofeos")
   } 
 }
 
-class Tienda {
-  var property position
-  var property image = "tienda.png"
-
-
-  method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
-		return false
-	}
-
-  method interactuar() {
-        game.say(self, "No hay objetos para vender")
-    }
-}
