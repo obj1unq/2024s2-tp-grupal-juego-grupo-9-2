@@ -29,11 +29,14 @@ object pepe {
       self.validarAtravesables(siguiente)
 	  }
     
-    method objetoDebajoDePepe() = game.uniqueCollider(self) // Lo que hay abajo de Pepe.
+    method objetosDebajoDePepe() = game.colliders(self) // Lo que hay abajo de Pepe.
 
     method interactuarConObjeto() {
         self.validarInteraccion()
-        const objeto = self.objetoDebajoDePepe()
+        var objeto = self.objetosDebajoDePepe().first()
+        if(self.objetosDebajoDePepe().size() > 1){
+            objeto = self.objetosDebajoDePepe().last()            
+        }
         objeto.interactuar()
     }
 

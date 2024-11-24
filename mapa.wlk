@@ -17,7 +17,6 @@ object p {  // representa a Pepe en el mapa.
 
     method dibujarEn(position) {
         pepe.position(position)
-        game.addVisual(pepe)
     }
 }
 
@@ -169,19 +168,43 @@ object rr {// Representa a ringo
     }
 }
 
-object s{
+object s { // Representa una zona segura. 
     method dibujarEn(position){
         game.addVisual(new ZonaSegura(position = position))
     }
 }
 
-object cs{
+object sm { // Representa una zona segura con una moneda
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+        game.addVisual(new Moneda(position = position))
+    }
+}
+
+object sp { // Representa una zona segura con una puerta al lobby y pepe.
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+        game.addVisual(new PuertaALobby(position = position))
+        pepe.position(position)
+    }
+}
+
+
+
+object sg { // Representa una zona segura con una puerta al segundo nivel.
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+        game.addVisual(new PuertaANivel2(position = position))
+    }
+}
+
+object cs{ // Representa Suelo de Vidrio.
     method dibujarEn(position){
         game.addVisual(new SueloVidrio(position = position))
     }
 }
 
-object cf{
+object cf{ // Representa Suelo de Vidrio falso.
     method dibujarEn(position){
         game.addVisual(new SueloVidrioFalso(position = position))
     }
@@ -195,49 +218,7 @@ object ll { // representa un leon
     }
 }
 
-class Mapa {
-    const tablero 
 
-    method dibujar() {
-        game.height(tablero.size())
-        game.width(tablero.get(0).size())
-
-        (0..game.width() - 1).forEach({ x =>
-            (0..game.height() -1).forEach({y =>
-                tablero.get(y).get(x).dibujarEn(game.at(x,y))
-            })
-        })
-    }
-}
-object background {
-   var property bgActual = start     // inst o lobby
-    const property position = game.at(0,0)
-    var dibujo = lobby
-    
-    method image() = bgActual.image()
-
-    method bgActual(_bgActual){
-        bgActual = _bgActual
-    }
-
-    method dibujo(_dibujo){
-        dibujo = _dibujo
-    }
-
-    method iniciar(){
-        game.addVisual(self)
-    }
-
-    method cambiar(){
-        if(bgActual.siguiente() != null){
-            
-            bgActual = bgActual.siguiente()    
-        }else{
-            game.allVisuals().forEach({bg=>game.removeVisual(bg)})
-            dibujo.dibujar()
-        }
-    }        
-}
 
 object start {
      method image() = "instrucciones.png"
@@ -348,6 +329,54 @@ object cc{   // representa el quinto trofe
     //listaDeTrofeos.get(4)
 }
 
+object background {
+   var property bgActual = start     // inst o lobby
+    const property position = game.at(0,0)
+    var dibujo = lobby
+    
+    method image() = bgActual.image()
+
+    method bgActual(_bgActual){
+        bgActual = _bgActual
+    }
+
+    method dibujo(_dibujo){
+        dibujo = _dibujo
+    }
+
+    method iniciar(){
+        game.addVisual(self)
+    }
+
+    method cambiar(){
+        if(bgActual.siguiente() != null){
+            
+            bgActual = bgActual.siguiente()    
+        }else{
+            game.allVisuals().forEach({bg=>game.removeVisual(bg)})
+            dibujo.dibujar()
+        }
+    }        
+}
+
+class Mapa {
+    const tablero 
+
+    method dibujar() {
+        game.height(tablero.size())
+        game.width(tablero.get(0).size())
+
+        (0..game.width() - 1).forEach({ x =>
+            (0..game.height() -1).forEach({y =>
+                tablero.get(y).get(x).dibujarEn(game.at(x,y))
+            })
+        })
+
+        game.addVisual(pepe) // Ponemos acá la visual de Pepe para que esté arriba de todas las visuales.
+    }
+}
+
+
 object mapaTienda inherits Mapa (tablero = 
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
@@ -365,30 +394,30 @@ object mapaTienda inherits Mapa (tablero =
 }
 
 object lobby inherits Mapa ( tablero =
-    [[_,_,_,_,_,_,_,_,_,_,_,_,p],
+    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,f,_,g,_,i,_,j,_,k,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,h,_,_,_,_,_,_,_,_,_,t,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
+     [_,_,_,_,_,_,p,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse())  {
 }
 
 object nivel1 inherits Mapa (tablero =  
-    [[_,_,_,_,_,_,s,s,_,_,_,p,e],
-     [_,_,_,_,_,_,cs,cf,_,_,_,_,_],    
-     [_,_,_,_,_,_,s,s,_,_,_,_,_],    
-     [_,_,_,_,_,_,cs,cf,_,_,_,_,_],    
-     [s,cf,s,cf,s,cs,s,s,_,_,_,_,_],    
-     [s,cs,s,cs,s,cf,s,_,_,_,_,_,_],    
-     [s,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [s,_,_,_,_,_,_,_,_,_,_,_,_],
-     [s,cs,s,cf,s,cf,s,cs,s,cs,s,s,s],
-     [s,cf,s,cs,s,cs,s,cf,s,cf,s,i,s]        
+    [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,sp,s],
+     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,s ,s ],    
+     [o ,o ,o ,o ,o ,o ,o ,s ,s ,o ,o ,o ,o ],    
+     [o ,o ,o ,o ,o ,o ,o ,cf,cs,o ,o ,o ,o ],    
+     [s ,cf,s ,cf,s ,cs,s ,s ,s ,o ,o ,o ,o ],    
+     [s ,cs,s ,cs,s ,cf,s ,s ,s ,o ,o ,sm,o ],    
+     [s ,o ,o ,o ,o ,o ,o ,o ,o ,o ,s ,s ,s ],    
+     [s ,o ,o ,o ,o ,o ,o ,o ,o ,o ,cf,cf,cs],
+     [s ,cs,s ,cf,s ,cf,s ,cs,s ,cs,s ,s ,s ],
+     [s ,cf,s ,cs,s ,cs,s ,cf,s ,cf,s ,sg,s ]        
     ].reverse()) { 
 }
 
