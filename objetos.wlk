@@ -136,19 +136,6 @@ class Puente {
     method interactuar(){
 
     }
-}
-
-class PuenteFantasma inherits Puente {
-  method cambiarEstado() {
-    if(!estado.derrumbado()) {
-      estado = puenteFantasma
-    }
-  }
-
-}
-
-class PuenteFragil inherits Puente{
-
     method cambiarEstado(){
        if(estado.derrumbado()){
         estado = puenteHabilitado
@@ -157,6 +144,14 @@ class PuenteFragil inherits Puente{
         estado = puenteNoHabilitado
        }
     }
+}
+
+class PuenteFantasma inherits Puente {
+  override method cambiarEstado() {
+    if(!estado.derrumbado()) {
+      estado = puenteFantasma
+    }
+  }
 }
 
 object puenteFantasma {
@@ -194,7 +189,7 @@ object puenteNoHabilitado {
     }
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
-		  nivel2.dibujar()
+		  pepe.nivelActual().dibujar()
       game.say(pepe,"¡me ahogué!")
     }
 }
