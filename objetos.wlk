@@ -206,6 +206,9 @@ class ZonaSegura{
   method colision(personaje) { // por polimorfismo
      
   }
+  method interactuar() {
+    
+  }
 }
 
 class SueloVidrio{
@@ -213,6 +216,10 @@ class SueloVidrio{
   method image() = "cristal.png"
   method solida() = false
   method colision(personaje){ // por polimorfismo
+    
+  }
+
+  method interactuar(){
     
   }
 }
