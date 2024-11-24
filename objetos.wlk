@@ -77,6 +77,52 @@ class Roca {
 
     
 }
+
+class Leon {
+  var property position
+  var property estado = leonDormido 
+
+  method image() {
+    return estado.image()
+  } 
+
+  method solida() {
+    return true
+  }
+
+  method cambiarEstado(){
+       if(estado.dormido()){
+        estado = leonDespierto
+       }
+       else {
+        estado = leonDormido
+       }
+    }
+
+}
+
+object leonDormido {
+  method image() {
+    return "leon-durmiendo.png"
+  }
+
+  method dormido() {
+    return true
+  } 
+}
+
+object leonDespierto {
+  method image() {
+    return "leon-despierto.png"
+  }
+
+  method dormido() {
+    return false
+  } 
+}
+
+
+
 class Puente {
     var property position
     var property estado = puenteHabilitado
@@ -89,10 +135,6 @@ class Puente {
     }
     method interactuar(){
 
-    }
-
-    method desaparecerPuente() {
-    //  image = "fondo-oceano.png"
     }
 }
 

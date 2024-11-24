@@ -187,6 +187,14 @@ object cf{
     }
 }
 
+object ll { // representa un leon 
+    method dibujarEn(position){
+        const leon = new Leon(position = position)
+        game.addVisual(leon)
+	    game.onTick(5000, "estado", {leon.cambiarEstado()})
+    }
+}
+
 class Mapa {
     const tablero 
 
@@ -405,7 +413,7 @@ object nivel3 inherits Mapa (tablero =
      [_,n,n,n,n,n,n,n,n,n,n,p,e],    
      [_,n,n,n,n,n,n,n,n,n,n,_,_],    
      [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
+     [ll,n,n,n,n,n,n,n,n,n,n,_,_],    
      [_,n,n,n,n,n,n,n,n,n,n,_,_],    
      [_,n,n,n,n,n,n,n,n,n,n,_,_],    
      [_,n,n,n,n,n,n,n,n,n,n,_,_],
