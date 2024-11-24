@@ -146,6 +146,13 @@ object v {  // Representa un Puente pu
     }
 }
 
+object vm {  // Representa un Puente con moneda
+    method dibujarEn(position){
+        game.addVisual(new Puente(position = position))
+        game.addVisual(new Moneda(position = position))
+    }
+}
+
 object n {// Representa un Puente que se desarma cada x tiempo
     method dibujarEn(position){
         const puente = new Puente(position = position)
@@ -195,6 +202,13 @@ object sg { // Representa una zona segura con una puerta al segundo nivel.
     method dibujarEn(position){
         game.addVisual(new ZonaSegura(position = position))
         game.addVisual(new PuertaANivel2(position = position))
+    }
+}
+
+object si { // Representa una zona segura con una puerta al segundo nivel.
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+        game.addVisual(new PuertaANivel3(position = position))
     }
 }
 
@@ -422,16 +436,16 @@ object nivel1 inherits Mapa (tablero =
 }
 
 object nivel2 inherits Mapa ( tablero =     
-    [[o,v,n,n,v,v,v,n,v,v,v,p,e],
-     [o,v,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,v,o,o,o,o,n,v,v,n,v,o,o],    
-     [o,v,n,n,n,v,n,o,o,o,n,m,o],    
-     [o,v,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,n,n,v,v,v,n,n,v,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,n,o,o,o,o],    
-     [o,o,v,n,n,v,v,n,v,o,o,v,e],
-     [o,o,n,o,o,o,o,o,o,o,o,n,o],
-     [o,o,n,v,n,v,n,v,n,v,v,n,o]       
+    [[o ,v ,n ,n ,v ,v ,v ,n ,v ,v ,v ,v ,sp],
+     [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
+     [o ,v ,o ,o ,o ,o ,n ,v ,v ,n ,v ,o ,o ],    
+     [o ,v ,n ,n ,n ,v ,n ,o ,o ,o ,n ,vm,o ],    
+     [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
+     [o ,n ,n ,v ,v ,v ,n ,n ,v ,o ,o ,o ,o ],    
+     [o ,o ,o ,o ,o ,o ,o ,o ,n ,o ,o ,o ,o ],    
+     [o ,o ,v ,n ,n ,v ,v ,n ,v ,o ,o ,v ,si],
+     [o ,o ,n ,o ,o ,o ,o ,o ,o ,o ,o ,n ,o ],
+     [o ,o ,n ,v ,n ,v ,n ,v ,n, v, v, n ,o ]       
     ].reverse()) {
     
 }
