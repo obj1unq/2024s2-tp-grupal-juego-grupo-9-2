@@ -149,7 +149,7 @@ object v {  // Representa un Puente pu
 
 object n {// Representa un Puente que se desarma cada x tiempo
     method dibujarEn(position){
-        const puente = new PuenteFragil(position = position)
+        const puente = new Puente(position = position)
         game.addVisual(puente)
 	    game.onTick(5000, "estado", {puente.cambiarEstado()})
     }
@@ -196,7 +196,7 @@ object ll { // representa un leon
 }
 
 class Mapa {
-    const tablero 
+    const tablero
 
     method dibujar() {
         game.height(tablero.size())
