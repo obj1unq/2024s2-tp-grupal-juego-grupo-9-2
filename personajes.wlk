@@ -9,6 +9,7 @@ object pepe {
     var property image = "pepite-back.png"
     var property nivelActual = lobby
     var property cantSombreros = 0
+    const property trofeos = []
 
     var dolaresTotales = 0
     var dolaresNivel = 0
@@ -81,10 +82,14 @@ object pepe {
 		return false
 	}
 
-    method agarrarVisual(moneda) {
-        self.sumarDolar(moneda)
-		game.removeVisual(moneda)
-	}    
+    method agarrarVisual(visual) {
+		game.removeVisual(visual)
+	}
+
+    method agregarTrofeo(trofeo){
+        self.trofeos().add(trofeo)
+    }
+
     method reinicio(){
         game.removeVisual(self)
         self.position(9.9)
