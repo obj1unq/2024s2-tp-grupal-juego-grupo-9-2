@@ -411,11 +411,11 @@ class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = i
 class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5, puertaDeNivel = 5)  {
  //override method dibujarSiguienteMapa() {
  //   nivel5.dibujar()
-      override method interactuar(){
-        super()
-        game.say(ringo, "Pepite,acá estoy!")
-        
-      }
+//      override method interactuar(){
+//        super()
+//       game.say(ringo, "Pepite,acá estoy!")
+//        
+//      }
  // }
 }
 
@@ -469,7 +469,7 @@ class NPC {
     game.sound("hector.mp3").play()
   } 
 }
-object ringo inherits NPC(image = "ringo.png",position = game.center()){
+class Ringo inherits NPC(image = "ringo.png"){
  
   
   override method colision(pepe){

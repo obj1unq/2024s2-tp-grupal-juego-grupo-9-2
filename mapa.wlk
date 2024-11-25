@@ -194,7 +194,7 @@ object n3 {// Representa un Puente que se desarma cada x tiempo
 
 object rr {// Representa a ringo
     method dibujarEn(position){
-        game.addVisual(ringo)
+        game.addVisual(new Ringo (position = position))
     }
 }
 
@@ -539,16 +539,16 @@ object nivel2 inherits Mapa ( tablero =
 
 
 object nivel3 inherits Mapa (tablero =
-    [[bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
+    [[bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,j ],
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
-     [ll,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,ep],    
+     [ll,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
-     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3]      
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,p ]      
     ].reverse() ) {
 
 
@@ -561,7 +561,7 @@ object nivel3 inherits Mapa (tablero =
 
 
 object nivel4 inherits Mapa (tablero =
-    [[sp,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
+    [[k ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
      [sc,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,s ,s ],    
      [n2,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,s ,s ],    
      [o ,o ,o ,at,n2,o ,n2,o ,n2,n2,r ,s ,s ],    
