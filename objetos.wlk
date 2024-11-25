@@ -56,6 +56,7 @@ class Moneda {
 
     method colision(personaje) {
 		  personaje.agarrarVisual(self)
+      game.sound("pickUp.mp3").play()
     }
 }
 class MonedaDePlata inherits Moneda(image = "monedaDePlata.png",valor = 50) {
@@ -240,6 +241,7 @@ class Oceano {
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
 		  pepe.nivelActual().dibujar()
       //pepe.reinicio()
+      game.sound("scream.mp3").play()
       game.say(pepe,"me caí al oceano")
     }
 }
@@ -266,17 +268,18 @@ class PuertaANivel1 {
     var property nivelADibujar = nivel1 
     var property bgAAgregar   = instN1 
 
-    method validarPuerta(){
-        if (not territorio.hayPuertaAca()){
-			    self.error("No hay puerta en la posición actual")
-		  }
-    }
+    //method validarPuerta(){
+    //    if (not territorio.hayPuertaAca()){
+		//	    self.error("No hay puerta en la posición actual")
+		//  }
+    //}
 
     method interactuar() {
       background.dibujo(nivelADibujar)
       background.bgActual(bgAAgregar)   
       background.iniciar()
-      pepe.nivelActual(nivelADibujar)   
+      pepe.nivelActual(nivelADibujar)
+      game.sound("openDoor.mp3").play() 
       //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
       //self.dibujarSiguienteMapa()
     }
@@ -392,6 +395,7 @@ class NPC {
     }
   method colision(pepe){
     game.say(self, "¡AUCH!")
+    game.sound("hector.mp3").play()
   } 
 }
 object ringo inherits NPC(image = "ringo.png",position = game.center()){
@@ -402,6 +406,7 @@ object ringo inherits NPC(image = "ringo.png",position = game.center()){
     game.schedule(3000, {game.allVisuals().forEach({bg=>game.removeVisual(bg)})
                          background.bgActual(bgFinal)
                          background.iniciar()
+                         game.sound("victoryTheme.mp3").play()
                           })
                           
   }
@@ -514,6 +519,7 @@ class Accesorio {
 
   method colision(personaje) {
     personaje.agarrarObjeto(self)
+    game.sound("pickUp.mp3").play()
   }
 }
 
@@ -538,6 +544,7 @@ class Trofeo {
 
   method colision(personaje) {
     personaje.agarrarTrofeo(self)
+    game.sound("pickUp.mp3").play()
   }
 }
 
