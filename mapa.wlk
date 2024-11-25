@@ -20,11 +20,12 @@ object p {  // representa a Pepe en el mapa.
     }
 }
 
-object r { // representa una roca.
+object r { // representa una roca con zona segura
     method dibujarEn(position) {
         const roca = new Roca(position = position)
+        game.addVisual(new ZonaSegura(position = position))
         game.addVisual(roca)
-        game.schedule(5000, {game.removeVisual(roca)})
+        game.schedule(7000, {game.removeVisual(roca)})
     }
 }
 
@@ -68,6 +69,14 @@ object e { // representa el lobby lo
 
     method dibujarEn(position) {
      game.addVisual(new PuertaALobby(position = position))
+    }
+}
+
+object ep { // representa el lobby lo
+
+    method dibujarEn(position) {
+     game.addVisual(new PuertaALobby(position = position))
+     pepe.position(position)
     }
 }
 
@@ -150,11 +159,18 @@ object v {  // Representa un Puente pu
     }
 }
 
+object vm {  // Representa un Puente con moneda
+    method dibujarEn(position){
+        game.addVisual(new Puente(position = position))
+        game.addVisual(new MonedaDePlata(position = position))
+    }
+}
+
 object n {// Representa un Puente que se desarma cada x tiempo
     method dibujarEn(position){
         const puente = new Puente(position = position)
         game.addVisual(puente)
-	    game.onTick(5000, "estado", {puente.cambiarEstado()})
+	    game.onTick(4000, "estado", {puente.cambiarEstado()})
     }
 }
 
@@ -162,7 +178,15 @@ object n2 {// Representa un Puente que se desarma cada x tiempo
     method dibujarEn(position){
         const puente = new PuenteFantasma(position = position)
         game.addVisual(puente)
-        game.schedule(5000, {puente.cambiarEstado()})
+        game.schedule(7000, {puente.cambiarEstado()})
+    }
+}
+
+object n3 {// Representa un Puente que se desarma cada x tiempo
+    method dibujarEn(position){
+        const sueloLeon = new SueloLeon(position = position)
+        game.addVisual(sueloLeon)
+	    game.onTick(5000, "estado", {sueloLeon.cambiarEstado()})
     }
 }
 
@@ -180,12 +204,24 @@ object s { // Representa una zona segura.
 
 object sm { // Representa una zona segura con una moneda
     method dibujarEn(position){
-        game.addVisual(new ZonaSegura(position = position))
+        game.addVisual(new ZonaSegura(position = position)
         if(pepe.trofeos().size() < 1){
-            game.addVisual(new Moneda(position = position))
+            game.addVisual(new MonedaDeBronce(position = position))
         }
     }
 }
+
+object sc { // Representa una zona segura con una moneda
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+        if(pepe.trofeos().size() < 3){
+            game.addVisual(new MonedaVioleta(position = position))
+        }
+
+
+    }
+}
+
 
 object sp { // Representa una zona segura con una puerta al lobby y pepe.
     method dibujarEn(position){
@@ -204,6 +240,13 @@ object sg { // Representa una zona segura con una puerta al segundo nivel.
     }
 }
 
+object si { // Representa una zona segura con una puerta al segundo nivel.
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+        game.addVisual(new PuertaANivel3(position = position))
+    }
+}
+
 object cs{ // Representa Suelo de Vidrio.
     method dibujarEn(position){
         game.addVisual(new SueloVidrio(position = position))
@@ -216,11 +259,29 @@ object cf{ // Representa Suelo de Vidrio falso.
     }
 }
 
-object ll { // representa un leon 
+object ll { // Representa un leon.
     method dibujarEn(position){
         const leon = new Leon(position = position)
         game.addVisual(leon)
 	    game.onTick(5000, "estado", {leon.cambiarEstado()})
+    }
+}
+
+object bi { // Representa una barrera invisible.
+    method dibujarEn(position){
+        game.addVisual(new BarreraInvisible(position = position))
+    }
+}
+
+object ap {
+    method dibujarEn(position){
+        game.addVisual(new Pescado(position = position))
+    }
+}
+
+object at {
+    method dibujarEn(position){
+        game.addVisual(new Tiburon(position = position))
     }
 }
 
@@ -418,14 +479,19 @@ object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,f,_,g,_,i,_,j,_,k,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,h,_,_,_,_,_,_,_,_,_,t,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,h,_,_,_,_,_,_,_,_,_],    
+     [_,t,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,p,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse())  {
+
+    override method dibujar() {
+        super()
+        game.boardGround("lobby.png")
+    }
 }
 
 object nivel1 inherits Mapa (tablero =  
@@ -440,71 +506,94 @@ object nivel1 inherits Mapa (tablero =
      [s ,cs,s ,cf,s ,cf,s ,cs,s ,cs,s ,s ,s ],
      [s ,cf,s ,cs,s ,cs,s ,cf,s ,cf,s ,sg,s ]        
     ].reverse()) { 
+
+    override method dibujar() {
+        super()
+        game.boardGround("fondo-oceano.png")
+    }
 }
 
 object nivel2 inherits Mapa ( tablero =     
-    [[o,v,n,n,v,v,v,n,v,v,v,p,e],
-     [o,v,o,o,o,o,o,o,o,o,o,v,v],    
-     [o,v,o,o,o,o,n,v,v,n,v,o,v],    
-     [o,v,n,n,n,v,n,o,o,o,n,a,v],    
-     [o,v,o,o,o,o,o,o,o,o,o,o,v],    
-     [o,n,n,v,v,v,n,n,v,o,o,o,v],    
-     [o,o,o,o,o,o,o,o,n,o,o,o,v],    
-     [o,o,v,n,n,v,v,n,v,o,o,v,i],
-     [o,o,n,o,o,o,o,o,o,o,o,n,o],
-     [o,o,n,v,n,v,n,v,n,v,v,v,o]       
+
+    [[o ,v ,n ,n ,v ,v ,v ,n ,v ,v ,v ,v ,sp],
+     [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
+     [o ,v ,o ,o ,o ,o ,n ,v ,v ,n ,v ,o ,o ],    
+     [o ,n ,n ,n ,n ,v ,n ,o ,o ,o ,n ,v,o ],    
+     [o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,n ,o ],    
+     [o ,n ,n ,v ,v ,vm,o ,o ,v ,n ,v ,v ,o ],    
+     [o ,n ,o ,o ,o ,o ,o ,o ,n ,o ,o ,o ,o ],    
+     [o ,n ,o ,o ,o ,v ,v ,n ,v ,o ,o ,v ,si],
+     [o ,v ,o ,o ,o ,v ,o ,o ,o ,o ,o ,n ,o ],
+     [o ,n ,n ,v ,n ,v ,n ,v ,n, v, v, n ,o ]       
+
     ].reverse()) {
+
+    override method dibujar() {
+        super()
+        game.boardGround("fondo-oceano.png")
+    }
     
 }
 
 
 object nivel3 inherits Mapa (tablero =
-    [[_,n,n,n,n,n,n,n,n,n,n,_,_],
-     [_,n,n,n,n,n,n,n,n,n,n,p,e],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [ll,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],
-     [_,n,n,n,n,n,n,n,n,n,n,_,_]      
+    [[bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [ll,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,ep],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3]      
     ].reverse() ) {
 
 
     override method dibujar() {
         super()
+        game.boardGround("lobby.png")
         game.onTick(5000, "sombreros", {administradorSombreros.nuevosSombreros()})
     }
 }
 
 
 object nivel4 inherits Mapa (tablero =
-    [[_ ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,_ ,_ ],
-     [_ ,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,p ,e ],    
-     [_ ,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,_ ,_ ],    
-     [_ ,o ,o ,o ,n2,o ,n2,o ,n2,n2,r ,_ ,_ ],    
-     [m ,o ,n2,n2,n2,o ,n2,o ,o ,o ,r ,_ ,_ ],    
-     [_ ,o ,n2,o ,o ,o ,n2,o ,o ,o ,r ,_ ,_ ],    
-     [_ ,o ,n2,o ,o ,o ,n2,o ,o ,o ,r ,_ ,_ ],    
-     [_ ,o ,n2,n2,o ,o ,n2,n2,n2,o ,r ,_ ,_ ],
-     [_ ,o ,o ,n2,n2,o ,o ,o ,n2,o ,r ,_ ,_ ],
-     [_ ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,_ ,_ ]      
+    [[o ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
+     [o ,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,s ,s ],    
+     [sc,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,s ,s ],    
+     [o ,o ,o ,at ,n2,o ,n2,o ,n2,n2,r ,s ,s ],    
+     [n2,n2,n2,n2,n2,o ,n2,o ,o ,o ,r ,s ,sp],    
+     [n2,o ,o ,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
+     [n2,n2,n2,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
+     [o ,o ,n2,n2,o ,o ,n2,n2,n2,o ,r ,s ,s ],
+     [o ,at,o ,n2,n2,o ,o ,ap,n2,o ,r ,s ,s ],
+     [o ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,s ,s ]      
     ].reverse() ) {
+    
+    override method dibujar() {
+        super()
+        game.boardGround("fondo-oceano.png")
+    }
 }
 
 
 
 object nivel5 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [e,p,_,_,_,_,_,_,_,_,_,f,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,rr],    
-     [_,_,_,_,_,_,_,_,q,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,b,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,c,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,rr,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+     [_,_,_,_,_,_,p,_,_,_,_,_,_],
+     [_,_,_,_,_,_,e,_,_,_,_,_,_]        
     ].reverse() ) {
+    
+    override method dibujar() {
+        super()
+        game.boardGround("lobby.png")
+    }
 }

@@ -69,9 +69,7 @@ object estadoNivel{
 class MonedaDePlata inherits Moneda(image = "monedaDePlata.png",valor = 50) {
 }
 class MonedaVioleta inherits Moneda(image = "monedaVioleta.png", valor = 100) {
-  override method solida() {
-		return true
-	}
+  
 }
 class MonedaDeBronce inherits Moneda(image = "monedaDeBronce.png",valor = 25) {
 }
@@ -202,6 +200,55 @@ object puenteNoHabilitado {
     }
 }
 
+class SueloLeon {
+   var property position
+    var property estado = leonNoAlerta
+    method image(){
+      return estado.image()
+    }
+    method solida() = estado.solida()
+    method colision(personaje){
+      estado.colision()
+    }
+    method interactuar(){
+
+    }
+    method cambiarEstado(){
+       if(estado.leonAtaca()){
+        estado = leonNoAlerta
+       }
+       else {
+        estado = leonAlerta
+       }
+    }
+}
+
+object leonNoAlerta {
+    var property image = "vacio.png"
+    var property solida = false
+    method leonAtaca(){
+      return false
+    }
+    method colision(){
+
+    }
+    
+}
+object leonAlerta {
+    var property image = "vacio.png"
+    var property solida = false 
+    method leonAtaca(){
+      return true
+    }
+    method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
+      administradorSombreros.creados().clear()   
+		  pepe.nivelActual().dibujar()
+      game.say(pepe,"¡Me comió el leon!")
+    }
+}
+
+
 class ZonaSegura{
   var property position
   method image() = "zonaSegura.png"
@@ -238,7 +285,7 @@ class SueloVidrioFalso inherits SueloVidrio{
 
 class Oceano {
     var property position 
-    var property image = "fondo-oceano.png"
+    var property image = "vacio.png"
 
     method solida() {
 		  return false
@@ -254,6 +301,14 @@ class Oceano {
     }
 }
 
+class Pescado inherits Oceano {
+  //override method image() = "pescado.png"
+}
+
+class Tiburon inherits Oceano {
+  //override method image() = "tiburon.png"
+}
+
 object oceanoPrendido{ // REVISAR
    var property image = "oceano.png"
    
@@ -263,7 +318,7 @@ object oceanoPrendido{ // REVISAR
 }
 
 object oceanoApagado{ // REVISAR
-   var property image = ""
+   var property image = "vacio.png"
    
     method oceanoCambiado(){
         return oceanoPrendido
@@ -276,6 +331,7 @@ class Puerta {
     var property nivelADibujar
     var property bgAAgregar = instN1
     const puertaDeNivel = 0
+
 
     method interactuar() {
       background.dibujo(nivelADibujar)
@@ -446,7 +502,7 @@ object sombreroFactory {
 
 
   method construir(position) {
-    return new Accesorio(position=position)
+    return new Sombrero(position=position)
   }
 }
 
@@ -463,7 +519,7 @@ object trofeosFactory {
 
 object administradorSombreros {
  
-  const creados = #{}
+  const property creados = #{}
   const property factories = [sombreroFactory, trofeosFactory]
 
 
@@ -511,7 +567,7 @@ object administradorSombreros {
     creados.remove(accesorio)
   }
 }
-class Accesorio {
+class Sombrero {
   const position
  
   method position() {
@@ -520,7 +576,7 @@ class Accesorio {
 
 
   method image() {
-    return "monedaDeOro.png"
+    return "sombrero.png"
   }
 
 
@@ -545,7 +601,7 @@ class Trofeo {
 
 
   method image() {
-    return "monedaVioleta.png"
+    return "monedaDeOro.png"
   }
 
 
@@ -560,4 +616,12 @@ class Trofeo {
   }
 }
 
+class BarreraInvisible {
+  var property position 
+  var property image = "vacio.png" 
+
+  method solida() {
+    return true
+  }
+}
 
