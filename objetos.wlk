@@ -57,6 +57,7 @@ class Moneda {
     method colision(personaje) {
       personaje.agregarTrofeo(self)
 		  personaje.agarrarVisual(self)
+      bgTienda.estado()
       game.sound("pickUp.mp3").play()
     }
 }

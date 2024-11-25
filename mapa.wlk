@@ -293,7 +293,22 @@ object instN5{
     }
 }
 object bgTienda{
-    method image() = "bgTrofeos.png"
+    var property image = "bgTrofeos.png"
+
+    method estado(){
+        if(pepe.trofeos().size() == 1){
+            self.image("tiendaNivel1.png")
+        }    
+        if(pepe.trofeos().size() == 2){
+          self.image("tiendaNivel2.png")
+        }
+        if (pepe.trofeos().size() == 3){
+          self.image("tiendaNivel3.png") 
+        }
+        if (pepe.trofeos().size() == 4){
+          self.image("tiendaNivel4.png")
+        }
+    }
 
     method siguiente(){
         return null
