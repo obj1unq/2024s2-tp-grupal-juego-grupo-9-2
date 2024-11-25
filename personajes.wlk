@@ -22,6 +22,7 @@ object pepe {
       self.validarMover(direccion)
 		  position = direccion.siguiente(self.position())
       image = direccion.imagenDelJugador()
+      game.sound("walking.mp3").play()
       }
 
     method validarMover(direccion) {
