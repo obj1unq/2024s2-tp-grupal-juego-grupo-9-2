@@ -117,8 +117,12 @@ object pepe {
 
 
     method agarrarTrofeo(trofeo) {  
-        //self.sumarObjeto()
-        administradorSombreros.remover(trofeo) //Revisar
+        self.agregarTrofeo(trofeo)
+        administradorSombreros.remover(trofeo) 
+    }
+
+    method tieneTercerTrofeo() {
+        return self.trofeos().size() == 3
     }
 }
 

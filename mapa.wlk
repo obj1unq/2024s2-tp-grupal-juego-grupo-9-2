@@ -204,7 +204,7 @@ object s { // Representa una zona segura.
 
 object sm { // Representa una zona segura con una moneda
     method dibujarEn(position){
-        game.addVisual(new ZonaSegura(position = position)
+        game.addVisual(new ZonaSegura(position = position))
         if(pepe.trofeos().size() < 1){
             game.addVisual(new MonedaDeBronce(position = position))
         }
@@ -214,7 +214,7 @@ object sm { // Representa una zona segura con una moneda
 object sc { // Representa una zona segura con una moneda
     method dibujarEn(position){
         game.addVisual(new ZonaSegura(position = position))
-        if(pepe.trofeos().size() < 3){
+        if(pepe.trofeos().size() < 4){
             game.addVisual(new MonedaVioleta(position = position))
         }
 

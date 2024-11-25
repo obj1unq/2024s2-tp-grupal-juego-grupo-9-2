@@ -556,9 +556,8 @@ object administradorSombreros {
 
 
   method hayEspacioParaTrofeo() {
-    return creados.size() < 1 //and not pepe.tieneTercerTrofeo()
+    return creados.size() < 1 and not pepe.tieneTercerTrofeo()
   }
-
 
 
 
@@ -613,6 +612,7 @@ class Trofeo {
   method colision(personaje) {
     personaje.agarrarTrofeo(self)
     game.sound("pickUp.mp3").play()
+    bgTienda.estado()
   }
 }
 

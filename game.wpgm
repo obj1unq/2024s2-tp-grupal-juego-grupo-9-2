@@ -32,6 +32,7 @@ program pepesgame {
 	keyboard.right().onPressDo({pepe.mover(derecha)})
 	keyboard.z().onPressDo({pepe.interactuarConObjeto()})
 	keyboard.h().onPressDo({pepe.decirDolares()})
+	keyboard.p().onPressDo({bgMusic.pause()})
 
 	game.onCollideDo(pepe, {algo => algo.colision(pepe)}) // Pepe puede colisionar 
 		
