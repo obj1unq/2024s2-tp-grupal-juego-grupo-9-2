@@ -20,11 +20,12 @@ object p {  // representa a Pepe en el mapa.
     }
 }
 
-object r { // representa una roca.
+object r { // representa una roca con zona segura
     method dibujarEn(position) {
         const roca = new Roca(position = position)
+        game.addVisual(new ZonaSegura(position = position))
         game.addVisual(roca)
-        game.schedule(5000, {game.removeVisual(roca)})
+        game.schedule(7000, {game.removeVisual(roca)})
     }
 }
 
@@ -64,6 +65,14 @@ object e { // representa el lobby lo
 
     method dibujarEn(position) {
      game.addVisual(new PuertaALobby(position = position))
+    }
+}
+
+object ep { // representa el lobby lo
+
+    method dibujarEn(position) {
+     game.addVisual(new PuertaALobby(position = position))
+     pepe.position(position)
     }
 }
 
@@ -149,7 +158,7 @@ object v {  // Representa un Puente pu
 object vm {  // Representa un Puente con moneda
     method dibujarEn(position){
         game.addVisual(new Puente(position = position))
-        game.addVisual(new Moneda(position = position))
+        game.addVisual(new MonedaDePlata(position = position))
     }
 }
 
@@ -157,7 +166,7 @@ object n {// Representa un Puente que se desarma cada x tiempo
     method dibujarEn(position){
         const puente = new Puente(position = position)
         game.addVisual(puente)
-	    game.onTick(5000, "estado", {puente.cambiarEstado()})
+	    game.onTick(4000, "estado", {puente.cambiarEstado()})
     }
 }
 
@@ -165,7 +174,15 @@ object n2 {// Representa un Puente que se desarma cada x tiempo
     method dibujarEn(position){
         const puente = new PuenteFantasma(position = position)
         game.addVisual(puente)
-        game.schedule(5000, {puente.cambiarEstado()})
+        game.schedule(7000, {puente.cambiarEstado()})
+    }
+}
+
+object n3 {// Representa un Puente que se desarma cada x tiempo
+    method dibujarEn(position){
+        const sueloLeon = new SueloLeon(position = position)
+        game.addVisual(sueloLeon)
+	    game.onTick(5000, "estado", {sueloLeon.cambiarEstado()})
     }
 }
 
@@ -184,9 +201,17 @@ object s { // Representa una zona segura.
 object sm { // Representa una zona segura con una moneda
     method dibujarEn(position){
         game.addVisual(new ZonaSegura(position = position))
-        game.addVisual(new Moneda(position = position))
+        game.addVisual(new MonedaDeBronce(position = position))
     }
 }
+
+object sc { // Representa una zona segura con una moneda
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+        game.addVisual(new MonedaVioleta(position = position))
+    }
+}
+
 
 object sp { // Representa una zona segura con una puerta al lobby y pepe.
     method dibujarEn(position){
@@ -224,11 +249,17 @@ object cf{ // Representa Suelo de Vidrio falso.
     }
 }
 
-object ll { // representa un leon 
+object ll { // Representa un leon.
     method dibujarEn(position){
         const leon = new Leon(position = position)
         game.addVisual(leon)
 	    game.onTick(5000, "estado", {leon.cambiarEstado()})
+    }
+}
+
+object bi { // Representa una barrera invisible.
+    method dibujarEn(position){
+        game.addVisual(new BarreraInvisible(position = position))
     }
 }
 
@@ -452,16 +483,16 @@ object nivel2 inherits Mapa ( tablero =
 
 
 object nivel3 inherits Mapa (tablero =
-    [[_,n,n,n,n,n,n,n,n,n,n,_,_],
-     [_,n,n,n,n,n,n,n,n,n,n,p,e],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [ll,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],    
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],
-     [_,n,n,n,n,n,n,n,n,n,n,_,_],
-     [_,n,n,n,n,n,n,n,n,n,n,_,_]      
+    [[bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [ll,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,ep],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3]      
     ].reverse() ) {
 
 
@@ -473,16 +504,16 @@ object nivel3 inherits Mapa (tablero =
 
 
 object nivel4 inherits Mapa (tablero =
-    [[_ ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,_ ,_ ],
-     [_ ,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,p ,e ],    
-     [_ ,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,_ ,_ ],    
-     [_ ,o ,o ,o ,n2,o ,n2,o ,n2,n2,r ,_ ,_ ],    
-     [m ,o ,n2,n2,n2,o ,n2,o ,o ,o ,r ,_ ,_ ],    
-     [_ ,o ,n2,o ,o ,o ,n2,o ,o ,o ,r ,_ ,_ ],    
-     [_ ,o ,n2,o ,o ,o ,n2,o ,o ,o ,r ,_ ,_ ],    
-     [_ ,o ,n2,n2,o ,o ,n2,n2,n2,o ,r ,_ ,_ ],
-     [_ ,o ,o ,n2,n2,o ,o ,o ,n2,o ,r ,_ ,_ ],
-     [_ ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,_ ,_ ]      
+    [[o ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
+     [o ,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,s ,s ],    
+     [sc,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,s ,s ],    
+     [o ,o ,o ,o ,n2,o ,n2,o ,n2,n2,r ,s ,s ],    
+     [n2,n2,n2,n2,n2,o ,n2,o ,o ,o ,r ,s ,sp],    
+     [n2,o ,o ,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
+     [n2,n2,n2,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
+     [o ,o ,n2,n2,o ,o ,n2,n2,n2,o ,r ,s ,s ],
+     [o ,o ,o ,n2,n2,o ,o ,o ,n2,o ,r ,s ,s ],
+     [o ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,s ,s ]      
     ].reverse() ) {
 }
 
