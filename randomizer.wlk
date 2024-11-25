@@ -14,14 +14,5 @@ object randomizer {
         const position = self.position()
 
         return position
-
-        /*
-        if(game.getObjectsIn(position).isEmpty()) {  // esto es para que aparezca en un lugar vacío.
-            return position
-        }
-        else {
-            return self.emptyPosition()
-        }
-        */
     }
 }

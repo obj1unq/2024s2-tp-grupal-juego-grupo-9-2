@@ -291,6 +291,14 @@ class Oceano {
     }
 }
 
+class Pescado inherits Oceano {
+  //override method image() = "pescado.png"
+}
+
+class Tiburon inherits Oceano {
+  //override method image() = "tiburon.png"
+}
+
 object oceanoPrendido{ // REVISAR
    var property image = "oceano.png"
    
@@ -313,11 +321,11 @@ class PuertaANivel1 {
     var property nivelADibujar = nivel1 
     var property bgAAgregar   = instN1 
 
-    method validarPuerta(){
-        if (not territorio.hayPuertaAca()){
-			    self.error("No hay puerta en la posición actual")
-		  }
-    }
+//   method validarPuerta(){
+//        if (not territorio.hayPuertaAca()){
+//			    self.error("No hay puerta en la posición actual")
+//		  }
+//    }
 
     method interactuar() {
       background.dibujo(nivelADibujar)

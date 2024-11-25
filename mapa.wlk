@@ -263,6 +263,18 @@ object bi { // Representa una barrera invisible.
     }
 }
 
+object ap {
+    method dibujarEn(position){
+        game.addVisual(new Pescado(position = position))
+    }
+}
+
+object at {
+    method dibujarEn(position){
+        game.addVisual(new Tiburon(position = position))
+    }
+}
+
 
 
 object start {
@@ -442,10 +454,10 @@ object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,f,_,g,_,i,_,j,_,k,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,h,_,_,_,_,_,_,_,_,_,t,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,h,_,_,_,_,_,_,_,_,_],    
+     [_,t,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,p,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_],
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
@@ -480,13 +492,13 @@ object nivel2 inherits Mapa ( tablero =
     [[o ,v ,n ,n ,v ,v ,v ,n ,v ,v ,v ,v ,sp],
      [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
      [o ,v ,o ,o ,o ,o ,n ,v ,v ,n ,v ,o ,o ],    
-     [o ,v ,n ,n ,n ,v ,n ,o ,o ,o ,n ,vm,o ],    
-     [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
-     [o ,n ,n ,v ,v ,v ,n ,n ,v ,o ,o ,o ,o ],    
-     [o ,o ,o ,o ,o ,o ,o ,o ,n ,o ,o ,o ,o ],    
-     [o ,o ,v ,n ,n ,v ,v ,n ,v ,o ,o ,v ,si],
-     [o ,o ,n ,o ,o ,o ,o ,o ,o ,o ,o ,n ,o ],
-     [o ,o ,n ,v ,n ,v ,n ,v ,n, v, v, n ,o ]       
+     [o ,n ,n ,n ,n ,v ,n ,o ,o ,o ,n ,v,o ],    
+     [o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,n ,o ],    
+     [o ,n ,n ,v ,v ,vm,o ,o ,v ,n ,v ,v ,o ],    
+     [o ,n ,o ,o ,o ,o ,o ,o ,n ,o ,o ,o ,o ],    
+     [o ,n ,o ,o ,o ,v ,v ,n ,v ,o ,o ,v ,si],
+     [o ,v ,o ,o ,o ,v ,o ,o ,o ,o ,o ,n ,o ],
+     [o ,n ,n ,v ,n ,v ,n ,v ,n, v, v, n ,o ]       
     ].reverse()) {
 
     override method dibujar() {
@@ -523,12 +535,12 @@ object nivel4 inherits Mapa (tablero =
     [[o ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
      [o ,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,s ,s ],    
      [sc,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,s ,s ],    
-     [o ,o ,o ,o ,n2,o ,n2,o ,n2,n2,r ,s ,s ],    
+     [o ,o ,o ,at ,n2,o ,n2,o ,n2,n2,r ,s ,s ],    
      [n2,n2,n2,n2,n2,o ,n2,o ,o ,o ,r ,s ,sp],    
      [n2,o ,o ,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
      [n2,n2,n2,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
      [o ,o ,n2,n2,o ,o ,n2,n2,n2,o ,r ,s ,s ],
-     [o ,o ,o ,n2,n2,o ,o ,o ,n2,o ,r ,s ,s ],
+     [o ,at,o ,n2,n2,o ,o ,ap,n2,o ,r ,s ,s ],
      [o ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,s ,s ]      
     ].reverse() ) {
     
@@ -542,15 +554,15 @@ object nivel4 inherits Mapa (tablero =
 
 object nivel5 inherits Mapa (tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [e,p,_,_,_,_,_,_,_,_,_,f,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,rr],    
-     [_,_,_,_,_,_,_,_,q,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,b,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,c,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,rr,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
+     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
      [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
+     [_,_,_,_,_,_,p,_,_,_,_,_,_],
+     [_,_,_,_,_,_,e,_,_,_,_,_,_]        
     ].reverse() ) {
     
     override method dibujar() {
