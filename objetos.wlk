@@ -55,9 +55,17 @@ class Moneda {
 	}
 
     method colision(personaje) {
+      personaje.agregarTrofeo(self)
 		  personaje.agarrarVisual(self)
+      bgTienda.estado()
+      game.sound("pickUp.mp3").play()
     }
 }
+
+object estadoNivel{
+  const property trofeos = []
+}
+
 class MonedaDePlata inherits Moneda(image = "monedaDePlata.png",valor = 50) {
 }
 class MonedaVioleta inherits Moneda(image = "monedaVioleta.png", valor = 100) {
@@ -286,7 +294,9 @@ class Oceano {
     method colision(personaje) {
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
 		  pepe.nivelActual().dibujar()
+      estadoNivel.trofeos().clear()
       //pepe.reinicio()
+      game.sound("scream.mp3").play()
       game.say(pepe,"me caí al oceano")
     }
 }
@@ -315,18 +325,20 @@ object oceanoApagado{ // REVISAR
     }
 }
 
-class PuertaANivel1 {
+class Puerta {
     var property position
     var property image = "puertaNueva.png"
-    var property nivelADibujar = nivel1 
-    var property bgAAgregar   = instN1 
+    var property nivelADibujar
+    var property bgAAgregar = instN1
+    const puertaDeNivel = 0
 
 
     method interactuar() {
       background.dibujo(nivelADibujar)
       background.bgActual(bgAAgregar)   
       background.iniciar()
-      pepe.nivelActual(nivelADibujar)   
+      pepe.nivelActual(nivelADibujar)
+      game.sound("openDoor.mp3").play() 
       //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
       //self.dibujarSiguienteMapa()
     }
@@ -344,47 +356,56 @@ class PuertaANivel1 {
   
   }
 }
-
-class PuertaALobby inherits PuertaANivel1(nivelADibujar = lobby) {
+class PuertaALobby inherits Puerta(nivelADibujar = lobby) {
 
   /*override dibujarSiguienteMapa()*/
-     override method interactuar() {
-    pepe.resetarDolares()
-    game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
-    lobby.dibujar()
+    override method interactuar() {
+      estadoNivel.trofeos().clear()
+      game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
+      nivelADibujar.dibujar()
   
-  }
+    }
+}
+
+class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1){
+
+    //method dibujarSiguienteMapa() {
+    //  nivel1.dibujar()
+    //}
+
 }
 
 
-class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2) {
+
+class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2, puertaDeNivel = 2) {
   /*override*/ 
   //method dibujarSiguienteMapa() {
     //pepe.actualizarDolares()
     //nivel2.dibujar()
   //}
-  override method interactuar(){
-    super()
-    pepe.actualizarDolares()
 
-  } 
+  override method interactuar() {
+    if(pepe.trofeos().size() >= (puertaDeNivel-1)){
+        super()
+      }
+  }
+
 }
 
 
-class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3) {
+class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3, puertaDeNivel = 3) {
  //override method dibujarSiguienteMapa() {
  //   nivel3.dibujar()
  // }
- 
 }
 
-class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4)  {
+class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4, puertaDeNivel = 4)  {
  //override method dibujarSiguienteMapa() {
  //   nivel4.dibujar()
  // }
 }
 
-class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5)  {
+class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5, puertaDeNivel = 5)  {
  //override method dibujarSiguienteMapa() {
  //   nivel5.dibujar()
       override method interactuar(){
@@ -442,6 +463,7 @@ class NPC {
     }
   method colision(pepe){
     game.say(self, "¡AUCH!")
+    game.sound("hector.mp3").play()
   } 
 }
 object ringo inherits NPC(image = "ringo.png",position = game.center()){
@@ -452,6 +474,7 @@ object ringo inherits NPC(image = "ringo.png",position = game.center()){
     game.schedule(3000, {game.allVisuals().forEach({bg=>game.removeVisual(bg)})
                          background.bgActual(bgFinal)
                          background.iniciar()
+                         game.sound("victoryTheme.mp3").play()
                           })
                           
   }
@@ -564,6 +587,7 @@ class Sombrero {
 
   method colision(personaje) {
     personaje.agarrarObjeto(self)
+    game.sound("pickUp.mp3").play()
   }
 }
 
@@ -588,6 +612,7 @@ class Trofeo {
 
   method colision(personaje) {
     personaje.agarrarTrofeo(self)
+    game.sound("pickUp.mp3").play()
   }
 }
 

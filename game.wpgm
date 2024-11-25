@@ -6,6 +6,12 @@ import mapa.*
 
 program pepesgame {
 
+	const bgMusic = game.sound("backgroundMusic.mp3")
+  	bgMusic.play()
+	bgMusic.shouldLoop(true)
+	game.start()
+
+
 	//  COMIENZA
 	game.start()
 	//  CONFIG	

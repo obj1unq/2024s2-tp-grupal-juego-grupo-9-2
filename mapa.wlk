@@ -32,13 +32,17 @@ object r { // representa una roca con zona segura
 
 object m { // representauna moneda.
     method dibujarEn(position) {
-     game.addVisual(new Moneda(position = position))
+        if(pepe.trofeos().size() < 1){
+            game.addVisual(new Moneda(position = position))
+        }
     }
 }
 
 object a { // representa una moneda de plata. m2
     method dibujarEn(position) {
-     game.addVisual(new MonedaDePlata(position = position))
+        if(pepe.trofeos().size() < 2){
+            game.addVisual(new MonedaDePlata(position = position))
+        }
     }
 }
 
@@ -200,15 +204,21 @@ object s { // Representa una zona segura.
 
 object sm { // Representa una zona segura con una moneda
     method dibujarEn(position){
-        game.addVisual(new ZonaSegura(position = position))
-        game.addVisual(new MonedaDeBronce(position = position))
+        game.addVisual(new ZonaSegura(position = position)
+        if(pepe.trofeos().size() < 1){
+            game.addVisual(new MonedaDeBronce(position = position))
+        }
     }
 }
 
 object sc { // Representa una zona segura con una moneda
     method dibujarEn(position){
         game.addVisual(new ZonaSegura(position = position))
-        game.addVisual(new MonedaVioleta(position = position))
+        if(pepe.trofeos().size() < 3){
+            game.addVisual(new MonedaVioleta(position = position))
+        }
+
+
     }
 }
 
@@ -344,7 +354,22 @@ object instN5{
     }
 }
 object bgTienda{
-    method image() = "bgTrofeos.png"
+    var property image = "bgTrofeos.png"
+
+    method estado(){
+        if(pepe.trofeos().size() == 1){
+            self.image("tiendaNivel1.png")
+        }    
+        if(pepe.trofeos().size() == 2){
+          self.image("tiendaNivel2.png")
+        }
+        if (pepe.trofeos().size() == 3){
+          self.image("tiendaNivel3.png") 
+        }
+        if (pepe.trofeos().size() == 4){
+          self.image("tiendaNivel4.png")
+        }
+    }
 
     method siguiente(){
         return null
@@ -470,7 +495,7 @@ object lobby inherits Mapa ( tablero =
 }
 
 object nivel1 inherits Mapa (tablero =  
-    [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,sp,s],
+    [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,sp ,s],
      [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,s ,s ],    
      [o ,o ,o ,o ,o ,o ,o ,s ,s ,o ,o ,o ,o ],    
      [o ,o ,o ,o ,o ,o ,o ,cf,cs,o ,o ,o ,o ],    
@@ -489,6 +514,7 @@ object nivel1 inherits Mapa (tablero =
 }
 
 object nivel2 inherits Mapa ( tablero =     
+
     [[o ,v ,n ,n ,v ,v ,v ,n ,v ,v ,v ,v ,sp],
      [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
      [o ,v ,o ,o ,o ,o ,n ,v ,v ,n ,v ,o ,o ],    
@@ -499,6 +525,7 @@ object nivel2 inherits Mapa ( tablero =
      [o ,n ,o ,o ,o ,v ,v ,n ,v ,o ,o ,v ,si],
      [o ,v ,o ,o ,o ,v ,o ,o ,o ,o ,o ,n ,o ],
      [o ,n ,n ,v ,n ,v ,n ,v ,n, v, v, n ,o ]       
+
     ].reverse()) {
 
     override method dibujar() {
