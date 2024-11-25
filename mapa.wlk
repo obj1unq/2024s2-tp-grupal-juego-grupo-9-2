@@ -39,7 +39,9 @@ object m { // representauna moneda.
 
 object a { // representa una moneda de plata. m2
     method dibujarEn(position) {
-     game.addVisual(new MonedaDePlata(position = position))
+        if(pepe.trofeos().size() < 2){
+            game.addVisual(new MonedaDePlata(position = position))
+        }
     }
 }
 
@@ -179,7 +181,9 @@ object s { // Representa una zona segura.
 object sm { // Representa una zona segura con una moneda
     method dibujarEn(position){
         game.addVisual(new ZonaSegura(position = position))
-        game.addVisual(new Moneda(position = position))
+        if(pepe.trofeos().size() < 1){
+            game.addVisual(new Moneda(position = position))
+        }
     }
 }
 
@@ -410,30 +414,30 @@ object lobby inherits Mapa ( tablero =
 }
 
 object nivel1 inherits Mapa (tablero =  
-    [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,s ,s],
-     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,s ,m ],    
+    [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,sp ,s],
+     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,s ,s ],    
      [o ,o ,o ,o ,o ,o ,o ,s ,s ,o ,o ,o ,o ],    
      [o ,o ,o ,o ,o ,o ,o ,cf,cs,o ,o ,o ,o ],    
      [s ,cf,s ,cf,s ,cs,s ,s ,s ,o ,o ,o ,o ],    
      [s ,cs,s ,cs,s ,cf,s ,s ,s ,o ,o ,sm,o ],    
      [s ,o ,o ,o ,o ,o ,o ,o ,o ,o ,s ,s ,s ],    
      [s ,o ,o ,o ,o ,o ,o ,o ,o ,o ,cf,cf,cs],
-     [s ,cs,s ,cf,s ,cf,s ,cs,s ,cs,s ,p ,m ],
+     [s ,cs,s ,cf,s ,cf,s ,cs,s ,cs,s ,s ,s ],
      [s ,cf,s ,cs,s ,cs,s ,cf,s ,cf,s ,sg,s ]        
     ].reverse()) { 
 }
 
 object nivel2 inherits Mapa ( tablero =     
-    [[o,v,n,n,v,v,v,n,v,v,m,p,e],
-     [o,v,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,v,o,o,o,o,n,v,v,n,v,o,o],    
-     [o,v,n,n,n,v,n,o,o,o,n,m,o],    
-     [o,v,o,o,o,o,o,o,o,o,o,o,o],    
-     [o,n,n,v,v,v,n,n,v,o,o,o,o],    
-     [o,o,o,o,o,o,o,o,n,o,o,o,o],    
-     [o,o,v,n,n,v,v,n,v,o,o,v,e],
+    [[o,v,n,n,v,v,v,n,v,v,v,p,e],
+     [o,v,o,o,o,o,o,o,o,o,o,v,v],    
+     [o,v,o,o,o,o,n,v,v,n,v,o,v],    
+     [o,v,n,n,n,v,n,o,o,o,n,a,v],    
+     [o,v,o,o,o,o,o,o,o,o,o,o,v],    
+     [o,n,n,v,v,v,n,n,v,o,o,o,v],    
+     [o,o,o,o,o,o,o,o,n,o,o,o,v],    
+     [o,o,v,n,n,v,v,n,v,o,o,v,i],
      [o,o,n,o,o,o,o,o,o,o,o,n,o],
-     [o,o,n,v,n,v,n,v,n,v,v,n,o]       
+     [o,o,n,v,n,v,n,v,n,v,v,v,o]       
     ].reverse()) {
     
 }

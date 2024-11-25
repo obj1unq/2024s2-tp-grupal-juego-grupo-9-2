@@ -55,8 +55,8 @@ class Moneda {
 	}
 
     method colision(personaje) {
+      personaje.agregarTrofeo(self)
 		  personaje.agarrarVisual(self)
-      estadoNivel.trofeos().add(self)
     }
 }
 
@@ -272,6 +272,7 @@ class Puerta {
     var property image = "puertaNueva.png"
     var property nivelADibujar
     var property bgAAgregar = instN1
+    const puertaDeNivel = 0
 
     // method validarPuerta(){
     //     if (not territorio.hayPuertaAca()){
@@ -305,6 +306,7 @@ class PuertaALobby inherits Puerta(nivelADibujar = lobby) {
 
   /*override dibujarSiguienteMapa()*/
     override method interactuar() {
+      estadoNivel.trofeos().clear()
       game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
       nivelADibujar.dibujar()
   
@@ -321,7 +323,7 @@ class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1){
 
 
 
-class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2) {
+class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2, puertaDeNivel = 2) {
   /*override*/ 
   //method dibujarSiguienteMapa() {
     //pepe.actualizarDolares()
@@ -329,8 +331,7 @@ class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =in
   //}
 
   override method interactuar() {
-    pepe.agregarTrofeo(estadoNivel.trofeos().first())
-    if(pepe.trofeos().size() >= 1){
+    if(pepe.trofeos().size() >= (puertaDeNivel-1)){
         super()
       }
   }
@@ -338,25 +339,19 @@ class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =in
 }
 
 
-class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3) {
+class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3, puertaDeNivel = 3) {
  //override method dibujarSiguienteMapa() {
  //   nivel3.dibujar()
  // }
-  override method interactuar() {
-    pepe.agregarTrofeo(estadoNivel.trofeos().first())
-    if(pepe.trofeos().size() >= 2){
-        super()
-      }
-  }
 }
 
-class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4)  {
+class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4, puertaDeNivel = 4)  {
  //override method dibujarSiguienteMapa() {
  //   nivel4.dibujar()
  // }
 }
 
-class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5)  {
+class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5, puertaDeNivel = 5)  {
  //override method dibujarSiguienteMapa() {
  //   nivel5.dibujar()
       override method interactuar(){

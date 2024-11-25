@@ -81,8 +81,8 @@ object pepe {
 		return false
 	}
 
-    method agarrarVisual(moneda) {
-		game.removeVisual(moneda)
+    method agarrarVisual(visual) {
+		game.removeVisual(visual)
 	}
 
     method agregarTrofeo(trofeo){
