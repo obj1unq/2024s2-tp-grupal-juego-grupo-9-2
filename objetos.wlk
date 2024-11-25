@@ -321,11 +321,6 @@ class PuertaANivel1 {
     var property nivelADibujar = nivel1 
     var property bgAAgregar   = instN1 
 
-//   method validarPuerta(){
-//        if (not territorio.hayPuertaAca()){
-//			    self.error("No hay puerta en la posición actual")
-//		  }
-//    }
 
     method interactuar() {
       background.dibujo(nivelADibujar)
