@@ -162,7 +162,9 @@ object v {  // Representa un Puente pu
 object vm {  // Representa un Puente con moneda
     method dibujarEn(position){
         game.addVisual(new Puente(position = position))
-        game.addVisual(new MonedaDePlata(position = position))
+        if(pepe.trofeos().size() < 2){
+            game.addVisual(new MonedaDePlata(position = position))
+        }
     }
 }
 
@@ -518,7 +520,7 @@ object nivel2 inherits Mapa ( tablero =
     [[o ,v ,n ,n ,v ,v ,v ,n ,v ,v ,v ,v ,sp],
      [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
      [o ,v ,o ,o ,o ,o ,n ,v ,v ,n ,v ,o ,o ],    
-     [o ,n ,n ,n ,n ,v ,n ,o ,o ,o ,n ,v,o ],    
+     [o ,n ,n ,n ,n ,v ,n ,o ,o ,o ,n ,v ,o ],    
      [o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,n ,o ],    
      [o ,n ,n ,v ,v ,vm,o ,o ,v ,n ,v ,v ,o ],    
      [o ,n ,o ,o ,o ,o ,o ,o ,n ,o ,o ,o ,o ],    
@@ -559,10 +561,10 @@ object nivel3 inherits Mapa (tablero =
 
 
 object nivel4 inherits Mapa (tablero =
-    [[o ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
-     [o ,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,s ,s ],    
-     [sc,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,s ,s ],    
-     [o ,o ,o ,at ,n2,o ,n2,o ,n2,n2,r ,s ,s ],    
+    [[sp,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
+     [sc,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,s ,s ],    
+     [n2,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,s ,s ],    
+     [o ,o ,o ,at,n2,o ,n2,o ,n2,n2,r ,s ,s ],    
      [n2,n2,n2,n2,n2,o ,n2,o ,o ,o ,r ,s ,sp],    
      [n2,o ,o ,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
      [n2,n2,n2,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    

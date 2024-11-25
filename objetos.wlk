@@ -302,11 +302,11 @@ class Oceano {
 }
 
 class Pescado inherits Oceano {
-  //override method image() = "pescado.png"
+  override method image() = "pescado.png"
 }
 
 class Tiburon inherits Oceano {
-  //override method image() = "tiburon.png"
+  override method image() = "tiburon.png"
 }
 
 object oceanoPrendido{ // REVISAR
@@ -387,8 +387,11 @@ class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =in
   override method interactuar() {
     if(pepe.trofeos().size() >= (puertaDeNivel-1)){
         super()
+      } else {
+        game.say(pepe,"Necesito el Trofeo del nivel anterior.")
       }
   }
+
 
 }
 
