@@ -31,7 +31,9 @@ object r { // representa una roca.
 
 object m { // representauna moneda.
     method dibujarEn(position) {
-     game.addVisual(new Moneda(position = position))
+        if(pepe.trofeos().size() < 1){
+            game.addVisual(new Moneda(position = position))
+        }
     }
 }
 
@@ -408,21 +410,21 @@ object lobby inherits Mapa ( tablero =
 }
 
 object nivel1 inherits Mapa (tablero =  
-    [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,sp,s],
-     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,s ,s ],    
+    [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,s ,s],
+     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,s ,m ],    
      [o ,o ,o ,o ,o ,o ,o ,s ,s ,o ,o ,o ,o ],    
      [o ,o ,o ,o ,o ,o ,o ,cf,cs,o ,o ,o ,o ],    
      [s ,cf,s ,cf,s ,cs,s ,s ,s ,o ,o ,o ,o ],    
      [s ,cs,s ,cs,s ,cf,s ,s ,s ,o ,o ,sm,o ],    
      [s ,o ,o ,o ,o ,o ,o ,o ,o ,o ,s ,s ,s ],    
      [s ,o ,o ,o ,o ,o ,o ,o ,o ,o ,cf,cf,cs],
-     [s ,cs,s ,cf,s ,cf,s ,cs,s ,cs,s ,s ,s ],
+     [s ,cs,s ,cf,s ,cf,s ,cs,s ,cs,s ,p ,m ],
      [s ,cf,s ,cs,s ,cs,s ,cf,s ,cf,s ,sg,s ]        
     ].reverse()) { 
 }
 
 object nivel2 inherits Mapa ( tablero =     
-    [[o,v,n,n,v,v,v,n,v,v,v,p,e],
+    [[o,v,n,n,v,v,v,n,v,v,m,p,e],
      [o,v,o,o,o,o,o,o,o,o,o,o,o],    
      [o,v,o,o,o,o,n,v,v,n,v,o,o],    
      [o,v,n,n,n,v,n,o,o,o,n,m,o],    
