@@ -277,7 +277,7 @@ class SueloVidrioFalso inherits SueloVidrio{
 
 class Oceano {
     var property position 
-    var property image = "fondo-oceano.png"
+    var property image = "vacio.png"
 
     method solida() {
 		  return false
