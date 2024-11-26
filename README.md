@@ -7,16 +7,33 @@ En este juego desarrollado en Wollok Game para la materia Programación con obje
 - Ferreyra, Amanda
 
 ## Capturas
--Intro
+
+- Intro
+
+
 ![instrucciones](https://github.com/user-attachments/assets/5e4f5a26-3335-4cc1-860f-6c1cfa969425)
 
-Instrucciones
+
+- Instrucciones
+
+
+
 ![inicio](https://github.com/user-attachments/assets/17bc84be-06cc-4f99-99ec-3b3551a979a2)
 
--Lobby
+
+
+- Lobby
+
+
+
 ![LOBBY](https://github.com/user-attachments/assets/99ed048e-38cc-4525-9ad9-af399d68eeb5)
 
--Tienda con niveles completados
+
+
+- Tienda con niveles completados
+
+
+
 ![tiendaNivel4](https://github.com/user-attachments/assets/7f7bab30-1a84-46cb-9b68-cc69ac1c88ec)
 
 
