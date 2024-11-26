@@ -58,12 +58,6 @@ object c { // representa una moneda violeta . m4
     }
 }
 
-object d {  // representa la entrada de adorno en el mapa. ea
-
-    method dibujarEn(position) {
-        game.addVisual(new PuertaDeAdorno(position = position)) //primero poner la puerta luego a Pepe, porque sino no funciona.
-    }
-}
 
 object e { // representa el lobby lo
 
@@ -115,27 +109,10 @@ object k { // representa la entrada al Nivel 5
     }
 }
 
-object l { // Representa una llave. 
-    method dibujarEn(position) {
-     game.addVisual(new Llave(position = position))
-    }
-}
-
-object q { // Representa una llave. q
-    method dibujarEn(position) {
-     game.addVisual(new Llave2(position = position))
-    }
-}
 
 object o { // Representa el oceano.
     method dibujarEn(position) {
      game.addVisual(new Oceano(position = position))
-    }
-}
-
-object u { // Representa una Palanca. pa
-    method dibujarEn(position) {
-     game.addVisual(new Palanca(position = position, oceano = o))
     }
 }
 
@@ -282,13 +259,13 @@ object bi { // Representa una barrera invisible.
     }
 }
 
-object ap {
+object ap { // Representa un Pescado.
     method dibujarEn(position){
         game.addVisual(new Pescado(position = position))
     }
 }
 
-object at {
+object at { // Representa un Tiburon.
     method dibujarEn(position){
         game.addVisual(new Tiburon(position = position))
     }
@@ -465,7 +442,7 @@ object lobby inherits Mapa ( tablero =
 
 object nivel1 inherits Mapa (tablero =  
     [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,sp ,s],
-     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,s ,s ],    
+     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,sm,s ],    
      [o ,o ,o ,o ,o ,o ,o ,s ,s ,o ,o ,o ,o ],    
      [o ,o ,o ,o ,o ,o ,o ,cf,cs,o ,o ,o ,o ],    
      [s ,cf,s ,cf,s ,cs,s ,s ,s ,o ,o ,o ,o ],    
@@ -484,7 +461,7 @@ object nivel1 inherits Mapa (tablero =
 
 object nivel2 inherits Mapa ( tablero =     
 
-    [[o ,v ,n ,n ,v ,v ,v ,n ,v ,v ,v ,v ,sp],
+    [[o ,v ,n ,n ,v ,v ,v ,n ,v ,v ,vm ,v ,sp],
      [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
      [o ,v ,o ,o ,o ,o ,n ,v ,v ,n ,v ,o ,o ],    
      [o ,n ,n ,n ,n ,v ,n ,o ,o ,o ,n ,v ,o ],    
@@ -507,14 +484,14 @@ object nivel2 inherits Mapa ( tablero =
 
 object nivel3 inherits Mapa (tablero =
     [[bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,j ],
-     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
-     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
-     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
-     [ll,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
-     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
-     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],    
-     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
-     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3],
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,_],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,_],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,_],    
+     [ll,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,_],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,_],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,_],    
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,_],
+     [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,c ],
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,p ]      
     ].reverse() ) {
 
@@ -533,7 +510,7 @@ object nivel4 inherits Mapa (tablero =
      [n2,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,s ,s ],    
      [o ,o ,o ,at,n2,o ,n2,o ,n2,n2,r ,s ,s ],    
      [n2,n2,n2,n2,n2,o ,n2,o ,o ,o ,r ,s ,sp],    
-     [n2,o ,o ,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
+     [n2,o ,o ,o ,o ,o ,n2,o ,o ,o ,r ,s ,sc],    
      [n2,n2,n2,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
      [o ,o ,n2,n2,o ,o ,n2,n2,n2,o ,r ,s ,s ],
      [o ,at,o ,n2,n2,o ,o ,ap,n2,o ,r ,s ,s ],

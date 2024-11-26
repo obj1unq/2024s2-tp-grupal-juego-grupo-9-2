@@ -143,56 +143,68 @@ class Puente {
 
     }
     method cambiarEstado(){
-       if(estado.derrumbado()){
-        estado = puenteHabilitado
-       }
-       else {
-        estado = puenteNoHabilitado
-       }
+       estado = estado.siguiente()
+       estado.iniciar(self)
     }
 }
 
-class PuenteFantasma inherits Puente {
-  override method cambiarEstado() {
-    if(!estado.derrumbado()) {
-      estado = puenteFantasma
+class PuenteFantasma inherits Puente (estado = puenteHabilitadoFantasma) {
+  
+}
+
+object puenteHabilitadoFantasma inherits PuenteHabilitado  {
+  override method siguiente(){
+      return puenteFantasma
     }
+}
+
+object puenteFantasma inherits PuenteHabilitado (image = "fondo-oceano.png" ){
+
+  override method siguiente() {
+    return puenteHabilitadoFantasma
   }
 }
 
-object puenteFantasma {
-  var property image = "fondo-oceano.png" 
-
-  method solida() {
-    return false
-  }
-
-  method derrumbado() {
-    return true
-  }
-
-  method colision() {
+object puenteHabilitado inherits PuenteHabilitado {
+    override method siguiente(){
+      return puenteNoHabilitado
+    }
     
-  }
+    
 }
 
-object puenteHabilitado {
+class PuenteHabilitado {
     var property image = "puente.png"
     var property solida = false
-    method derrumbado(){
-      return false
-    }
+    method siguiente()
     method colision(){
 
     }
+
+    method iniciar(puente) {
+
+    }
+}
+
+object puenteNoHabilitado inherits PuenteNoHabilitado { 
+    override method siguiente(){
+      return puenteHabilitado
+    }
+
     
 }
-object puenteNoHabilitado {
-    var property image = "puenteRoto.png"
+
+class PuenteNoHabilitado {
+  var property image = "puenteRoto.png"
     var property solida = false 
-    method derrumbado(){
-      return true
+    method siguiente()
+
+    method iniciar(puente) {
+      if(puente.position() == pepe.position()) {
+        puente.colision(pepe)
+      }
     }
+
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
 		  pepe.nivelActual().dibujar()
@@ -327,7 +339,7 @@ object oceanoApagado{ // REVISAR
 
 class Puerta {
     var property position
-    var property image = "puertaNueva.png"
+    var property image 
     var property nivelADibujar
     var property bgAAgregar = instN1
     const puertaDeNivel = 0
@@ -356,9 +368,9 @@ class Puerta {
   
   }
 }
-class PuertaALobby inherits Puerta(nivelADibujar = lobby) {
+class PuertaALobby inherits Puerta(nivelADibujar = lobby, image = "puertaDeLobby.png") {
 
-  /*override dibujarSiguienteMapa()*/
+
     override method interactuar() {
       estadoNivel.trofeos().clear()
       game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
@@ -367,22 +379,13 @@ class PuertaALobby inherits Puerta(nivelADibujar = lobby) {
     }
 }
 
-class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1){
-
-    //method dibujarSiguienteMapa() {
-    //  nivel1.dibujar()
-    //}
+class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1, image = "puertaDeNivel1.png"){
 
 }
 
 
 
-class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2, puertaDeNivel = 2) {
-  /*override*/ 
-  //method dibujarSiguienteMapa() {
-    //pepe.actualizarDolares()
-    //nivel2.dibujar()
-  //}
+class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2, puertaDeNivel = 2, image = "puertaDeNivel2.png") {
 
   override method interactuar() {
     if(pepe.trofeos().size() >= (puertaDeNivel-1)){
@@ -396,38 +399,18 @@ class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =in
 }
 
 
-class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3, puertaDeNivel = 3) {
- //override method dibujarSiguienteMapa() {
- //   nivel3.dibujar()
- // }
+class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3, puertaDeNivel = 3, image = "puertaDeNivel3.png") {
+
 }
 
-class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4, puertaDeNivel = 4)  {
- //override method dibujarSiguienteMapa() {
- //   nivel4.dibujar()
- // }
+class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4, puertaDeNivel = 4, image = "puertaDeNivel4.png")  {
+
 }
 
-class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5, puertaDeNivel = 5)  {
- //override method dibujarSiguienteMapa() {
- //   nivel5.dibujar()
-//      override method interactuar(){
-//        super()
-//       game.say(ringo, "Pepite,acá estoy!")
-//        
-//      }
- // }
+class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5, puertaDeNivel = 5, image = "puertaDeNivel5.png")  {
+
 }
 
-class PuertaDeAdorno  { // No la estamos usando pero anda.
-  var property position
-  var property image = "puertaNueva.png"
-  
-  
-  method solida() {
-		return false
-	}
-}
 
 class Llave {
     var property position
