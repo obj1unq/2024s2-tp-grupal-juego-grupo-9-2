@@ -41,8 +41,13 @@ En este juego desarrollado en Wollok Game para la materia Programación con obje
 
 ## Reglas de Juego / Instrucciones 
 
+Inicia el juego y explora el lobby.
+Entra en los niveles para recolectar tesoros y ganar trofeos.
+Avanza a través de los niveles desbloqueados hasta completar el quinto nivel.
+Reúnete con el perro de Pepite para ganar el juego.
 
-Características principales:
+
+## Características principales
 Lobby inicial: Es el punto de partida del juego. Aquí se encuentran:
 
 Cinco puertas: Cada una lleva a un nivel diferente.
@@ -72,11 +77,6 @@ Las clases relacionadas con personajes, puertas y objetos del juego heredan de c
 Tests automatizados:
 El juego incluye pruebas automatizadas para verificar el correcto funcionamiento de las mecánicas principales, como el acceso a niveles, la recolección de trofeos y la interacción con Héctor. Esto asegura que los cambios futuros en el código no introduzcan errores inesperados.
 
-Cómo jugar
-Inicia el juego y explora el lobby.
-Entra en los niveles para recolectar tesoros y ganar trofeos.
-Avanza a través de los niveles desbloqueados hasta completar el quinto nivel.
-Reúnete con el perro de Pepite para ganar el juego.
 
 ## Otros
 
