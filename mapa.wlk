@@ -33,7 +33,7 @@ object r { // representa una roca con zona segura
 object m { // representauna moneda.
     method dibujarEn(position) {
         if(pepe.trofeos().size() < 1){
-            game.addVisual(new Moneda(position = position))
+            game.addVisual(new MonedaDeOro(position = position))
         }
     }
 }
@@ -119,7 +119,7 @@ object o { // Representa el oceano.
 
 object h { // Representa a Hector.
     method dibujarEn(position) {
-     game.addVisual(new NPC(position = position))
+     game.addVisual(new Hector(position = position))
     }
 }
 

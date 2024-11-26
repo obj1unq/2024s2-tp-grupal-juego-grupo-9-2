@@ -5,129 +5,111 @@ import personajes.*
 import mapa.*
 import randomizer.*
 
-class Palanca {
-    var property position = game.center()
-    var property estado  = palancaApagada
-    const oceano
 
-    method interactuar(){
-       estado = estado.palancaCambiada()
-       oceano.cambiar()
-    }    
-    method image(){
-        return estado.image()
-    }
-
-    method solida() {
-		  return false
-    }
-
-    method colision(personaje) {
-		  // no queremos que al colisionar haga nada, pero por polimorfismo lo mantenemos
-	}
-}
-object palancaPrendida{
-   var property image = "palanca_prendida.png"
-    
-    method palancaCambiada(){
-        return palancaApagada
-    }
-}
-object palancaApagada{
-   var property image = "palanca_apagada.png"
-    
-    method palancaCambiada(){
-        return palancaPrendida
-    }
-}
+// ---------- MONEDA / TROFEOS ----------
 class Moneda {
-    var property position 
-    var property image = "monedaDeOro.png"
-    var property valor = 10
+  var property position 
+  var property image
 
-    method interactuar(){ // Teniendo el metodo "Colision" ya no es importante.
-        //pepe.sumarMoneda()
-        //game.removeVisual(self)      // no queremos el efecto de colisionar sea a a través de una tecla, pero por polimorfismo lo dejamos.
-    }
-    
-    method solida() {
-		return false
-	}
+  method solida() {
+    return false
+  }
 
-    method colision(personaje) {
-      personaje.agregarTrofeo(self)
-		  personaje.agarrarVisual(self)
-      bgTienda.estado()
-      game.sound("pickUp.mp3").play()
-    }
+  method colision(personaje) {
+    personaje.agregarTrofeo(self)
+    personaje.agarrarVisual(self)
+    bgTienda.estado()
+    game.sound("pickUp.mp3").play()
+  }
 }
 
-object estadoNivel{
-  const property trofeos = []
+class MonedaDeOro inherits Moneda(image = "monedaDeOro.png") {
+}
+class MonedaDePlata inherits Moneda(image = "monedaDePlata.png") {
+}
+class MonedaVioleta inherits Moneda(image = "monedaVioleta.png") {
+}
+class MonedaDeBronce inherits Moneda(image = "monedaDeBronce.png") {
 }
 
-class MonedaDePlata inherits Moneda(image = "monedaDePlata.png",valor = 50) {
-}
-class MonedaVioleta inherits Moneda(image = "monedaVioleta.png", valor = 100) {
-  
-}
-class MonedaDeBronce inherits Moneda(image = "monedaDeBronce.png",valor = 25) {
-}
+// ---------- ROCA ----------
 class Roca {
-    var property position 
-    var property image = "roca-chica.png"
+  var property position 
+  var property image = "roca-chica.png"
 
-    method solida() {
-		return true
-	}
-
-    
+  method solida() {
+    return true
+  }
 }
 
+// ---------- LEON ----------
 class Leon {
   var property position
   var property estado = leonDormido 
 
+
   method image() {
     return estado.image()
-  } 
-
+  }
+   
   method solida() {
     return true
   }
 
   method cambiarEstado(){
-       if(estado.dormido()){
-        estado = leonDespierto
-       }
-       else {
-        estado = leonDormido
-       }
-    }
-
+    estado.siguiente()
+  }
 }
-
+// --- estado del LEON ---
 object leonDormido {
+
   method image() {
     return "leon-durmiendo.png"
   }
 
-  method dormido() {
-    return true
+  method siguiente() {
+    return leonDespierto
   } 
 }
 
 object leonDespierto {
+
   method image() {
     return "leon-despierto.png"
   }
 
-  method dormido() {
-    return false
+  method siguiente() {
+    return leonDormido
   } 
 }
 
+// ---------- SUELO ----------
 
+class Superficie{
+  var property position 
+  var property image
+
+  method solida() = false
+
+  method colision(personaje) { // por polimorfismo
+     
+  }
+  method interactuar() {
+    
+  }
+}
+
+class ZonaSegura inherits Superficie(image = "zonaSegura.png"){
+}
+class SueloVidrio inherits Superficie(image = "cristal.png"){
+}
+class SueloVidrioFalso inherits SueloVidrio{
+  override method colision(personaje){  // revisar porque se repite código y hay dos metodos que se llaman igual.
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
+		  nivel1.dibujar()
+      game.say(pepe,"¡me ahogué!")
+    }
+}
 
 class Puente {
     var property position
@@ -144,7 +126,7 @@ class Puente {
     }
     method cambiarEstado(){
        estado = estado.siguiente()
-//       estado.iniciar()
+       //estado.iniciar(self)
     }
 }
 
@@ -181,37 +163,36 @@ class PuenteHabilitado {
 
     }
 
-    method iniciar() {
+    method iniciar(p) {
 
     }
 }
 
-// object puenteNoHabilitado inherits PuenteNoHabilitado { 
-//     override method siguiente(){
-//       return puenteHabilitado
-//     }   
-// }
-
-object puenteNoHabilitado {
-  var property image = "puenteRoto.png"
-  var property solida = false
-
-    method siguiente() {
+object puenteNoHabilitado inherits PuenteNoHabilitado { 
+    override method siguiente(){
       return puenteHabilitado
     }
 
-    // method iniciar() {
-    //   if(self.position() == pepe.position()) {
-    //     game.schedule(500, { self.colision()})
-        
-    //   }
-    // }
+    method iniciar(p) {
+      if(p.position() == pepe.position()) {
+        game.schedule(500, { p.colision()})  
+      }
+    }
 
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
 		  pepe.nivelActual().dibujar()
       game.say(pepe,"¡me ahogué!")
     }
+}
+
+class PuenteNoHabilitado {
+  var property image = "puenteRoto.png"
+  var property solida = false
+
+    method siguiente()
+
+    
 }
 
 class SueloLeon {
@@ -263,38 +244,7 @@ object leonAlerta {
 }
 
 
-class ZonaSegura{
-  var property position
-  method image() = "zonaSegura.png"
-  method solida() = false
-  method colision(personaje) { // por polimorfismo
-     
-  }
-  method interactuar() {
-    
-  }
-}
 
-class SueloVidrio{
-  var property position
-  method image() = "cristal.png"
-  method solida() = false
-  method colision(personaje){ // por polimorfismo
-    
-  }
-
-  method interactuar(){
-    
-  }
-}
-
-class SueloVidrioFalso inherits SueloVidrio{
-  override method colision(personaje){  // revisar porque se repite código y hay dos metodos que se llaman igual.
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
-		  nivel1.dibujar()
-      game.say(pepe,"¡me ahogué!")
-    }
-}
 
 
 class Oceano {
@@ -308,8 +258,6 @@ class Oceano {
     method colision(personaje) {
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
 		  pepe.nivelActual().dibujar()
-      estadoNivel.trofeos().clear()
-      //pepe.reinicio()
       game.sound("scream.mp3").play()
       game.say(pepe,"me caí al oceano")
     }
@@ -323,72 +271,41 @@ class Tiburon inherits Oceano {
   override method image() = "tiburon.png"
 }
 
-object oceanoPrendido{ // REVISAR
-   var property image = "oceano.png"
-   
-    method oceanoCambiado(){
-        return oceanoApagado
-    }
-}
-
-object oceanoApagado{ // REVISAR
-   var property image = "vacio.png"
-   
-    method oceanoCambiado(){
-        return oceanoPrendido
-    }
-}
-
+// ---------- PUERTAS ----------
 class Puerta {
-    var property position
-    var property image 
-    var property nivelADibujar
-    var property bgAAgregar = instN1
-    const puertaDeNivel = 0
+  var property position
+  var property image 
+  var property nivelADibujar
+  var property bgAAgregar = instN1
+  const puertaDeNivel = 0
 
 
-    method interactuar() {
-      background.dibujo(nivelADibujar)
-      background.bgActual(bgAAgregar)   
-      background.iniciar()
-      pepe.nivelActual(nivelADibujar)
-      game.sound("openDoor.mp3").play() 
-      //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
-      //self.dibujarSiguienteMapa()
-    }
-    
+  method interactuar() {
+    background.dibujo(nivelADibujar)
+    background.bgActual(bgAAgregar)   
+    background.iniciar()
+    pepe.nivelActual(nivelADibujar)
+    game.sound("openDoor.mp3").play() 
+  }
 
-    method solida() {
-		return false
-	}
+  method solida() {
+    return false
+  }
 
-    //method dibujarSiguienteMapa() {
-    //  nivel1.dibujar()
-    //}
+  method colision(personaje){ // Por porlimorfismo
 
-    method colision(personaje){
-  
   }
 }
 class PuertaALobby inherits Puerta(nivelADibujar = lobby, image = "puertaDeLobby.png") {
-
-
-    override method interactuar() {
-      estadoNivel.trofeos().clear()
-      game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
-      nivelADibujar.dibujar()
-  
-    }
+  override method interactuar() {
+    game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
+    nivelADibujar.dibujar()
+  }
 }
 
 class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1, image = "puertaDeNivel1.png"){
-
 }
-
-
-
 class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2, puertaDeNivel = 2, image = "puertaDeNivel2.png") {
-
   override method interactuar() {
     if(pepe.trofeos().size() >= (puertaDeNivel-1)){
         super()
@@ -396,95 +313,33 @@ class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =in
         game.say(pepe,"Necesito el Trofeo del nivel anterior.")
       }
   }
-
-
 }
 
-
 class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3, puertaDeNivel = 3, image = "puertaDeNivel3.png") {
-
 }
 
 class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4, puertaDeNivel = 4, image = "puertaDeNivel4.png")  {
-
 }
 
 class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5, puertaDeNivel = 5, image = "puertaDeNivel5.png")  {
-
 }
 
 
-class Llave {
-    var property position
-    var property image = "llave.png"
-
-
-    method interactuar() {
-        game.removeVisual(self)
-    }
-
-    method solida() {
-		return false
-	}
-
-  method colision(personaje) {
-		  // no queremos que al colisionar haga nada, pero por polimorfismo lo mantenemos
-	}
-}
-class Llave2 inherits Llave(image = "llave2.png") {
-  override method solida() {
-    return true
-  }
-}
-
-class NPC {
-  var property position
-  var property image = "hector.png"
-
-
-  method solida() { 
-		return false
-	}
-
-  method interactuar() {
-        game.say(self, "¡HOLA VIAJERO!")
-    }
-  method colision(pepe){
-    game.say(self, "¡AUCH!")
-    game.sound("hector.mp3").play()
-  } 
-}
-class Ringo inherits NPC(image = "ringo.png"){
- 
-  
-  override method colision(pepe){
-    game.say(self,"Hola pepite te extrañé!")
-    game.schedule(3000, {game.allVisuals().forEach({bg=>game.removeVisual(bg)})
-                         background.bgActual(bgFinal)
-                         background.iniciar()
-                         game.sound("victoryTheme.mp3").play()
-                          })
-                          
-  }
-}
+// ---------- TIENDA ----------
 
 class Tienda inherits PuertaANivel1(image = "tienda.png",bgAAgregar = bgTienda ){
-  //var property position
-  //var property image = "tienda.png"
-
-
-  /*method solida() { //EN EL FUTURO TIENE QUE SER TRUE 
-		//return false
-	}*/
-  override method interactuar(){
-  super()
-  background.dibujo(lobby)
   
+  override method interactuar(){
+    super()
+    background.dibujo(lobby)
   }
- override  method colision(pepe){
+
+  override  method colision(pepe){
     game.say(self, "Presiona ''z'' para ver tus trofeos")
   } 
 }
+
+// ---------- SOMBREROS ----------
 
 object sombreroFactory {
 

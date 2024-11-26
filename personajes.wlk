@@ -11,13 +11,6 @@ object pepe {
     var property cantSombreros = 0
     const property trofeos = []
 
-    var dolaresTotales = 0
-    var dolaresNivel = 0
-
-    // method imagenDelJugador() { 
-    //     imagen = 
-    // }
-
     method mover(direccion) {
       self.validarMover(direccion)
 		  position = direccion.siguiente(self.position())
@@ -50,23 +43,6 @@ object pepe {
     method hayObjetoAca() {
         return not game.colliders(self).isEmpty()
     }
-
-    method resetarDolares(){
-        dolaresNivel = 0
-    }
-
-    method sumarDolar(moneda) {
-        dolaresNivel += moneda.valor()
-    }
-    method dolaresTotales() {
-        return dolaresTotales
-    }
-    method actualizarDolares(){
-        dolaresTotales += dolaresNivel
-    }
-    method decirDolares(){
-      game.say(self, "Tengo "+dolaresTotales+" dolares")
-    }
     
     method haySolido(_position) {
 		return game.getObjectsIn(_position).any({cosa => cosa.solida()})
@@ -87,6 +63,7 @@ object pepe {
 	}
 
     method agregarTrofeo(trofeo){
+        game.removeVisual(trofeo)
         self.trofeos().add(trofeo)
     }
 
@@ -95,12 +72,6 @@ object pepe {
         self.position(9.9)
         game.addVisual(self)
     }
-
-    method agarrarMoneda(moneda) {
-        self.sumarDolar(moneda)
-        game.removeVisual(moneda)
-    }
-
 
     method agarrarObjeto(objeto) {  
         self.sumarObjeto()
@@ -126,3 +97,42 @@ object pepe {
     }
 }
 
+
+// ---------- NPCs ----------
+class NPC {
+    var property position
+    var property image = "hector.png"
+
+    method colision(pepe)
+
+    method solida() { 
+        return false
+    }
+
+    method interactuar() {
+
+    }
+}
+
+class Hector inherits NPC(image = "hector.png"){
+    override method interactuar() {
+        game.say(self, "¡HOLA VIAJERO!")
+    }
+    override method colision(pepe){
+        game.say(self, "¡AUCH!")
+        game.sound("hector.mp3").play()
+    } 
+}
+
+class Ringo inherits NPC(image = "ringo.png"){
+ 
+  override method colision(pepe){
+    game.say(self,"Hola pepite te extrañé!")
+    game.schedule(3000, {game.allVisuals().forEach({bg=>game.removeVisual(bg)})
+                         background.bgActual(bgFinal)
+                         background.iniciar()
+                         game.sound("victoryTheme.mp3").play()
+                        }
+                )                    
+  }
+}
