@@ -8,7 +8,9 @@
 
 ## Capturas
 
-(agregar)
+![tiendaNivel4](https://github.com/user-attachments/assets/7f7bab30-1a84-46cb-9b68-cc69ac1c88ec)
+
+
 
 ## Reglas de Juego / Instrucciones
 
