@@ -483,7 +483,7 @@ class Ringo inherits NPC(image = "ringo.png"){
   }
 }
 
-class Tienda inherits PuertaANivel1(image = "tienda.png",nivelADibujar = mapaTienda,bgAAgregar = bgTienda ){
+class Tienda inherits PuertaANivel1(image = "tienda.png",bgAAgregar = bgTienda ){
   //var property position
   //var property image = "tienda.png"
 

@@ -249,6 +249,13 @@ object si { // Representa una zona segura con una puerta al segundo nivel.
     }
 }
 
+object sk {
+    method dibujarEn(position){
+        game.addVisual(new ZonaSegura(position = position))
+        game.addVisual(new PuertaANivel5(position = position))
+    }
+}
+
 object cs{ // Representa Suelo de Vidrio.
     method dibujarEn(position){
         game.addVisual(new SueloVidrio(position = position))
@@ -388,30 +395,6 @@ object bgFinal{
 
     method siguiente() = null
 }
-object z{  // representa el primer trofe
-   
-    
-    
-    //listaDeTrofeos.get(0) // suponiendo que se guarden los trofes es una lista y no un set.
-    
-}
-
-object zz{  // representa el segundo trofe
-    
-    //listaDeTrofeos.get(1)
-}
-
-object aa{  // representa el tercer trofe
-  
-    //listaDeTrofeos.get(2)
-}
-object bb{  // representa el cuarto trofe
-    //listaDeTrofeos.get(3)
-}
-
-object cc{   // representa el quinto trofe
-    //listaDeTrofeos.get(4)
-}
 
 object background {
    var property bgActual = start     // inst o lobby
@@ -460,22 +443,6 @@ class Mapa {
     }
 }
 
-
-object mapaTienda inherits Mapa (tablero = 
-    [[_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,z,_,zz,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,aa,_,bb,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,cc,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],    
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_],
-     [_,_,_,_,_,_,_,_,_,_,_,_,_]        
-    ].reverse()) 
-{
-
-}
 
 object lobby inherits Mapa ( tablero =
     [[_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -561,7 +528,7 @@ object nivel3 inherits Mapa (tablero =
 
 
 object nivel4 inherits Mapa (tablero =
-    [[k ,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
+    [[sk,o ,n2,n2,n2,o ,o ,o ,o ,o ,r ,s ,s ],
      [sc,o ,n2,o ,n2,o ,n2,n2,n2,o ,r ,s ,s ],    
      [n2,n2,n2,o ,n2,o ,n2,o ,n2,o ,r ,s ,s ],    
      [o ,o ,o ,at,n2,o ,n2,o ,n2,n2,r ,s ,s ],    

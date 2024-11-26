@@ -15,7 +15,7 @@ program pepesgame {
 	//  COMIENZA
 	game.start()
 	//  CONFIG	
-	game.title("Juego sin nombre")
+	game.title("Pepites Game")
 	game.height(10)
 	game.width(13)
 	game.cellSize(50) //valor por defecto 50	
