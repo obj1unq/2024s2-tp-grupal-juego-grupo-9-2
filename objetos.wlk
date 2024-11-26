@@ -201,7 +201,8 @@ class PuenteNoHabilitado {
 
     method iniciar(puente) {
       if(puente.position() == pepe.position()) {
-        puente.colision(pepe)
+        game.schedule(3000, { puente.colision(pepe)})
+        
       }
     }
 
