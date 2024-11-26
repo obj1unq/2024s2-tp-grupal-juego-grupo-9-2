@@ -99,6 +99,7 @@ class Superficie{
   }
 }
 
+// --- superficies nivel 1 ---
 class ZonaSegura inherits Superficie(image = "zonaSegura.png"){
 }
 class SueloVidrio inherits Superficie(image = "cristal.png"){
@@ -110,130 +111,31 @@ class SueloVidrioFalso inherits SueloVidrio{
       game.say(pepe,"¡me ahogué!")
     }
 }
-
-class Puente {
-    var property position
-    var property estado = puenteHabilitado
-    method image(){
-      return estado.image()
-    }
-    method solida() = estado.solida()
-    method colision(personaje){
-      estado.colision()
-    }
-    method interactuar(){
-
-    }
-    method cambiarEstado(){
-       estado = estado.siguiente()
-       //estado.iniciar(self)
-    }
-}
-
-class PuenteFantasma inherits Puente (estado = puenteHabilitadoFantasma) {
-  
-}
-
-object puenteHabilitadoFantasma inherits PuenteHabilitado  {
-  override method siguiente(){
-      return puenteFantasma
-    }
-}
-
-object puenteFantasma inherits PuenteHabilitado (image = "vacio.png" ){
-
-  override method siguiente() {
-    return puenteHabilitadoFantasma
-  }
-}
-
-object puenteHabilitado inherits PuenteHabilitado {
-    override method siguiente(){
-      return puenteNoHabilitado
-    }
-    
-    
-}
-
-class PuenteHabilitado {
-    var property image = "puente.png"
-    var property solida = false
-    method siguiente()
-    method colision(){
-
-    }
-
-    method iniciar(p) {
-
-    }
-}
-
-object puenteNoHabilitado inherits PuenteNoHabilitado { 
-    override method siguiente(){
-      return puenteHabilitado
-    }
-
-    method iniciar(p) {
-      if(p.position() == pepe.position()) {
-        game.schedule(500, { p.colision()})  
-      }
-    }
-
-    method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
-		  pepe.nivelActual().dibujar()
-      game.say(pepe,"¡me ahogué!")
-    }
-}
-
-class PuenteNoHabilitado {
-  var property image = "puenteRoto.png"
-  var property solida = false
-
-    method siguiente()
-
-    
-}
-
-class SueloLeon {
-   var property position
+// --- superficie leon ---
+class SueloLeon inherits Superficie (image = "vacio.png"){
     var property estado = leonNoAlerta
-    method image(){
-      return estado.image()
-    }
-    method solida() = estado.solida()
-    method colision(personaje){
+
+    override method colision(personaje){
       estado.colision()
     }
-    method interactuar(){
 
-    }
     method cambiarEstado(){
-       if(estado.leonAtaca()){
-        estado = leonNoAlerta
-       }
-       else {
-        estado = leonAlerta
-       }
+      estado = estado.siguiente()
     }
 }
-
+// - estados de superficie leon -
 object leonNoAlerta {
-    var property image = "vacio.png"
-    var property solida = false
-    method leonAtaca(){
-      return false
+    method siguiente(){
+      return leonAlerta
     }
+
     method colision(){
 
     }
-    
 }
 object leonAlerta {
-    var property image = "vacio.png"
-    var property solida = false 
-    method leonAtaca(){
-      return true
+    method siguiente(){
+      return leonNoAlerta
     }
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
@@ -243,19 +145,10 @@ object leonAlerta {
     }
 }
 
+// ---------- OCEANO ---------
+class Oceano inherits SueloLeon{
 
-
-
-
-class Oceano {
-    var property position 
-    var property image = "vacio.png"
-
-    method solida() {
-		  return false
-	  }
-
-    method colision(personaje) {
+    override method colision(personaje) {
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
 		  pepe.nivelActual().dibujar()
       game.sound("scream.mp3").play()
@@ -270,6 +163,93 @@ class Pescado inherits Oceano {
 class Tiburon inherits Oceano {
   override method image() = "tiburon.png"
 }
+
+// --- puente para nivel 2 y 4 ---
+class Puente inherits Superficie(image = estado.image()){
+    var property estado = puenteHabilitado
+
+
+    override method solida() = estado.solida()
+
+    override method colision(personaje){
+      estado.colision()
+    }
+
+    method cambiarEstado(){
+       estado = estado.siguiente()
+       //estado.iniciar(self)
+    }
+}
+
+
+// --- estados de puente (nivel 2) ---
+class PuenteHabilitado {
+    var property image = "puente.png"
+    var property solida = false
+
+
+    method siguiente()
+    
+    method colision(){
+
+    }
+
+    method iniciar(puente) {
+
+    }
+}
+class PuenteNoHabilitado {
+  var property image = "puenteRoto.png"
+  var property solida = false
+
+    method siguiente()
+
+    method iniciar(puente) {
+      if(puente.position() == pepe.position()) {
+        game.schedule(500, { puente.colision()})  
+      }
+    }
+
+    method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
+      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
+		  pepe.nivelActual().dibujar()
+      game.say(pepe,"¡me ahogué!")
+    }
+    
+}
+object puenteHabilitado inherits PuenteHabilitado {
+
+  override method siguiente(){
+    return puenteNoHabilitado
+  }
+
+}
+object puenteNoHabilitado inherits PuenteNoHabilitado { 
+    override method siguiente(){
+      return puenteHabilitado
+    }
+
+}
+
+// --- estados de puente fantasma (nivel 4) ---
+class PuenteFantasma inherits Puente (estado = puenteHabilitadoFantasma) {
+  
+}
+object puenteHabilitadoFantasma inherits PuenteHabilitado  {
+  override method siguiente(){
+      return puenteFantasma
+    }
+}
+
+object puenteFantasma inherits PuenteHabilitado (image = "vacio.png" ){
+
+  override method siguiente() {
+    return puenteHabilitadoFantasma
+  }
+
+}
+
+
 
 // ---------- PUERTAS ----------
 class Puerta {
