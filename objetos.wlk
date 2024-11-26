@@ -144,7 +144,7 @@ class Puente {
     }
     method cambiarEstado(){
        estado = estado.siguiente()
-       estado.iniciar(self)
+//       estado.iniciar()
     }
 }
 
@@ -181,30 +181,31 @@ class PuenteHabilitado {
 
     }
 
-    method iniciar(puente) {
+    method iniciar() {
 
     }
 }
 
-object puenteNoHabilitado inherits PuenteNoHabilitado { 
-    override method siguiente(){
+// object puenteNoHabilitado inherits PuenteNoHabilitado { 
+//     override method siguiente(){
+//       return puenteHabilitado
+//     }   
+// }
+
+object puenteNoHabilitado {
+  var property image = "puenteRoto.png"
+  var property solida = false
+
+    method siguiente() {
       return puenteHabilitado
     }
 
-    
-}
-
-class PuenteNoHabilitado {
-  var property image = "puenteRoto.png"
-    var property solida = false 
-    method siguiente()
-
-    method iniciar(puente) {
-      if(puente.position() == pepe.position()) {
-        game.schedule(500, { puente.colision(pepe)})
+    // method iniciar() {
+    //   if(self.position() == pepe.position()) {
+    //     game.schedule(500, { self.colision()})
         
-      }
-    }
+    //   }
+    // }
 
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
