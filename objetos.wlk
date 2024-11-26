@@ -158,7 +158,7 @@ object puenteHabilitadoFantasma inherits PuenteHabilitado  {
     }
 }
 
-object puenteFantasma inherits PuenteHabilitado (image = "fondo-oceano.png" ){
+object puenteFantasma inherits PuenteHabilitado (image = "vacio.png" ){
 
   override method siguiente() {
     return puenteHabilitadoFantasma
@@ -201,7 +201,7 @@ class PuenteNoHabilitado {
 
     method iniciar(puente) {
       if(puente.position() == pepe.position()) {
-        game.schedule(3000, { puente.colision(pepe)})
+        game.schedule(500, { puente.colision(pepe)})
         
       }
     }
