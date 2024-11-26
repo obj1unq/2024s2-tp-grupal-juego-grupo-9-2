@@ -165,13 +165,15 @@ class Tiburon inherits Oceano {
 }
 
 // --- puente para nivel 2 y 4 ---
-class Puente inherits Superficie(image = estado.image()){
+class Puente{
+  var property image = estado.image()
+  var property position
     var property estado = puenteHabilitado
 
 
-    override method solida() = estado.solida()
+    method solida() = estado.solida()
 
-    override method colision(personaje){
+    method colision(personaje){
       estado.colision()
     }
 
