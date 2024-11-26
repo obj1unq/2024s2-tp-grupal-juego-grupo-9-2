@@ -57,7 +57,7 @@ class Leon {
   }
 
   method cambiarEstado(){
-    estado.siguiente()
+    estado = estado.siguiente()
   }
 }
 // --- estado del LEON ---
