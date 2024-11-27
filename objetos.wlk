@@ -9,7 +9,7 @@ import randomizer.*
 // ---------- MONEDA / TROFEOS ----------
 class Moneda {
   var property position 
-  var property image
+  const property image
 
   method solida() {
     return false
@@ -41,7 +41,7 @@ class MonedaDeBronce inherits Moneda(image = "monedaDeBronce.png") {
 // ---------- ROCA ----------
 class Roca {
   var property position 
-  var property image = "roca-chica.png"
+  method image() = "roca-chica.png"
 
   method solida() {
     return true
@@ -51,7 +51,7 @@ class Roca {
 // ---------- LEON ----------
 class Leon {
   var property position
-  var property estado = leonDormido 
+  var estado = leonDormido 
 
 
   method image() {
@@ -93,7 +93,7 @@ object leonDespierto {
 
 class Superficie{
   var property position 
-  var property image
+  const property image
 
   method solida() = false
 
@@ -119,7 +119,7 @@ class SueloVidrioFalso inherits SueloVidrio{
 }
 // --- superficie leon ---
 class SueloLeon inherits Superficie (image = "vacio.png"){
-    var property estado = leonNoAlerta
+    var estado = leonNoAlerta
 
     override method colision(personaje){
       estado.colision()
@@ -178,7 +178,7 @@ class Tiburon inherits Oceano {
 // --- puente para nivel 2 y 4 ---
 class Puente{
   var property position
-  var property estado = puenteHabilitado
+  var estado = puenteHabilitado
 
   method image() {
     return estado.image()
@@ -232,8 +232,6 @@ class PuenteNoHabilitado {
       game.say(pepe,"¡me ahogué!")
     }
 
-     
-    
 }
 object puenteHabilitado inherits PuenteHabilitado {
 
@@ -251,7 +249,6 @@ object puenteNoHabilitado inherits PuenteNoHabilitado {
 
 // --- estados de puente fantasma (nivel 4) ---
 class PuenteFantasma inherits Puente (estado = puenteHabilitadoFantasma) {
-  
 }
 object puenteHabilitadoFantasma inherits PuenteHabilitado  {
   override method siguiente(){
@@ -272,9 +269,9 @@ object puenteFantasma inherits PuenteHabilitado (image = "vacio.png" ){
 // ---------- PUERTAS ----------
 class Puerta {
   var property position
-  var property image 
-  var property nivelADibujar
-  var property bgAAgregar = instN1
+  const property image 
+  const property nivelADibujar
+  const property bgAAgregar = instN1
   const puertaDeNivel = 0
 
 
@@ -306,7 +303,7 @@ class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1, 
 }
 class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2, puertaDeNivel = 2, image = "puertaDeNivel2.png") {
   override method interactuar() {
-    if(pepe.trofeos().size() >= (puertaDeNivel-1)){
+    if(pepe.cantidadDeTrofeos() >= (puertaDeNivel-1)){
         super()
       } else {
         game.say(pepe,"Necesito el Trofeo del nivel anterior.")
@@ -436,7 +433,7 @@ class Sombrero {
 
 class BarreraInvisible {
   var property position 
-  var property image = "vacio.png" 
+  method image() = "vacio.png" 
 
   method solida() {
     return true

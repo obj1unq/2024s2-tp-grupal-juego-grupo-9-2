@@ -30,14 +30,6 @@ object r { // representa una roca con zona segura
 }
 
 
-object m { // representauna moneda.
-    method dibujarEn(position) {
-        if(pepe.trofeos().size() < 1){
-            game.addVisual(new MonedaDeOro(position = position))
-        }
-    }
-}
-
 object a { // representa una moneda de plata. m2
     method dibujarEn(position) {
         if(pepe.trofeos().size() < 2){
@@ -343,18 +335,9 @@ object instN5{
 object bgTienda{
     var property image = "bgTrofeos.png"
 
-    method estado(){
-        if(pepe.trofeos().size() == 1){
-            self.image("tiendaNivel1.png")
-        }    
-        if(pepe.trofeos().size() == 2){
-          self.image("tiendaNivel2.png")
-        }
-        if (pepe.trofeos().size() == 3){
-          self.image("tiendaNivel3.png") 
-        }
-        if (pepe.trofeos().size() == 4){
-          self.image("tiendaNivel4.png")
+    method estado() {
+        if (pepe.cantidadDeTrofeos() >= 1 && pepe.cantidadDeTrofeos() <= 4) {
+            self.image("tiendaNivel" + pepe.cantidadDeTrofeos() + ".png")
         }
     }
 

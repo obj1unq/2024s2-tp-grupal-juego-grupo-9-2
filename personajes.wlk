@@ -91,6 +91,10 @@ object pepe {
     method tieneMasDeDosTrofeos() {
         return self.trofeos().size() > 2
     }
+
+    method cantidadDeTrofeos(){
+        return self.trofeos().size()
+    }
 }
 
 
