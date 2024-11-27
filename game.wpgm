@@ -2,29 +2,35 @@ import wollok.game.*
 import personajes.*
 import posiciones.*
 import objetos.*
+import mapa.*
 
 program pepesgame {
+
+	const bgMusic = game.sound("backgroundMusic.mp3")
+  	bgMusic.play()
+	bgMusic.shouldLoop(true)
+	game.start()
+
+	//  COMIENZA
+	game.start()
 	//  CONFIG	
-	game.title("Juego sin nombre")
+	game.title("Pepites Game")
 	game.height(10)
-	game.width(10)
-
+	game.width(13)
+	game.cellSize(50) //valor por defecto 50	
+	game.boardGround("lobby.png")
 	//  VISUALES
+	background.iniciar()
 
-	game.ground("fondo-uno.jpeg")
- 	game.addVisual(pepe)
-	game.addVisual(new Palanca(position = game.at(6,7)))
-	game.addVisual(new Moneda(position = game.at(1,1)))
-
- 	
+	//CONTROL
+	keyboard.enter().onPressDo({background.cambiar()})
 	keyboard.up().onPressDo({pepe.mover(arriba)})
 	keyboard.left().onPressDo({pepe.mover(izquierda)})
 	keyboard.down().onPressDo({pepe.mover(abajo)})
 	keyboard.right().onPressDo({pepe.mover(derecha)})
 	keyboard.z().onPressDo({pepe.interactuarConObjeto()})
-	keyboard.h().onPressDo({pepe.decirMonedas()})
-	keyboard.p().onPressDo({pepe.activarPalanca()})
+	keyboard.p().onPressDo({bgMusic.pause()})
 
- 	//  COMIENZA
-	game.start()
+	game.onCollideDo(pepe, {algo => algo.colision(pepe)}) // Pepe puede colisionar 
+		
 }
