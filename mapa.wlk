@@ -150,6 +150,7 @@ object n {// Representa un Puente que se desarma cada x tiempo
         const puente = new Puente(position = position)
         game.addVisual(puente)
 	    game.onTick(4000, "estado", {puente.cambiarEstado()})
+//      "estado" + self.identity()  / + puente.identity()
     }
 }
 

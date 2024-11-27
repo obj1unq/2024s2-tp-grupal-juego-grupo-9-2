@@ -50,17 +50,17 @@ Reúnete con el perro de Pepite para ganar el juego.
 ## Características principales
 Lobby inicial: Es el punto de partida del juego. Aquí se encuentran:
 
-Cinco puertas: Cada una lleva a un nivel diferente.
-Tienda: Muestra la cantidad de trofeos obtenidos.
-Héctor: Un NPC que aparece en cinemáticas previas a cada nivel, explicando las tareas a realizar.
+Cinco puertas: Cada una lleva a un nivel diferente.  
+Tienda: Muestra la cantidad de trofeos obtenidos.  
+Héctor: Un NPC que aparece en cinemáticas previas a cada nivel, explicando las tareas a realizar.  
 
 Acceso a niveles: Los niveles se desbloquean en función de la cantidad de trofeos que tenga Pepite:
 
-Nivel 1: 0 o más trofeos.
-Nivel 2: 1 o más trofeos.
-Nivel 3: 2 o más trofeos.
-Nivel 4: 3 o más trofeos.
-Nivel 5: 4 o más trofeos.
+Nivel 1: 0 o más trofeos.  
+Nivel 2: 1 o más trofeos.  
+Nivel 3: 2 o más trofeos.  
+Nivel 4: 3 o más trofeos.  
+Nivel 5: 4 o más trofeos.  
 Objetivo final: En el último nivel, Pepite deberá encontrar y reunirse con su perro Ringo para completar la aventura y ganar el juego.
 
 Enfoque técnico y diseño

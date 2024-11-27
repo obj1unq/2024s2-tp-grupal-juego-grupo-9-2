@@ -166,9 +166,12 @@ class Tiburon inherits Oceano {
 
 // --- puente para nivel 2 y 4 ---
 class Puente{
-  var property image = estado.image()
   var property position
-    var property estado = puenteHabilitado
+  var property estado = puenteHabilitado
+
+  method image() {
+    return estado.image()
+  }
 
 
     method solida() = estado.solida()
@@ -179,15 +182,15 @@ class Puente{
 
     method cambiarEstado(){
        estado = estado.siguiente()
-       //estado.iniciar(self)
+       estado.iniciar(self)
     }
 }
 
 
 // --- estados de puente (nivel 2) ---
 class PuenteHabilitado {
-    var property image = "puente.png"
-    var property solida = false
+    const property image = "puente.png"
+    const property solida = false
 
 
     method siguiente()
@@ -201,14 +204,14 @@ class PuenteHabilitado {
     }
 }
 class PuenteNoHabilitado {
-  var property image = "puenteRoto.png"
-  var property solida = false
+  const property image = "puenteRoto.png"
+  const property solida = false
 
     method siguiente()
 
     method iniciar(puente) {
       if(puente.position() == pepe.position()) {
-        game.schedule(500, { puente.colision()})  
+        game.schedule(500, {puente.colision(pepe)})  
       }
     }
 
@@ -217,6 +220,8 @@ class PuenteNoHabilitado {
 		  pepe.nivelActual().dibujar()
       game.say(pepe,"¡me ahogué!")
     }
+
+     
     
 }
 object puenteHabilitado inherits PuenteHabilitado {
@@ -266,6 +271,7 @@ class Puerta {
     background.dibujo(nivelADibujar)
     background.bgActual(bgAAgregar)   
     background.iniciar()
+    game.removeTickEvent("estado")
     pepe.nivelActual(nivelADibujar)
     game.sound("openDoor.mp3").play() 
   }
@@ -281,6 +287,7 @@ class Puerta {
 class PuertaALobby inherits Puerta(nivelADibujar = lobby, image = "puertaDeLobby.png") {
   override method interactuar() {
     game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
+    game.removeTickEvent("estado")
     nivelADibujar.dibujar()
   }
 }
