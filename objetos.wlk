@@ -100,7 +100,7 @@ class Superficie{
   method colision(personaje) { // por polimorfismo
      
   }
-  method interactuar() {
+  method interactuar() {         // es vacío para evitar errores al interactuar con una instancia de la clase (no tendría sentido) 
     
   }
 }
@@ -112,8 +112,9 @@ class SueloVidrio inherits Superficie(image = "cristal.png"){
 }
 class SueloVidrioFalso inherits SueloVidrio{
   override method colision(personaje){  // revisar porque se repite código y hay dos metodos que se llaman igual.
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
-		  nivel1.dibujar()
+      //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
+		  //nivel1.dibujar()
+      estadoDeNivel.cargarNivel(pepe.nivelActual())
       game.say(pepe,"¡me ahogué!")
     }
 }
@@ -239,8 +240,9 @@ class PuenteNoHabilitado {
     }
 
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
-		  pepe.nivelActual().dibujar()
+      //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
+		  //pepe.nivelActual().dibujar()
+      estadoDeNivel.cargarNivel(pepe.nivelActual())
       game.say(pepe,"¡me ahogué!")
     }
 
@@ -277,7 +279,7 @@ object puenteFantasma inherits PuenteHabilitado (image = "vacio.png" ){
 
 
 // ---------- PUERTAS ----------
-class Puerta {
+class Puerta {                          //HERENCIA 
   var property position
   const property image 
   const property nivelADibujar
@@ -285,7 +287,7 @@ class Puerta {
   const puertaDeNivel 
 
 
-  method interactuar() {
+  method interactuar() {                  //POLIMORFISMO 
     background.dibujo(nivelADibujar)
     background.bgActual(bgAAgregar)   
     background.iniciar()
@@ -297,13 +299,13 @@ class Puerta {
     return false
   }
 
-  method colision(personaje){ // Por porlimorfismo
+  method colision(personaje){ // Por porlimorfismo para evitar errores en las hijas
 
   }
 }
 class PuertaALobby inherits Puerta(nivelADibujar = lobby, image = "puertaDeLobby.png", puertaDeNivel = 0) {
   override method interactuar() {
-    estadoDeNivel.cargarNivel(nivelADibujar)
+    estadoDeNivel.cargarNivel(nivelADibujar) // ejemplo
   }
 }
 
