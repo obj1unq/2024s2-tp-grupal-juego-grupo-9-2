@@ -87,13 +87,9 @@ object pepe {
     }
 
 
-    method agarrarTrofeo(trofeo) {  
-        self.agregarTrofeo(trofeo)
-        administradorSombreros.remover(trofeo) 
-    }
 
-    method tieneTercerTrofeo() {
-        return self.trofeos().size() == 3
+    method tieneMasDeDosTrofeos() {
+        return self.trofeos().size() > 2
     }
 }
 

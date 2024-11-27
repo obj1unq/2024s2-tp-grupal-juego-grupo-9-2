@@ -24,6 +24,12 @@ class Moneda {
 }
 
 class MonedaDeOro inherits Moneda(image = "monedaDeOro.png") {
+  
+  override method colision(personaje) {
+    super(personaje)
+    administradorSombreros.remover(self) 
+  }
+
 }
 class MonedaDePlata inherits Moneda(image = "monedaDePlata.png") {
 }
@@ -138,10 +144,15 @@ object leonAlerta {
       return leonNoAlerta
     }
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
+      self.limpiarListasPorPerder()
       game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
-      administradorSombreros.creados().clear()   
 		  pepe.nivelActual().dibujar()
       game.say(pepe,"¡Me comió el leon!")
+    }
+
+    method limpiarListasPorPerder() {
+      administradorSombreros.creados().clear()
+      pepe.cantSombreros(0) 
     }
 }
 
@@ -339,10 +350,10 @@ object sombreroFactory {
 }
 
 
-object trofeosFactory {
+object monedaFactory {
  
   method construir(position) {
-    return new Trofeo(position=position)
+    return new MonedaDeOro(position=position)
   }
 }
 
@@ -352,7 +363,7 @@ object trofeosFactory {
 object administradorSombreros {
  
   const property creados = #{}
-  const property factories = [sombreroFactory, trofeosFactory]
+  const property factories = [sombreroFactory, monedaFactory]
 
 
 
@@ -376,7 +387,7 @@ object administradorSombreros {
 
 
   method construirTrofeos() {
-    return trofeosFactory.construir(randomizer.emptyPosition())
+    return monedaFactory.construir(randomizer.emptyPosition())
   }
 
 
@@ -388,7 +399,7 @@ object administradorSombreros {
 
 
   method hayEspacioParaTrofeo() {
-    return creados.size() < 1 and not pepe.tieneTercerTrofeo()
+    return creados.size() < 1 and not pepe.tieneMasDeDosTrofeos()
   }
 
 
@@ -423,30 +434,6 @@ class Sombrero {
 }
 
 
-class Trofeo {
-  const position
- 
-  method position() {
-    return position
-  }
-
-
-  method image() {
-    return "monedaDeOro.png"
-  }
-
-
-  method solida() {
-    return false
-  }
-
-
-  method colision(personaje) {
-    personaje.agarrarTrofeo(self)
-    game.sound("pickUp.mp3").play()
-    bgTienda.estado()
-  }
-}
 
 class BarreraInvisible {
   var property position 
