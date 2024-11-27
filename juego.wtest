@@ -1,0 +1,103 @@
+import wollok.game.*
+import mapa.*
+import objetos.*
+import personajes.*
+import posiciones.*
+import randomizer.*
+import territorio.*
+
+describe "Test Pepe" {
+    
+    const moneda = new MonedaDeBronce(position = game.center())
+    const leon = new Leon (position = game.center())
+    const puente = new Puente (position = game.center())
+    const sueloFalso = new SueloVidrioFalso (position = game.center())
+    const sueloLeon = new SueloLeon (position= game.center())
+    const puerta = new PuertaANivel1 (position = game.center())
+    const sombrero = new Sombrero (position = game.center())
+
+    const mapaTest = new Mapa ( tablero =
+    [[t ,p ,r ]      
+    ].reverse())
+
+    // t = tienda
+    // p = pepe
+    // r = roca
+
+    method initialize(){
+		mapaTest.dibujar()
+	}
+
+    test "Territorio" {
+        assert.throwsExceptionWithMessage("No puedo moverme fuera del tablero", {pepe.mover(abajo)})
+        assert.throwsExceptionWithMessage("No hay objeto para interactuar!", {pepe.interactuarConObjeto()})
+        assert.throwsExceptionWithMessage("No puedo ir ahí", {pepe.mover(derecha)})
+    }
+
+    test "Tienda" {
+        assert.that(pepe.cantidadDeTrofeos() == 0)
+        moneda.colision(pepe)
+        assert.that(pepe.cantidadDeTrofeos() == 1) 
+        pepe.mover(izquierda)
+        pepe.interactuarConObjeto()
+        assert.equals("tiendaNivel1.png", background.image())
+    }
+ 
+    test "Colision" {
+        moneda.colision(pepe)
+        assert.that(pepe.cantidadDeTrofeos() == 1)
+        
+        assert.equals(lobby, pepe.nivelActual())
+        puerta.interactuar()
+        assert.equals("nivel_1_instrucciones.png", background.image())
+        sueloFalso.colision(pepe)
+        assert.equals(nivel1, pepe.nivelActual())
+        
+        puente.cambiarEstado()
+        puente.colision(pepe)
+        assert.equals(nivel1, pepe.nivelActual())
+    }
+
+    test "Estado" {
+        assert.equals(leonDormido, leon.estado())
+        leon.cambiarEstado()
+        assert.equals(leonDespierto, leon.estado())
+
+        assert.equals(puenteHabilitado, puente.estado())
+        puente.cambiarEstado()
+        assert.equals(puenteNoHabilitado, puente.estado())
+    }
+
+
+    test "Sombreros y Trofeos - Nivel 3" {
+        assert.equals(0, pepe.cantSombreros())
+        sombrero.colision(pepe)
+        assert.equals(1, pepe.cantSombreros())
+        sueloLeon.cambiarEstado()
+        sueloLeon.colision(pepe)
+        assert.equals(0, pepe.cantSombreros())
+        assert.that(pepe.tieneSombrerosInsuficientes())
+        sombrero.colision(pepe)
+        sombrero.colision(pepe)
+        sombrero.colision(pepe)
+        sombrero.colision(pepe)
+        sombrero.colision(pepe)
+        assert.notThat(pepe.tieneSombrerosInsuficientes())
+        assert.notThat(pepe.tieneMasDeDosTrofeos())
+        moneda.colision(pepe)
+        moneda.colision(pepe)
+        moneda.colision(pepe)
+        assert.that(pepe.tieneMasDeDosTrofeos())
+    }
+}
+
+
+    
+
+
+
+
+
+
+
+

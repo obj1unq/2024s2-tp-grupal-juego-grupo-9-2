@@ -51,7 +51,7 @@ class Roca {
 // ---------- LEON ----------
 class Leon {
   var property position
-  var estado = leonDormido 
+  var property estado = leonDormido 
 
 
   method image() {
@@ -186,7 +186,7 @@ class Tiburon inherits Oceano {
 // --- puente para nivel 2 y 4 ---
 class Puente{
   var property position
-  var estado = puenteHabilitado
+  var property estado = puenteHabilitado
 
   method image() {
     return estado.image()

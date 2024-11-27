@@ -29,42 +29,13 @@ object r { // representa una roca con zona segura
     }
 }
 
-
-object a { // representa una moneda de plata. m2
-    method dibujarEn(position) {
-        if(pepe.trofeos().size() < 2){
-            game.addVisual(new MonedaDePlata(position = position))
-        }
-    }
-}
-
-object b { // representa una moneda de bronce. m3
-    method dibujarEn(position) {
-     game.addVisual(new MonedaDeBronce(position = position))
-    }
-}
-
-object c { // representa una moneda violeta . m4
-    method dibujarEn(position) {
-     game.addVisual(new MonedaVioleta(position = position))
-    }
-}
-
-
-object e { // representa el lobby lo
+object e { // representa el lobby.
 
     method dibujarEn(position) {
      game.addVisual(new PuertaALobby(position = position))
     }
 }
 
-object ep { // representa el lobby lo
-
-    method dibujarEn(position) {
-     game.addVisual(new PuertaALobby(position = position))
-     pepe.position(position)
-    }
-}
 
 object f { // representa la entrada al Nivel 1 f 
 
@@ -122,7 +93,7 @@ object t { // Representa una Tienda.
 }
 
 
-object v {  // Representa un Puente pu
+object v {  // Representa un Puente.
     method dibujarEn(position){
         game.addVisual(new Puente(position = position))
     }
@@ -194,7 +165,6 @@ object sc { // Representa una zona segura con una moneda
     }
 }
 
-
 object sp { // Representa una zona segura con una puerta al lobby y pepe.
     method dibujarEn(position){
         game.addVisual(new ZonaSegura(position = position))
@@ -202,8 +172,6 @@ object sp { // Representa una zona segura con una puerta al lobby y pepe.
         pepe.position(position)
     }
 }
-
-
 
 object sg { // Representa una zona segura con una puerta al segundo nivel.
     method dibujarEn(position){
@@ -245,7 +213,7 @@ object cf{ // Representa Suelo de Vidrio falso.
     }
 }
 
-object ll { // Representa un leon.
+object l { // Representa un leon.
     method dibujarEn(position){
         const leon = new Leon(position = position)
         game.addVisual(leon)
@@ -340,7 +308,7 @@ object instN5{
     }
 }
 object bgTienda{
-    var property image = "bgTrofeos.png"
+    var property image = "bgTienda00.png"
 
     method estado() {
         if (pepe.cantidadDeTrofeos() >= 1 && pepe.cantidadDeTrofeos() <= 4) {
@@ -434,7 +402,7 @@ object lobby inherits Mapa ( tablero =
 
 object nivel1 inherits Mapa (tablero =  
     [[o ,o ,o ,o ,o ,o ,o ,s ,s ,cf,s ,sp,s ],
-     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,sm ,s ],    
+     [o ,o ,o ,o ,o ,o ,o ,s ,s ,cs,s ,s ,s ],    
      [o ,o ,o ,o ,o ,o ,o ,s ,s ,o ,o ,o ,o ],    
      [o ,o ,o ,o ,o ,o ,o ,cf,cs,o ,o ,o ,o ],    
      [s ,cf,s ,cf,s ,cs,s ,s ,s ,o ,o ,o ,o ],    
@@ -453,7 +421,7 @@ object nivel1 inherits Mapa (tablero =
 
 object nivel2 inherits Mapa ( tablero =     
 
-    [[o ,v ,n ,n ,v ,v ,v ,n ,v ,vm ,v ,v ,sp],
+    [[o ,v ,n ,n ,v ,v ,v ,n ,v ,v ,v ,v ,sp],
      [o ,v ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
      [o ,v ,o ,o ,o ,o ,n ,v ,v ,n ,v ,o ,o ],    
      [o ,n ,n ,n ,n ,v ,n ,o ,o ,o ,n ,v ,o ],    
@@ -479,7 +447,7 @@ object nivel3 inherits Mapa (tablero =
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,s ],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,s ],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,s ],    
-     [ll,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,s ],    
+     [l ,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,s ],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,s ],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,s ],    
      [bi,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,n3,s ],

@@ -11,7 +11,6 @@ program pepesgame {
 	bgMusic.shouldLoop(true)
 	game.start()
 
-
 	//  COMIENZA
 	game.start()
 	//  CONFIG	
@@ -22,7 +21,6 @@ program pepesgame {
 	game.boardGround("lobby.png")
 	//  VISUALES
 	background.iniciar()
-
 
 	//CONTROL
 	keyboard.enter().onPressDo({background.cambiar()})
