@@ -139,14 +139,23 @@ object leonNoAlerta {
 
     }
 }
+
+object estadoDeNivel {
+    
+    method cargarNivel(nivel){
+        game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
+        game.removeTickEvent("estado")
+        nivel.dibujar()
+    }
+}
+
 object leonAlerta {
     method siguiente(){
       return leonNoAlerta
     }
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       self.limpiarListasPorPerder()
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
-		  pepe.nivelActual().dibujar()
+      estadoDeNivel.cargarNivel(pepe.nivelActual())
       game.say(pepe,"¡Me comió el leon!")
     }
 
@@ -160,8 +169,7 @@ object leonAlerta {
 class Oceano inherits SueloLeon{
 
     override method colision(personaje) {
-      game.allVisuals().forEach({elementos => game.removeVisual(elementos)})
-		  pepe.nivelActual().dibujar()
+      estadoDeNivel.cargarNivel(personaje.nivelActual())
       game.sound("scream.mp3").play()
       game.say(pepe,"me caí al oceano")
     }
@@ -194,6 +202,10 @@ class Puente{
     method cambiarEstado(){
        estado = estado.siguiente()
        estado.iniciar(self)
+    }
+
+    method interactuar() { // Por polimorfismo
+
     }
 }
 
@@ -238,13 +250,11 @@ object puenteHabilitado inherits PuenteHabilitado {
   override method siguiente(){
     return puenteNoHabilitado
   }
-
 }
 object puenteNoHabilitado inherits PuenteNoHabilitado { 
     override method siguiente(){
       return puenteHabilitado
     }
-
 }
 
 // --- estados de puente fantasma (nivel 4) ---
@@ -272,7 +282,7 @@ class Puerta {
   const property image 
   const property nivelADibujar
   const property bgAAgregar = instN1
-  const puertaDeNivel = 0
+  const puertaDeNivel 
 
 
   method interactuar() {
@@ -291,15 +301,13 @@ class Puerta {
 
   }
 }
-class PuertaALobby inherits Puerta(nivelADibujar = lobby, image = "puertaDeLobby.png") {
+class PuertaALobby inherits Puerta(nivelADibujar = lobby, image = "puertaDeLobby.png", puertaDeNivel = 0) {
   override method interactuar() {
-    game.allVisuals().forEach({bg=>game.removeVisual(bg)}) // no supe como reutilizar el "cambiar" de background
-    game.removeTickEvent("estado")
-    nivelADibujar.dibujar()
+    estadoDeNivel.cargarNivel(nivelADibujar)
   }
 }
 
-class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1, image = "puertaDeNivel1.png"){
+class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1, image = "puertaDeNivel1.png", puertaDeNivel = 0){
 }
 class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2, puertaDeNivel = 2, image = "puertaDeNivel2.png") {
   override method interactuar() {
@@ -339,12 +347,10 @@ class Tienda inherits PuertaANivel1(image = "tienda.png",bgAAgregar = bgTienda )
 
 object sombreroFactory {
 
-
   method construir(position) {
     return new Sombrero(position=position)
   }
 }
-
 
 object monedaFactory {
  
@@ -353,16 +359,9 @@ object monedaFactory {
   }
 }
 
-
-
-
 object administradorSombreros {
- 
   const property creados = #{}
   const property factories = [sombreroFactory, monedaFactory]
-
-
-
 
   method nuevosSombreros() {
     if (self.hayEspacioParaSombrero()) {
@@ -376,35 +375,32 @@ object administradorSombreros {
     }
   }
 
-
   method construirSombrero() {
     return sombreroFactory.construir(randomizer.emptyPosition())
   }
-
 
   method construirTrofeos() {
     return monedaFactory.construir(randomizer.emptyPosition())
   }
 
-
-
-
   method hayEspacioParaSombrero() {
-    return creados.size() < 3  and pepe.tieneSombrerosInsuficientes()
+    return self.cantidadDeCreados() < 3 and pepe.tieneSombrerosInsuficientes() and not pepe.tieneMasDeDosTrofeos()
   }
-
 
   method hayEspacioParaTrofeo() {
-    return creados.size() < 1 and not pepe.tieneMasDeDosTrofeos()
+    return self.cantidadDeCreados() < 1 and not pepe.tieneMasDeDosTrofeos()
   }
 
-
+  method cantidadDeCreados() {
+    return creados.size()
+  }
 
   method remover(accesorio) {
     game.removeVisual(accesorio)
     creados.remove(accesorio)
   }
 }
+
 class Sombrero {
   const position
  
@@ -412,24 +408,19 @@ class Sombrero {
     return position
   }
 
-
   method image() {
     return "sombrero.png"
   }
 
-
   method solida() {
     return false
   }
-
 
   method colision(personaje) {
     personaje.agarrarObjeto(self)
     game.sound("pickUp.mp3").play()
   }
 }
-
-
 
 class BarreraInvisible {
   var property position 

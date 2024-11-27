@@ -86,10 +86,8 @@ object pepe {
         return cantSombreros < 5
     }
 
-
-
     method tieneMasDeDosTrofeos() {
-        return self.trofeos().size() > 2
+        return self.cantidadDeTrofeos() > 2
     }
 
     method cantidadDeTrofeos(){
