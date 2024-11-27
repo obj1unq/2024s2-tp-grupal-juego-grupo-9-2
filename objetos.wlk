@@ -114,7 +114,7 @@ class SueloVidrioFalso inherits SueloVidrio{
   override method colision(personaje){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
 		  //nivel1.dibujar()
-      estadoDeNivel.cargarNivel(pepe.nivelActual())
+      estadoDeNivel.reiniciarNivel(pepe.nivelActual())
       game.say(pepe,"¡me ahogué!")
     }
 }
