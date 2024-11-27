@@ -148,6 +148,10 @@ object estadoDeNivel {
         game.removeTickEvent("estado")
         nivel.dibujar()
     }
+    method reiniciarNivel(nivel){
+      self.cargarNivel(nivel)
+      game.sound("scream.mp3").play()
+    }
 }
 
 object leonAlerta {
@@ -156,7 +160,7 @@ object leonAlerta {
     }
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       self.limpiarListasPorPerder()
-      estadoDeNivel.cargarNivel(pepe.nivelActual())
+      estadoDeNivel.reiniciarNivel(pepe.nivelActual())
       game.say(pepe,"¡Me comió el leon!")
     }
 
@@ -170,8 +174,8 @@ object leonAlerta {
 class Oceano inherits SueloLeon{
 
     override method colision(personaje) {
-      estadoDeNivel.cargarNivel(personaje.nivelActual())
-      game.sound("scream.mp3").play()
+      estadoDeNivel.reiniciarNivel(personaje.nivelActual())
+      //game.sound("scream.mp3").play()
       game.say(pepe,"me caí al oceano")
     }
 }
@@ -212,7 +216,7 @@ class Puente{
 
 
 // --- estados de puente (nivel 2) ---
-class PuenteHabilitado {
+class PuenteHabilitado{
     const property image = "puente.png"
     const property solida = false
 
@@ -227,7 +231,7 @@ class PuenteHabilitado {
 
     }
 }
-class PuenteNoHabilitado {
+class PuenteNoHabilitado{
   const property image = "puenteRoto.png"
   const property solida = false
 
@@ -242,7 +246,7 @@ class PuenteNoHabilitado {
     method colision(){  // revisar porque se repite código y hay dos metodos que se llaman igual.
       //game.allVisuals().forEach({elementos => game.removeVisual(elementos)})   
 		  //pepe.nivelActual().dibujar()
-      estadoDeNivel.cargarNivel(pepe.nivelActual())
+      estadoDeNivel.reiniciarNivel(pepe.nivelActual())
       game.say(pepe,"¡me ahogué!")
     }
 
