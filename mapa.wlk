@@ -399,6 +399,7 @@ object background {
             bgActual = bgActual.siguiente()    
         }else{
             game.allVisuals().forEach({bg=>game.removeVisual(bg)})
+            game.removeTickEvent("estado")
             dibujo.dibujar()
         }
     }        

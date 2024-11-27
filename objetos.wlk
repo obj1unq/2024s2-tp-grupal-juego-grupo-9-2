@@ -282,7 +282,6 @@ class Puerta {
     background.dibujo(nivelADibujar)
     background.bgActual(bgAAgregar)   
     background.iniciar()
-    game.removeTickEvent("estado")
     pepe.nivelActual(nivelADibujar)
     game.sound("openDoor.mp3").play() 
   }
