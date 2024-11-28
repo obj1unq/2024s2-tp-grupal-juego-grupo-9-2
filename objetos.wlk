@@ -206,7 +206,7 @@ class Puente{
 
     method cambiarEstado(){
        estado = estado.siguiente()
-       estado.iniciar(self)
+       estado.validarPuenteRoto(self)
     }
 
     method interactuar() { // Por polimorfismo
@@ -227,7 +227,7 @@ class PuenteHabilitado{
 
     }
 
-    method iniciar(puente) {
+    method validarPuenteRoto(puente) {
 
     }
 }
@@ -237,7 +237,7 @@ class PuenteNoHabilitado{
 
     method siguiente()
 
-    method iniciar(puente) {
+    method validarPuenteRoto(puente) {
       if(puente.position() == pepe.position()) {
         game.schedule(500, {puente.colision(pepe)})  
       }
