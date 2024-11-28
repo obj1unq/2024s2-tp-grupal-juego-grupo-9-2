@@ -426,11 +426,11 @@ object nivel2 inherits Mapa ( tablero =
      [o ,v ,o ,o ,o ,o ,n ,v ,v ,n ,v ,o ,o ],    
      [o ,n ,n ,n ,n ,v ,n ,o ,o ,o ,n ,v ,o ],    
      [o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,n ,o ],    
-     [o ,n ,n ,v ,v ,vm,o ,o ,v ,n ,v ,v ,o ],    
-     [o ,n ,o ,o ,o ,o ,o ,o ,n ,o ,o ,o ,o ],    
-     [o ,n ,o ,o ,o ,v ,v ,n ,v ,o ,o ,v ,si],
-     [o ,v ,o ,o ,o ,v ,o ,o ,o ,o ,o ,n ,o ],
-     [o ,n ,n ,v ,n ,v ,n ,v ,n, v, v, n ,o ]       
+     [o ,n ,n ,v ,v ,n ,n ,v ,v ,n ,v ,v ,o ],    
+     [o ,n ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
+     [o ,n ,o ,n ,n ,n ,o ,n ,n ,n ,o ,v ,si],
+     [o ,v ,o ,v ,o ,n ,o ,v ,o ,n ,o ,v ,o ],
+     [o ,n ,n ,v ,o ,v ,n ,v ,o, v, v, n ,vm]       
 
     ].reverse()) {
 
