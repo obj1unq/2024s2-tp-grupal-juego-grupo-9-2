@@ -17,7 +17,7 @@ class Moneda {
 
   method colision(personaje) {
     personaje.agregarTrofeo(self)
-    personaje.agarrarVisual(self)
+    personaje.agarrarVisual(self) // Revisar
     bgTienda.estado()
     game.sound("pickUp.mp3").play()
   }
@@ -165,7 +165,7 @@ object leonAlerta {
     }
 
     method limpiarListasPorPerder() {
-      administradorSombreros.creados().clear()
+      administradorSombreros.creados().clear() // Revisar (subtarea)
       pepe.cantSombreros(0) 
     }
 }
