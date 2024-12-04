@@ -375,7 +375,7 @@ class Mapa {
                 tablero.get(y).get(x).dibujarEn(game.at(x,y))
             })
         })
-
+//      game.boardGround(fondo.image())
         game.addVisual(pepe) // Ponemos acá la visual de Pepe para que esté arriba de todas las visuales.
     }
 }
@@ -394,10 +394,7 @@ object lobby inherits Mapa ( tablero =
      [_,_,_,_,_,_,_,_,_,_,_,_,_]        
     ].reverse())  {
 
-    override method dibujar() {
-        super()
-        game.boardGround("lobby.png")
-    }
+    
 }
 
 object nivel1 inherits Mapa (tablero =  
@@ -413,10 +410,7 @@ object nivel1 inherits Mapa (tablero =
      [s ,cf,s ,cs,s ,cs,s ,cf,s ,cf,s ,sg,s ]        
     ].reverse()) { 
 
-    override method dibujar() {
-        super()
-        game.boardGround("fondo-oceano.png")
-    }
+    
 }
 
 object nivel2 inherits Mapa ( tablero =     
@@ -434,10 +428,7 @@ object nivel2 inherits Mapa ( tablero =
 
     ].reverse()) {
 
-    override method dibujar() {
-        super()
-        game.boardGround("fondo-oceano.png")
-    }
+    
     
 }
 
@@ -458,7 +449,6 @@ object nivel3 inherits Mapa (tablero =
 
     override method dibujar() {
         super()
-        game.boardGround("lobby.png")
         game.onTick(5000, "sombreros", {administradorSombreros.nuevosSombreros()})
     }
 }
@@ -477,10 +467,6 @@ object nivel4 inherits Mapa (tablero =
      [o ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,s ,s ]      
     ].reverse() ) {
     
-    override method dibujar() {
-        super()
-        game.boardGround("fondo-oceano.png")
-    }
 }
 
 
@@ -498,8 +484,4 @@ object nivel5 inherits Mapa (tablero =
      [_,_,_,_,_,_,e,_,_,_,_,_,_]        
     ].reverse() ) {
     
-    override method dibujar() {
-        super()
-        game.boardGround("lobby.png")
-    }
 }

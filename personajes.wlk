@@ -4,12 +4,30 @@ import objetos.*
 import territorio.*
 import mapa.*
 
+
+object tierra {
+    method fondo() {
+        return 0
+    }
+}
+
+object mar {
+    method fondo() {
+        return 1
+    }
+}
+
 object pepe {
     var property position = game.center()
     var property image = "pepite-back.png"
     var property nivelActual = lobby
     var property cantSombreros = 0
     const property trofeos = []
+    var property estadoParaFondo = tierra
+
+    method fondo() {
+        return self.estadoParaFondo().fondo()
+    }
 
     method mover(direccion) {
       self.validarMover(direccion)

@@ -296,7 +296,12 @@ class Puerta {                          //HERENCIA
     background.bgActual(bgAAgregar)   
     background.iniciar()
     pepe.nivelActual(nivelADibujar)
-    game.sound("openDoor.mp3").play() 
+    game.sound("openDoor.mp3").play()
+    self.cambiarFondo() 
+  }
+
+  method cambiarFondo() {
+    pepe.estadoParaFondo(tierra)
   }
 
   method solida() {
@@ -314,6 +319,10 @@ class PuertaALobby inherits Puerta(nivelADibujar = lobby, image = "puertaDeLobby
 }
 
 class PuertaANivel1 inherits Puerta(nivelADibujar = nivel1,bgAAgregar = instN1, image = "puertaDeNivel1.png", puertaDeNivel = 0){
+
+  override method cambiarFondo() {
+    pepe.estadoParaFondo(mar)
+  }
 }
 class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =instN2, puertaDeNivel = 2, image = "puertaDeNivel2.png") {
   override method interactuar() {
@@ -326,12 +335,20 @@ class PuertaANivel2 inherits PuertaANivel1(nivelADibujar = nivel2,bgAAgregar =in
 }
 
 class PuertaANivel3 inherits PuertaANivel2(nivelADibujar = nivel3,bgAAgregar = instN3, puertaDeNivel = 3, image = "puertaDeNivel3.png") {
+
+  override method cambiarFondo() {
+    pepe.estadoParaFondo(tierra)
+  }
 }
 
 class PuertaANivel4 inherits PuertaANivel2(nivelADibujar = nivel4,bgAAgregar = instN4, puertaDeNivel = 4, image = "puertaDeNivel4.png")  {
 }
 
 class PuertaANivel5 inherits PuertaANivel2(nivelADibujar = nivel5,bgAAgregar = instN5, puertaDeNivel = 5, image = "puertaDeNivel5.png")  {
+
+  override method cambiarFondo() {
+    pepe.estadoParaFondo(tierra)
+  }
 }
 
 
@@ -437,3 +454,30 @@ class BarreraInvisible {
   }
 }
 
+// -------- FONDO ------------
+
+object fondo {
+    method position() = game.at(0,0)
+
+    // var escenario = 0
+
+     method image() {
+       return "fondo" + pepe.fondo() + ".png"
+   }
+
+    // method image() {
+    //     return "fondo" + escenario + ".png"
+    // }
+
+    // method cambiar() {
+    //      escenario = (escenario + 1) % 2
+    // }
+    
+    method solida() {
+		  return false
+	}
+
+    method colision(personaje) {
+
+    }
+}   
