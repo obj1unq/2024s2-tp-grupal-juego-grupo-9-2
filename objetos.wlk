@@ -461,9 +461,9 @@ object fondo {
 
     // var escenario = 0
 
-     method image() {
-       return "fondo" + pepe.fondo() + ".png"
-   }
+    method image() {
+      return "fondo" + pepe.fondo() + ".png"
+  }
 
     // method image() {
     //     return "fondo" + escenario + ".png"
@@ -480,4 +480,18 @@ object fondo {
     method colision(personaje) {
 
     }
-}   
+}  
+
+
+class Fondo {
+  var property position
+  const property image = "fondo3.png" 
+
+  method solida() {
+    return false
+  }
+
+  method colision(personaje){
+    
+  }
+}

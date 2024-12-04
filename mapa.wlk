@@ -12,6 +12,19 @@ object _ {
     }
 }
 
+object fo {
+    method dibujarEn(position) { //oceano
+        game.addVisual(new Fondo(position = position))
+        game.addVisual(new ZonaSegura(position = position))
+    }
+}
+
+object fd {
+    method dibujarEn(position) { //oceano
+        game.addVisual(new Fondo(position = position))
+        
+    }
+}
 
 object p {  // representa a Pepe en el mapa.
 
@@ -407,7 +420,7 @@ object nivel1 inherits Mapa (tablero =
      [s ,o ,o ,o ,o ,o ,o ,o ,o ,o ,s ,s ,s ],    
      [s ,o ,o ,o ,o ,o ,o ,o ,o ,o ,cf,cf,cs],
      [s ,cs,s ,cf,s ,cf,s ,cs,s ,cs,s ,s ,s ],
-     [s ,cf,s ,cs,s ,cs,s ,cf,s ,cf,s ,sg,s ]        
+     [fo ,cf,s ,cs,s ,cs,s ,cf,s ,cf,s ,sg,s ]        
     ].reverse()) { 
 
     
@@ -424,7 +437,7 @@ object nivel2 inherits Mapa ( tablero =
      [o ,n ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ,o ],    
      [o ,n ,o ,n ,n ,n ,o ,n ,n ,n ,o ,v ,si],
      [o ,v ,o ,v ,o ,n ,o ,v ,o ,n ,o ,v ,o ],
-     [o ,n ,n ,v ,o ,v ,n ,v ,o, v, v, n ,vm]       
+     [fd ,n ,n ,v ,o ,v ,n ,v ,o, v, v, n ,vm]       
 
     ].reverse()) {
 
@@ -464,7 +477,7 @@ object nivel4 inherits Mapa (tablero =
      [n2,n2,n2,o ,o ,o ,n2,o ,o ,o ,r ,s ,s ],    
      [o ,o ,n2,n2,o ,o ,n2,n2,n2,o ,r ,s ,s ],
      [o ,at,o ,n2,n2,o ,o ,ap,n2,o ,r ,s ,s ],
-     [o ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,s ,s ]      
+     [fd ,o ,o ,o ,n2,n2,n2,n2,n2,o ,r ,s ,s ]      
     ].reverse() ) {
     
 }
